@@ -1,0 +1,29 @@
+[
+    { "name":"Shikhar",
+      "last":"Priyadarshi",
+      "age": 24
+     },
+   {
+    "name":"Rahul",
+    "last":"Chauhan",
+    "age": 35
+
+   },
+   {
+    "name":"Nishekh",
+    "last":"Pratap",
+    "age": 21
+
+   },
+   {
+    "name":"Thomas",
+    "last":"Edison",
+    "age": 20
+
+   },
+{
+    "name":"Herison",
+    "last":"Kiwi",  
+    "age": 24
+}
+]
