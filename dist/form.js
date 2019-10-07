@@ -41,7 +41,7 @@ $.ajax({
         if(inpVal1==" " && inpVal2=="")
       {   $('a').addClass('disabled');
         $('input').attr('disabled',true);   
-      $('div .label1').addClass('alert alert-dark').html("huh! No response."); 
+      $('div #success').addClass('alert alert-info').html("huh! No response."); 
           
         }
       
@@ -50,9 +50,9 @@ $.ajax({
           if(!((getter.charCodeAt(b)>64
           &&getter.charCodeAt(b)<91) ||(getter.charCodeAt(b)==32)))
           {
-            $('a').addClass('disabled');
-            $('input').attr('disabled',true);
-            $('div #success').addClass('alert alert-danger').html('Invalid inputs. Name can only have alphabets.');
+           $('a').addClass('disabled');
+           $('input').attr('disabled',true);
+            $('div #success').addClass('alert alert-info').html('Invalid inputs. Name can only have alphabets.');
             detect=1;
             break;  
           
@@ -62,10 +62,10 @@ $.ajax({
 
 
 
-        if(inpVal2<15 && inpVal2!=""){
-            $('a').addClass('disabled');
+        if(inpVal2<15 && inpVal2!=""&& detect==0){
+           $('a').addClass('disabled');
         $('input').attr('disabled',true);
-            $('div #age').addClass('alert alert-warning').html("Age should be less than 15"); 
+            $('div #success').addClass('alert alert-info').html("Age shouldn't be less than 15"); 
           
          }    
        for(var t=0;t<retriever.length;t++)
@@ -84,7 +84,7 @@ $.ajax({
        if(inpVal1!=""&&(inpVal2!=""&&inpVal2>15)&&(flag==0)&&(detect==0)){
        $('a').addClass('disabled');
         $('input').attr('disabled',true);   
-       $('div #success').addClass('alert alert-success').html("Successfully Listed");
+       $('div #success').addClass('alert alert-info').html("Successfully Listed");
         index=inpVal1.indexOf(" ");
          console.log(index);
          k=k+1;
@@ -106,14 +106,18 @@ $.ajax({
         colAge.appendTo(trr); 
     }
     else if(flag==1){
-        $('div .label1').addClass('alert alert-primary').html("Already Listed."); 
-        reset();
+      $('a').addClass('disabled');
+      $('input').attr('disabled',true); 
+      $('div #success').addClass('alert alert-info').html("Already Listed."); 
+        
     }    
   });
     }
 });
 
 $('#Reset').on('click',function(){
-   location.reload(false);
+  $('a').removeClass('disabled');
+        $('input').removeAttr('disabled'); 
+   
 });
 });
