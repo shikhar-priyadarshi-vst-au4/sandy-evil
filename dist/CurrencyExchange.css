@@ -1,0 +1,22 @@
+.fixing{
+    font-size: 28px;
+    text-align: center;
+    background-color: #D3D3D3;
+    border: rgb(136, 11, 11);
+}
+.switch{
+    
+    margin-left: 38%;
+    width:200px;
+}
+#currencyOne {
+    box-shadow: 2px 2px 1px 0px;
+}
+#currencyTwo {
+    box-shadow: 2px 2px 1px 0px;
+}
+.card {
+    margin:3px;
+    margin-bottom: 14px;
+    box-shadow: 1px 1px 5px 0px;
+}
