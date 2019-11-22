@@ -1,0 +1,29 @@
+body{
+    
+    width: 100%;
+    height: 100%;
+}
+.sidebar{
+    height: 2000px;
+    background-color: #ffc107;
+    color:#FFFF;
+}
+.list-1, .list{
+    height: 500px;
+}
+.main{
+    box-shadow: 1px 1px 1px 1px #e2d1d17d;
+}
+
+#myChart{
+  height: 400px !important;
+}
+.click:hover{
+  padding: 10px;
+  background-color: gold;
+  border:1px solid;
+  border-radius:10%;
+  cursor: pointer;
+  font-size: 22px;
+  transition: all 0.2s linear;
+}

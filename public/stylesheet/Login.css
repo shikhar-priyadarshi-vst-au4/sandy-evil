@@ -1,0 +1,48 @@
+#nav {
+    height: 120px;
+    background: #113D6C !important;
+}
+
+#logo {
+    margin: 0px 20px 0px 20px;
+}
+
+
+a {
+    color: #FCE181 !important;
+    margin-right: 22px !important;
+    text-decoration: none !important;
+    background-color: transparent !important;
+}
+
+a:hover {
+    background-color: #FCE181 !important;
+    color: #113D6C !important;
+}
+
+#footer {
+    margin-top: 200px;
+    background-color: #101f2b;
+    height: 350px;
+    padding: 20px 20px 20px 20px;
+    color: white;
+
+}
+
+#footer-block1 {
+    display: inline-block;
+    width: 40%;
+    margin: 10px 20px 10px 10px;
+}
+
+#footer-block2 {
+    display: inline-block;
+    width: 20%;
+    margin: 10px 20px 0px 20px;
+}
+
+#footer-block3 {
+    display: inline-block;
+    width: 30%;
+    margin: 15px 20px 0px 20px;
+}

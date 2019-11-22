@@ -1,0 +1,294 @@
+<div class="mt-3 container-fluid ml-2 row">
+<div class=" col-2 border rounded-lg sidebar d-flex flex-column">
+   <div class="sidebar-list ml-3">
+       <div class="sidebar-items py-4" id="dashboard"><span class='click'>Dashboard</span></div>
+     <div class="sidebar-items py-4" id="createorder"><span class='click'>Create Order</span></div>
+      <div class="sidebar-items py-4" id="reservations"><span class='click'>Reservations</span></div>
+       <div class="sidebar-items py-4" id="menu"><span class='click'>Cuisine</span></div>
+        <div class="sidebar-items py-4" id="inventory"><span class='click'>Inventory</span></div>
+   </div>
+</div>
+<div class=" col-9 border dashboard-elem pt-2">
+<div class="d-flex justify-content-center main dashboard-elem text-secondary bg-light border py-4 rounded-pill">
+    <div class="px-3 dashboard-elem mr-4">Total orders
+        <div class="text-center dashboard-elem ">12</div>
+    </div>
+<div class="px-5 border-right dashboard-elem border-left border-warning">No. of bookings
+    <div class="text-center dashboard-elem ">12</div>
+</div>
+<div class="px-5 border-right border-warning dashboard-elem ">Waitlist bucket
+    <div class="text-center dashboard-elem ">12</div>
+</div>
+<div class="px-5 border-right border-warning dashboard-elem ">Vacant Tables
+    <div class="text-center dashboard-elem ">12</div>
+</div>
+<div class=" ml-4 px-4 text-center dashboard-elem ">Servers
+  <div class="d-flex dashboard-elem ">
+    <div class="pr-2 dashboard-elem ">Busy
+        <div class="text-danger dashboard-elem ">2</div>
+      </div>
+       <div class="border-left border-warning pl-2 dashboard-elem ">Active
+          <div class="text-success dashboard-elem ">4</div>
+      </div>
+    </div>
+   </div>
+  </div>
+  <div class="row mt-2 dashboard-elem container-fluid">
+      <div class="col-6 list-1  w-100 dashboard-elem " aria-placeholder="Chart">
+         <div class="row chart m-5 dashboard-elem ">
+          <canvas id="myChart" class="bg-light mb-3" width="300" height="400"></canvas>
+         </div>
+         
+      </div>
+      <div class="col-6 list border-left employpee dashboard-elem  w-100">
+       <table class="table mt-3 table-hover dashboard-elem ">
+           <thead class="thead-secondary dashboard-elem ">
+               <th>Name</th>
+               <th>Position</th>
+               <th>Status</th>
+           </thead>
+         <tbody>
+             <tr>
+           <td>Manager_name</td>
+           <td>Manager</td>
+           <td><h5><a class="badge badge-success" href="#">Online</a></h5></td>
+       </tr>
+       <tr>
+           <td>Execuitve_chef_name</td>
+           <td>Executive Chef</td>
+           <td> <h5><a class="badge badge-success" href="#">Online</a></h5>
+               </td>
+       </tr>
+       <tr>
+           <td>Sous_chef_name</td>
+           <td>Sous chef</td>
+           <td><h5><a class="badge badge-success" href="#">Online</a></h5></td>
+       </tr>
+         <tr>
+             <td>Dishwasher_name</td>
+             <td>Dishwasher</td>
+             <td><h5><a class="badge badge-success" href="#" >Online</a></h5></td>
+         </tr>
+         <tr>
+             <td>Server1_name</td>
+             <td>Server</td>
+             <td><h5><a class="badge badge-success" href="#">Online</a></h5></td>
+         </tr>
+         <tr>
+             <td>Server2_name</td>
+             <td>Server</td>
+             <td><h5><a class="badge badge-success" href="#">Online</a></h5></td>
+         </tr>
+         <tr>
+             <td>Server3_name</td>
+             <td>Server</td>
+             <td><h5><a class="badge badge-success" href="#">Online</a></h5></td>
+         </tr>
+         <tr>
+             <td>Bartender_name</td>
+             <td>Bartender</td>
+             <td><h5><a class="badge badge-success" href="#">Online</a></h5></td>
+         </tr>
+         </tbody>
+       
+       </table>
+       </div>
+  </div>
+  <div class="row container-fluid mt-5 dashboard-elem">
+      <div class="col-12 text-center">
+        <table class="table w-100 table-bordered dashboard-elem">
+           <thead class="thead-secondary dashboard-elem ">
+               <th>Order_Id</th>
+               <th>Billing_Id</th>
+               <th>Transaction_Status</th>
+           </thead>
+           <tbody>
+               <tr>
+                   <td>12312</td>
+                   <td>321123312</td>
+                   <td>Paid</td>
+               </tr>
+               <tr>
+                   <td>23322</td>
+                   <td>23432234</td>
+                   <td>Paid</td>
+               </tr>
+               <tr>
+                   <td>12321</td>
+                   <td>433453</td>
+                   <td>Paid</td>
+               </tr>
+               <tr>
+                   <td>3242</td>
+                   <td>456456</td>
+                   <td>Paid</td>
+               </tr>
+               <tr>
+                   <td>234325</td>
+                   <td>56454</td>
+                   <td>Paid</td>
+               </tr>
+           </tbody>
+           </table>
+      </div>
+  </div>
+        
+  </div>
+  <div class=" col-9 createorder-elem container-fluid">
+      <div class="row">
+          <div class="col-5">
+               <div class="h5 ml-3 text-secondary">Customer Order Details</div>
+              <div style="overflow-y: scroll;">
+              <table class="table ml-3 table-bordered">
+                  <thead>
+                   <th class="lead text-center border-left border-right">OrderId</th>
+                   <th class="lead text-center border-right">Status</th>
+                   <th class="lead text-center border-right">Server</th>
+                    <th class="lead text-center  border-right">Table</th>
+                  </thead>
+                  <tbody>
+                     <tr>
+                         <td>order_id</td>
+                         <td>Payment_status</td>
+                         <td>Server_assigned</td>
+                         <td>Table_no</td>
+                     </tr>
+                     <tr>
+                         <td>order_id</td>
+                         <td>Payment_status</td>
+                         <td>Server_assigned</td>
+                         <td>Table_no</td>
+                     </tr>
+                     <tr>
+                         <td>order_id</td>
+                         <td>Payment_status</td>
+                         <td>Server_assigned</td>
+                         <td>Table_no</td>
+                     </tr>
+                     <tr>
+                         <td>order_id</td>
+                         <td>Payment_status</td>
+                         <td>Server_assigned</td>
+                         <td>Table_no</td>
+                     </tr>
+                     <tr>
+                         <td>order_id</td>
+                         <td>Payment_status</td>
+                         <td>Server_assigned</td>
+                         <td>Table_no</td>
+                     </tr>
+                     <tr>
+                         <td>order_id</td>
+                         <td>Payment_status</td>
+                         <td>Server_assigned</td>
+                         <td>Table_no</td>
+                     </tr>
+                     <tr>
+                         <td>order_id</td>
+                         <td>Payment_status</td>
+                         <td>Server_assigned</td>
+                         <td>Table_no</td>
+                     </tr>
+                     <tr>
+                         <td>order_id</td>
+                         <td>Payment_status</td>
+                         <td>Server_assigned</td>
+                         <td>Table_no</td>
+                     </tr>
+                     <tr>
+                         <td>order_id</td>
+                         <td>Payment_status</td>
+                         <td>Server_assigned</td>
+                         <td>Table_no</td>
+                     </tr>
+                     <tr>
+                         <td>order_id</td>
+                         <td>Payment_status</td>
+                         <td>Server_assigned</td>
+                         <td>Table_no</td>
+                     </tr>
+                     <tr>
+                         <td>order_id</td>
+                         <td>Payment_status</td>
+                         <td>Server_assigned</td>
+                         <td>Table_no</td>
+                     </tr>
+                  </tbody>
+              </table>
+              </div>
+          </div>
+          
+          
+          
+          
+          <div class="col-4  ml-4">
+              <div class="w-100 container-fluid mx-5">
+                  <div class="h5 ml-3 text-secondary">Create Order</div>
+                  <form action="" method="" class="form-group w-100">
+                      <label for="order_id" class="ml-3 lead">Order Id</label>
+                      <input type="text" class="form-control mx-3" name="order_id">
+                      <label for="customer_name" class="ml-3 lead">Name</label>
+                      <input type="text" class="form-control mx-3" name="customer_name">
+                      <label for="contact_no" class="ml-3 lead">Contact</label>
+                      <input type="text" class="form-control mx-3" name="contact_no">
+                      <label for="table_no" class="ml-3 lead">Table</label>
+                      <input type="text" class="form-control mx-3" name="table_no">
+                      <label for="server_no" class="ml-3 lead">Waiter</label>
+                      <input type="text" class="form-control mx-3" name="server_no">
+                      <label for="order_stack" class="ml-3 lead">Food</label>
+                      <input type="text" class="form-control mx-3" name="order_stack">
+                      <input type="submit" class=" btn text-light btn-warning ml-3 mt-3" value="Generate Ticket">
+                  </form>
+              </div>
+              
+
+          </div>
+      </div>
+      <div class="row container-fluid ml-1 mt-3">
+         <div class="col-12 border border-secondary">
+            <div class=" text-center my-4 display-4">Vacant Tables</div>
+         </div>
+         <div class="col-12 border border-secondary bg-light">
+          <div class="d-flex flex-wrap">
+              <div class="p-5 m-3 border border-secondary rounded">1</div>
+              <div class="p-5 m-3 border border-secondary rounded">2</div>
+              <div class="p-5 m-3 border border-secondary rounded">3</div>
+              <div class="p-5 m-3 border border-secondary rounded">4</div>
+              <div class="p-5 m-3 border border-secondary rounded">5</div>
+              <div class="p-5 m-3 border border-secondary rounded">6</div>
+              <div class="p-5 m-3 border border-secondary rounded">7</div>
+              <div class="p-5 m-3 border border-secondary rounded">8</div>
+              <div class="p-5 m-3 border border-secondary rounded">9</div>
+              <div class="p-5 m-3 border border-secondary rounded">10</div>
+              <div class="p-5 m-3 border border-secondary rounded">11</div>
+              <div class="p-5 m-3 border border-secondary rounded">12</div>
+              <div class="p-5 m-3 border border-secondary rounded">13</div>
+              <div class="p-5 m-3 border border-secondary rounded">14</div>
+              <div class="p-5 m-3 border border-secondary rounded">15</div>
+              <div class="p-5 m-3 border border-secondary rounded">16</div>
+              <div class="p-5 m-3 border-secondary border rounded">17</div>
+              <div class="p-5 m-3 border-secondary border rounded">18</div>
+              <div class="p-5 m-3 border-secondary border rounded">19</div>
+              <div class="p-5 m-3 border-secondary border rounded">20</div>
+          </div>
+         </div>
+         <div class="col-12">
+             <div class="display-4 text-center mt-3 border border-secondary text-secondary">Server Availability</div>
+             <div class="col-12 border border-secondary rounded bg-light">
+             <div class="d-flex flex-wrap">
+             <div class="p-4 m-3 border border-dark rounded-circle">1</div>
+             <div class="p-4 m-3 border border-dark rounded-circle">2</div>
+             <div class="p-4 m-3 border border-dark rounded-circle">3</div>
+             <div class="p-4 m-3 border border-dark rounded-circle">4</div>
+             <div class="p-4 m-3 border border-dark rounded-circle">5</div>
+             <div class="p-4 m-3 border border-dark rounded-circle">6</div>
+             <div class="p-4 m-3 border border-dark rounded-circle">7</div>
+             <div class="p-4 m-3 border border-dark rounded-circle">8</div>
+             <div class="p-4 m-3 border border-dark rounded-circle">9</div>
+             <div class="p-4 m-3 border border-dark rounded-circle">10</div>
+             </div>
+             </div> 
+         </div> 
+      </div>
+   </div>
+</div>
