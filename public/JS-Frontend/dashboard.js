@@ -1,21 +1,34 @@
 $(document).ready(function(){
     $('.dashboard-elem').hide(); 
     $('.createorder-elem').hide()
+    $('.mean').hide();
     $('#dashboard').on('click',function(){
         console.log("Dashboard was clicked.");
         $('.dashboard-elem').show();
         $('.createorder-elem').hide();    
-        
+        $('.mean').hide();
              
         
     })
+    
     $('#createorder').on('click',function(){
         console.log("Createorder was clicked.");
         $('.createorder-elem').show();
-
+        $('.grid_container').hide();
+     
              $('.dashboard-elem').hide();
-        
+            
+             //$('.order_id').val(Math.floor(Math.random()*Math.floor(100000)));
     })
+    $('#reservations').on('click',function(){ 
+        $('.grid_container').show();
+        $('.dashboard-elem').hide();
+        $('.createorder-elem').hide();
+    })
+    $('.hamburger').on('click',function(){
+        $('.sidebar').css({"left":"0px"})
+        $('.hamburger').css('display','none');
+    });
     var ctx = $('#myChart');
     var myChart = new Chart(ctx, {
             type: 'bar',

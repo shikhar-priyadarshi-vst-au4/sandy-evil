@@ -1,4 +1,10 @@
-<div class="mt-3 container-fluid ml-2 row">
+<div class="mt-1 container-fluid row">
+<span class="hamburger bg-light border border-light rounded-lg">
+       <span class="border border-dark "></span>
+       <span class="border border-dark  mt-2"></span>
+       <span class="border border-dark  mt-2"></span>
+   </span>
+
 <div class=" col-2 border rounded-lg sidebar d-flex flex-column">
    <div class="sidebar-list ml-3">
        <div class="sidebar-items py-4" id="dashboard"><span class='click'>Dashboard</span></div>
@@ -7,8 +13,10 @@
        <div class="sidebar-items py-4" id="menu"><span class='click'>Cuisine</span></div>
         <div class="sidebar-items py-4" id="inventory"><span class='click'>Inventory</span></div>
    </div>
+   
+   
 </div>
-<div class=" col-9 border dashboard-elem pt-2">
+<div class=" col-9 border dash dashboard-elem pt-2">
 <div class="d-flex justify-content-center main dashboard-elem text-secondary bg-light border py-4 rounded-pill">
     <div class="px-3 dashboard-elem mr-4">Total orders
         <div class="text-center dashboard-elem ">12</div>
@@ -36,7 +44,7 @@
   <div class="row mt-2 dashboard-elem container-fluid">
       <div class="col-6 list-1  w-100 dashboard-elem " aria-placeholder="Chart">
          <div class="row chart m-5 dashboard-elem ">
-          <canvas id="myChart" class="bg-light mb-3" width="300" height="400"></canvas>
+          <canvas id="myChart" class=" mb-3" width="300" height="400"></canvas>
          </div>
          
       </div>
@@ -226,15 +234,17 @@
                   <div class="h5 ml-3 text-secondary">Create Order</div>
                   <form action="" method="" class="form-group w-100">
                       <label for="order_id" class="ml-3 lead">Order Id</label>
-                      <input type="text" class="form-control mx-3" name="order_id">
+                      <input type="text" class="form-control mx-3 order_id" name="order_id"  required>
                       <label for="customer_name" class="ml-3 lead">Name</label>
-                      <input type="text" class="form-control mx-3" name="customer_name">
+                      <input type="text" class="form-control mx-3" pattern="[a-zA-z].{2,}"
+                       title="Must be atleast 3 characters" name="customer_name" required>
                       <label for="contact_no" class="ml-3 lead">Contact</label>
-                      <input type="text" class="form-control mx-3" name="contact_no">
+                      <input type="text" class="form-control mx-3" pattern="[0-9]{10}" 
+                       title="10-digit number" name="contact_no"  required>
                       <label for="table_no" class="ml-3 lead">Table</label>
-                      <input type="text" class="form-control mx-3" name="table_no">
+                      <input type="text" class="form-control mx-3" name="table_no"  required>
                       <label for="server_no" class="ml-3 lead">Waiter</label>
-                      <input type="text" class="form-control mx-3" name="server_no">
+                      <input type="text" class="form-control mx-3" name="server_no"  required>
                       <label for="order_stack" class="ml-3 lead">Food</label>
                       <input type="text" class="form-control mx-3" name="order_stack">
                       <input type="submit" class=" btn text-light btn-warning ml-3 mt-3" value="Generate Ticket">
@@ -291,4 +301,109 @@
          </div> 
       </div>
    </div>
+   <div class="grid_container mean">
+   <div class="reservation item1">
+       <div class="booking_table">
+        <table class="table_table">
+            <thead class="table_head">
+                <th class="table_head_item">Name</th>
+                <th class="table_head_item">Contact</th>
+                <th class="table_head_item_Table">Table</th>
+                <th class="table_head_item">Action</th>
+            </thead>
+            <tbody class="table_body">
+                    <tr>
+                    <td class="table_body_item">Shikhar Priyadarshi</td>
+                    <td class="table_body_item">7338957430</td>
+                    <td class="table_body_item_Table">12</td>
+                    <td class="table_body_item"><a  href="#" class="del">Delete</a></td>
+                    </tr>
+                    <tr>
+                    <td class="table_body_item">Satish</td>
+                    <td class="table_body_item">7338957430</td>
+                    <td class="table_body_item_Table">7</td>
+                    <td class="table_body_item"><a href="#" class="del">Delete</a></td>
+                    </tr>
+                    <tr>
+                    <td class="table_body_item">Dhoni</td>
+                    <td class="table_body_item">7338957430</td>
+                    <td class="table_body_item_Table">39</td>
+                    <td class="table_body_item"><a href="#" class="del">Delete</a></td>
+                    </tr>
+                    <tr>
+                    <td class="table_body_item">Kalam</td>
+                    <td class="table_body_item">7338957430</td>
+                    <td class="table_body_item_Table">1</td>
+                    <td class="table_body_item"><a  href="#"class="del">Delete</a></td>
+                    </tr>
+            </tbody>
+        </table>
+     </div>
+     <div class="form">
+         <form action="" method="" class="flex-form">
+             <label for="Table_number" class="label">Table</label>
+             <input type="text" name="Table_number">
+             <label for="Customer_name" class="label">Name</label>
+             <input type="text" name="Customer_name">
+             <label for="Contact_no" class="label">Contact</label>
+             <input type="text" name="Contact_no">
+             <input type="Submit" value="Create Ticket">
+         </form>
+      </div>
+      </div>
+      <div class="reservation_main ">
+       <div class="Waiting_list_table item2">
+       <div class="title">Waiting List</div>
+       <table class="table_1">
+           <thead class="table_head_1">
+              <th class="table_head_1_item">First</th>
+              <th class="table_head_1_item">Second</th>
+              <th class="table_head_1_item">Third</th>
+           </thead>
+           <tbody> 
+             <tr>
+                 <td class="table_body_1_item">Shikhar</td>
+                 <td class="table_body_1_item">Rahul Singh</td>
+                 <td class="table_body_1_item">heresh</td>
+             </tr>
+             <tr>
+                 <td class="table_body_1_item">Shikhar</td>
+                 <td class="table_body_1_item">Rahul Singh</td>
+                 <td class="table_body_1_item">heresh</td>
+
+             </tr>
+             <tr>
+                 <td></td>
+                 <td></td>
+                 <td></td>
+             </tr>
+             <tr>
+                 <td></td>
+                 <td></td>
+                 <td></td>
+             </tr>
+             <tr>
+                 <td></td>
+                 <td></td>
+                 <td></td>
+             </tr>
+           </tbody>
+       </table>
+       </div>
+     <div class="Cancelled">
+      <div class="head">Cancelled Tickets</div>
+      <div class="body">
+
+          <div class="ticket">
+           <div class="name"> Shikhar</div>
+           <div class="table_no"></div>
+           <div class="mail_id"></div>
+          </div>
+      </div>
+     </div>
+   </div>
+   </div>
+   
 </div>
+
+
