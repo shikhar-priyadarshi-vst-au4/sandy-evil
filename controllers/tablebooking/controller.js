@@ -1,9 +1,64 @@
 const controller={};
 const data=require('./../../models/TableDetails');
+const Cart=require('./../../models/cart');
 var user;
+
+controller.switchindices=(req,res)=>{
+    console.log(req.body);
+    var {Table_indices}=req.body;
+    data.switchindices(Table_indices,(error,response)=>{
+        console.log(response);
+        res.redirect('/Admin_dashboard');
+    })
+}
+controller.tableMatrix=(req,res)=>{
+   var {Matrix_unit,indices_value}=req.body;
+   data.tableMatrix(Matrix_unit,indices_value,(error,response)=>{
+       if(!error)
+       {
+           console.log(response);
+       }
+   })
+}
+
+controller.homepage=(req, res)=>{
+    res.render('homepage', {
+        title: "HOMEPAGE",
+        CSSlink: "./../../public/stylesheet/style.css",
+        JSlink:'./../../public/JS-Frontend/Homepage.js'
+    });
+}
+
+controller.aboutus=(req,res)=>{
+    res.render('about', {
+        title: "ABOUTPAGE",
+        CSSlink: "./../../public/stylesheet/style.css"
+    });
+}
+
+controller.menupage=(req,res)=>{
+            data.product((error,response)=>{
+                
+                //console.log("Response==>"+response);
+                if(!error){
+                    res.render('menupage', { title: 'Flavor',
+                    products:response,
+                CSSlink:'./../../public/stylesheet/menupage.css',
+                
+            });
+                }
+            })    
+        }
+controller.feedback=(req,res)=>{
+    res.render('feedback',{
+        title:"FLAVOR",
+        CSSlink:"./../../public/stylesheet/style.css",
+        CSSlink1:"./../../public/stylesheet/feedback.css"
+    })
+}
 controller.retrieve=(req,res)=>{
     
-    console.log("Username>>Booking_page"+user);
+    console.log("Username>>Booking_page"+req.session.user);
     data.retrieve((error,response)=>{
         console.log(response);
         if(response)
@@ -17,7 +72,7 @@ controller.retrieve=(req,res)=>{
                 data3:response.slice(8,12),
                 data4:response.slice(12,16),
                 data5:response.slice(16,20),
-                username:user
+                username:req.session.user
             });
         }
         
@@ -25,13 +80,25 @@ controller.retrieve=(req,res)=>{
     
 }
 controller.retrieveDashboard=(req,res)=>{
-    res.render('dashboard',{
-        CSSlink:"./../../public/stylesheet/dashboard.css",
-        JSlink:"./../../public/JS-Frontend/dashboard.js"
-    })
-}
+     data.bookingdetails((error,response)=>{
+         if(error){
+             res.send(error);
+         }
+         else{ 
+             console.log(response);
+                res.render('dashboard',{
+                CSSlink:"./../../public/stylesheet/dashboard.css",
+                JSlink:"./../../public/JS-Frontend/dashboard.js",
+                data:response.message,
+                matrix:response.matrix,
+                number:response.counter,
+                vacant:response.vacant
+            })
+        }
+     }); 
+    }
 controller.createbooking=(req,res)=>{
-     var {Customer_name, Table_number, Status}=req.body;
+    var {Customer_name, Table_number, Status}=req.body;
      console.log(Customer_name, Table_number, Status);
      data.createbooking(Customer_name, Table_number, Status,(error,response)=>{
         
@@ -68,7 +135,8 @@ controller.retrieveAdminPage=(req,res)=>{
     
     })
 }
-controller.retrieveUserPage=(req,res)=>{
+/*controller.retrieveUserPage=(req,res)=>{
+       
     res.render('Login',{
         CSSlink:'./../../public/stylesheet/Login.css',
             JSlink:'./../../public/JS-Frontend/booking.js'
@@ -76,11 +144,32 @@ controller.retrieveUserPage=(req,res)=>{
     
     })
 
-}
+}*/
 controller.adminlogin=(req,res)=>{
     console.log(req.body);
+    var{Username,Password}=req.body;
+    if(Username==='Shikhar' & Password==='admin123')
+    {
+        res.redirect('/');
+    }
+    else{
+        res.send('<h1>Admin not recognised</h1>');
+    }
 }
-controller.createAccount=(req,res)=>{
+
+controller.adminbookingticket=(req,res)=>{
+    var {Table_number,Customer_name,Contact_no}=req.body;
+    data.adminbookingticket(Customer_name,Table_number,Contact_no,(error,response)=>{
+      if(error){
+          res.send({error});
+      }else{
+        res.redirect('/Admin_dashboard');
+      }
+      
+    });
+};
+
+/*controller.createAccount=(req,res)=>{
    var {username, email, password, confirmpassword}=req.body;
    data.createAccount(username, email, password, confirmpassword,(error,response)=>{   
     console.log(response);
@@ -98,8 +187,8 @@ controller.createAccount=(req,res)=>{
        }
    })
    
-}
-controller.userLogin=(req,res)=>{
+}*/
+/*controller.userLogin=(req,res)=>{
     
     var{username, email, password}=req.body;
     data.login(username, email, password,(error,response)=>{
@@ -109,7 +198,7 @@ controller.userLogin=(req,res)=>{
             user=response.response[0].username;
             console.log("Username>>Login_page"+user);
             setTimeout(()=>{
-                res.redirect('/booking/details');       
+                res.redirect('/');       
             },5000);
         }
         else{
@@ -121,19 +210,67 @@ controller.userLogin=(req,res)=>{
                })              
             }
 })
+}*/
+/*controller.logout=(req,res)=>{
+    
+    req.session.destroy();
+    res.send("logout");
+}*/
+controller.anuthorisedaccess=(req,res)=>{
+ res.render('unauthorised');
 }
-controller.logout=(req,res)=>{
-req.session.destroy();
-}
-controller.authentication=(req,res,next)=>{
-     
-     
+/*controller.authentication=(req,res,next)=>{
+    console.log(req.session);
+     console.log(req.originalUrl);
     if(req.session.user==undefined)
-     {
-         return res.send("<h1>You're not logged in.</h1>");
+    {   if((req.originalUrl=="/booking/details"||req.originalUrl=="/logout"||req.originalUrl==("/add-to-cart/"+req.params.id))) 
+        {console.log("Inside Authentication");
+         //return res.send("<h1>You're not logged in.</h1>");
+         res.redirect('/unauthorised');}
      }
      else{
         return next();
      }
+     if(req.originalUrl==("/add-to-cart/"+req.params.id))
+     {  
+        session=req.session.cart;
+    console.log(session);
+    next();
+    }
+}*/
+controller.addcart=(req,res)=>{
+console.log("productId=>"+req.params.id);
+var productId=req.params.id;//working till here
+var cart = new Cart(req.session.cart ? req.session.cart : {});
+data.addCart(productId,(error,response)=>{
+    if(!error){
+        console.log(response);
+        cart.add(response, productId);
+        req.session.cart = cart;
+        console.log(req.session.cart)
+        res.redirect('/menu'); 
+        //session=req.session.cart.totalQty;
+    }
+    else{
+        res.redirect('/menu');
+    }
+    
+})
+}
+controller.shoppingcart=(req,res)=>{
+     console.log("Shopping-cart-->",req.session.cart);
+    if (!req.session.cart){
+       
+       res.render('shopping-cart', {products: null});
+    
+      }
+      var cart = new Cart(req.session.cart);
+      //console.log(cart.generateArray());
+      Promise.resolve( value=cart.generateArray()).then(
+          ()=>{
+            res.render('shopping-cart', {products: value,totalPrice: cart.totalPrice})
+          }
+      )
+      
 }
 module.exports=controller;

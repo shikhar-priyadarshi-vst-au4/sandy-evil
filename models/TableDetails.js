@@ -1,6 +1,15 @@
 const Table={};
+const Promise=require('promise');
 const booking=require('./CreateBooking');
 const user=require('./User');
+const product=require('./Product');
+const tabledata=require('./tableexpansion');
+var index=0;
+var counter=0;
+var vacantTab=0;
+var vacant;
+var Tab;
+var Flag=0;
  data=[{
     "tableId":1,
     "reserved":false,
@@ -60,19 +69,72 @@ const user=require('./User');
                                                 "tableId":20,
                                                 "reserved":false,
                                                 }]
-Table.retrieve=(callbackfn)=>{
-booking.find({},(error,result)=>{
-    console.error(error);
-    result.map((value,index)=>{
-        var pos=Number(value.tableNumber
-            .substring(value.tableNumber.indexOf('-')+1));
-          
-            data[pos-1].reserved=true;
-    })
-    return callbackfn(null,data);
-})
-
+Table.switchindices=(indices,callbackfn)=>{
+index=indices;
+console.log(index);
+return callbackfn(null,{status:true,
+            message:"indcies is set"});
 }
+
+Table.tableMatrix=(number,indices,callbackfn)=>{
+    index=indices;
+    var matrix=new Array(Number(number));
+    for(var i=0; i<matrix.length;i++)
+    {
+        matrix[i]={
+            "tableId":i+1,
+            "reserved":false
+        }
+    }
+
+    tabledata.create({table:matrix},function(error,result){
+      console.log(result);
+      console.error(error);
+      tabledata.countDocuments({},(error,count)=>{
+          Flag=count;
+          console.log("COUNT==>"+Flag);
+          tabledata.find({},(error,value)=>{
+            Tab=value[index].table; 
+            console.log(Tab);
+         })
+      })
+    })   
+ return callbackfn(null,matrix);
+}
+Table.retrieve=(callbackfn)=>{
+    
+      console.log("Table present in DB");
+      Promise.resolve(tabledata.countDocuments({},(error,count)=>{
+           Flag=count;
+      })).then(tabledata.find({},(error,value)=>{
+          console.log(value);
+        Tab=value[index].table; 
+        console.log(Tab);
+     })).then(
+            booking.find({},(error,result)=>{
+                console.error(error);
+                result.map((value,index)=>{
+                    var pos=Number(value.tableNumber
+                        .substring(value.tableNumber.indexOf('-')+1));
+                         if(Flag>0){
+                            console.log( Tab);  
+                            Tab[pos-1].reserved=true;
+                         }
+                         else{
+                            data[pos-1].reserved=true;
+                         }
+                        
+                })
+                if(Flag>0)
+                {
+                    return callbackfn(null,Tab);
+                }
+                else{
+                    return callbackfn(null,data);
+                }
+            })
+        )
+      }
 
 Table.createbooking=(username,tableNumber,bookingStatus,callbackfn)=>{
     console.log(username,tableNumber,bookingStatus);
@@ -99,7 +161,7 @@ Table.createbooking=(username,tableNumber,bookingStatus,callbackfn)=>{
          )
 }
 
-Table.createAccount=(username,email,password,confirmpassword,callbackfn)=>{
+/*Table.createAccount=(username,email,password,confirmpassword,callbackfn)=>{
         if(!username||!email||!password||!confirmpassword)
         {
             return callbackfn({
@@ -135,7 +197,22 @@ Table.createAccount=(username,email,password,confirmpassword,callbackfn)=>{
             }
         }
 
-};
+};*/
+
+Table.product=(callbackfn)=>{
+    product.find(function(err,docs){
+        productChunks=[];
+        chunkSize = 4;
+        //console.log(docs);
+        for (var i = 0; i<docs.length; i+= chunkSize){
+         productChunks.push(docs.slice(i, i+ chunkSize));
+         //console.log(productChunks+" "+i+","+(i+chunkSize));
+         
+        }
+        //console.log(productChunks);
+    return callbackfn(null,productChunks);
+})
+}
 
 Table.login=(username,email,password,callbackfn)=>{
    console.log(username,email,password);
@@ -160,5 +237,78 @@ Table.login=(username,email,password,callbackfn)=>{
         }
     })
   }
+}
+
+Table.adminbookingticket=(username,tableNumber,bookingStatus,callbackfn)=>{
+    console.log(username,tableNumber,bookingStatus);
+    if(Number(tableNumber.substring(tableNumber.indexOf("-")+1))>20)
+    {
+        data.push({ "tableId":Number(tableNumber.substring(tableNumber.indexOf("-")+1)),
+        "reserved":false});
+        
+    }
+    console.log(data);
+      booking.create({username:username,
+            tableNumber:tableNumber,
+            bookingStatus:bookingStatus},(error,result)=>{
+                console.log(error);
+                if(error){
+                   return callbackfn({
+                       status:false,
+                       message:error
+                   })
+                }
+                else{
+                     return callbackfn(null,{status:true,
+                     message:result,
+                    })
+                }
+            })
+}
+
+Table.bookingdetails=(callbackfn)=>{
+    tabledata.countDocuments({},(error,count)=>{
+        //console.log(count);
+        Flag=count;
+        console.log(Flag);
+      tabledata.find({},(error,table)=>{
+          console.log(table);
+        Tab=table[index].table
+        console.log(Tab);
+        booking.find({},(error,booking)=>{
+            console.log(booking);
+            Promise.resolve(booking.forEach((item,index)=>{
+                 console.log(Tab[Number(item.tableNumber.substring(
+                    item.tableNumber.indexOf('-')+1))-1]);                
+                 Tab[Number(item.tableNumber.substring(item.tableNumber.indexOf('-')+1))-1].reserved=true;
+            })).then(
+                ()=>{
+                 console.log(Tab);
+                 console.log("hello"+index);
+                 return callbackfn(null,{
+                    status:true,
+                    matrix:Tab,
+                    message:booking
+                
+                });
+                }
+            )
+        })          
+    })       
+    
+})}
+Table.addCart=(id,callbackfn)=>{
+    console.log("Inside model=>"+id);
+product.findById(id,(error,output)=>{
+    if(!error){
+       return callbackfn(null,output);
+    }
+    else{
+        return callbackfn({
+            status:false,
+            message:"product not found"
+        })
+    }
+})
 }
 module.exports=Table;

@@ -33,7 +33,13 @@ a:hover {
     color: white;
     position: relative;
 }
-
+.dropdown-menu{
+    background-color: #fcb00bfd !important;
+    border-radius: 15% !important;
+}
+.admin, .logout, .login{
+    color: #FFFFFF;
+}
 #footer-block1 {
     display: inline-block;
     width: 40%;
@@ -50,4 +56,37 @@ a:hover {
     display: inline-block;
     width: 30%;
     margin: 15px 20px 0px 20px;
+}
+
+#about {
+    background-image: url('./../images/food7.jpg');
+    padding: 180px 80px 180px 80px;
+}
+
+#about-container1 {
+    background-color: #101f2b;
+    border-radius: 10px;
+    border: 5px solid #fcb00bfd;
+    color: white;
+    padding: 80px 80px 80px 80px;
+    text-align: center;
+
+}
+
+#homepage {
+    background-color: #a5cdee;
+}
+
+#dropdown {
+    padding: 8px;
+}
+
+.dropdown-toggle {
+    padding: 10px;
+}
+
+li.active > a {
+    text-decoration: underline;
+     background-color: #999;
+    color: #FFFFFF;
 }

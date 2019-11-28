@@ -1,34 +1,39 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
 
 #nav {
-    height: 120px;
-    background: #113D6C !important;
+    height: 70px;
+    
 }
 
 #logo {
-    margin: 0px 20px 0px 20px;
+    margin: 0px 10px 0px 10px;
+    width: 50px;
+    height: 50px;
 }
 
+.background-image {
+    width: 1080px;
 
-a {
-    color: #FCE181 !important;
+}
+
+a { font-weight: 500;
+    color: #FFFFFF !important;
     margin-right: 22px !important;
     text-decoration: none !important;
     background-color: transparent !important;
 }
 
 a:hover {
-    background-color: #FCE181 !important;
-    color: #113D6C !important;
+    background-color:  #FFFFFF !important;
+    color:  #fcb00bfd !important;
 }
 
 #footer {
-    margin-top: 200px;
-    background-color: #101f2b;
+    background-color: #fcb00bfd;
     height: 350px;
-    padding: 20px 20px 20px 20px;
+    padding: 10px 20px 20px 20px;
     color: white;
-
+    position: relative;
 }
 
 #footer-block1 {
@@ -48,6 +53,7 @@ a:hover {
     width: 30%;
     margin: 15px 20px 0px 20px;
 }
+
 .lead{
     
     font-family: 'Open Sans', sans-serif;

@@ -1,0 +1,55 @@
+
+
+.thumbnail img {
+    height: 170px;
+    width: 300px;
+}
+
+
+.thumbnail .description {
+    color: #7f7f7f;
+    
+}
+
+.price {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+#footer {
+    margin-top: 730px;
+    background-color: #101f2b;
+    height: 350px;
+    padding: 20px 20px 20px 20px;
+    color: white;
+
+}
+
+#footer-block1 {
+    display: inline-block;
+    width: 40%;
+    margin: 10px 20px 10px 10px;
+}
+
+#footer-block2 {
+    display: inline-block;
+    width: 20%;
+    margin: 10px 20px 0px 20px;
+}
+
+#footer-block3 {
+    display: inline-block;
+    width: 30%;
+    margin: 15px 20px 0px 20px;
+}
+.lead{
+    
+    font-family: 'Open Sans', sans-serif;
+    
+}
+.matrix{
+    width: 1000px;
+    height: 800px;
+    background-color: #e6e9ec33;
+    border-radius: 16%;
+}

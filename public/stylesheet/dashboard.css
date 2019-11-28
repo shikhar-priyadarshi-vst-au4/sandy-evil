@@ -210,3 +210,12 @@ float: right;
   border: 1px solid #000000a6;
   margin: 10px;
 }
+.table-matrix{
+  display:flex;
+  justify-content: flex-end;
+}
+.flex-item{
+  display: flex;
+  flex-direction: column;
+
+}

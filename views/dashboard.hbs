@@ -22,13 +22,13 @@
         <div class="text-center dashboard-elem ">12</div>
     </div>
 <div class="px-5 border-right dashboard-elem border-left border-warning">No. of bookings
-    <div class="text-center dashboard-elem ">12</div>
+    <div class="text-center dashboard-elem ">{{number}}</div>
 </div>
 <div class="px-5 border-right border-warning dashboard-elem ">Waitlist bucket
     <div class="text-center dashboard-elem ">12</div>
 </div>
 <div class="px-5 border-right border-warning dashboard-elem ">Vacant Tables
-    <div class="text-center dashboard-elem ">12</div>
+    <div class="text-center dashboard-elem ">{{vacant}}</div>
 </div>
 <div class=" ml-4 px-4 text-center dashboard-elem ">Servers
   <div class="d-flex dashboard-elem ">
@@ -260,26 +260,11 @@
          </div>
          <div class="col-12 border border-secondary bg-light">
           <div class="d-flex flex-wrap">
-              <div class="p-5 m-3 border border-secondary rounded">1</div>
-              <div class="p-5 m-3 border border-secondary rounded">2</div>
-              <div class="p-5 m-3 border border-secondary rounded">3</div>
-              <div class="p-5 m-3 border border-secondary rounded">4</div>
-              <div class="p-5 m-3 border border-secondary rounded">5</div>
-              <div class="p-5 m-3 border border-secondary rounded">6</div>
-              <div class="p-5 m-3 border border-secondary rounded">7</div>
-              <div class="p-5 m-3 border border-secondary rounded">8</div>
-              <div class="p-5 m-3 border border-secondary rounded">9</div>
-              <div class="p-5 m-3 border border-secondary rounded">10</div>
-              <div class="p-5 m-3 border border-secondary rounded">11</div>
-              <div class="p-5 m-3 border border-secondary rounded">12</div>
-              <div class="p-5 m-3 border border-secondary rounded">13</div>
-              <div class="p-5 m-3 border border-secondary rounded">14</div>
-              <div class="p-5 m-3 border border-secondary rounded">15</div>
-              <div class="p-5 m-3 border border-secondary rounded">16</div>
-              <div class="p-5 m-3 border-secondary border rounded">17</div>
-              <div class="p-5 m-3 border-secondary border rounded">18</div>
-              <div class="p-5 m-3 border-secondary border rounded">19</div>
-              <div class="p-5 m-3 border-secondary border rounded">20</div>
+              {{#each matrix}}
+              <div class="p-3 m-3 border border-secondary rounded" {{#if this.reserved}}style="background-color:rgb(247, 136, 136); color:white"{{/if}}
+              >Tab-{{this.tableId}}</div>
+              {{/each}}
+              
           </div>
          </div>
          <div class="col-12">
@@ -312,97 +297,49 @@
                 <th class="table_head_item">Action</th>
             </thead>
             <tbody class="table_body">
+                    {{#each data}}
                     <tr>
-                    <td class="table_body_item">Shikhar Priyadarshi</td>
-                    <td class="table_body_item">7338957430</td>
-                    <td class="table_body_item_Table">12</td>
+                    <td class="table_body_item">{{this.username}}</td>
+                    <td class="table_body_item">N/A</td>
+                    <td class="table_body_item_Table">{{this.tableNumber}}</td>
                     <td class="table_body_item"><a  href="#" class="del">Delete</a></td>
                     </tr>
-                    <tr>
-                    <td class="table_body_item">Satish</td>
-                    <td class="table_body_item">7338957430</td>
-                    <td class="table_body_item_Table">7</td>
-                    <td class="table_body_item"><a href="#" class="del">Delete</a></td>
-                    </tr>
-                    <tr>
-                    <td class="table_body_item">Dhoni</td>
-                    <td class="table_body_item">7338957430</td>
-                    <td class="table_body_item_Table">39</td>
-                    <td class="table_body_item"><a href="#" class="del">Delete</a></td>
-                    </tr>
-                    <tr>
-                    <td class="table_body_item">Kalam</td>
-                    <td class="table_body_item">7338957430</td>
-                    <td class="table_body_item_Table">1</td>
-                    <td class="table_body_item"><a  href="#"class="del">Delete</a></td>
-                    </tr>
+                    {{/each}}
             </tbody>
         </table>
      </div>
      <div class="form">
-         <form action="" method="" class="flex-form">
-             <label for="Table_number" class="label">Table</label>
+         <form action="/admin_bookingticket" method="POST" class="flex-form">
+             <div class="display-4 ">Create Ticket</div>
+             <label for="Table_number" class="label mt-1">Table</label>
              <input type="text" name="Table_number">
              <label for="Customer_name" class="label">Name</label>
              <input type="text" name="Customer_name">
-             <label for="Contact_no" class="label">Contact</label>
+             <label for="Contact_no" class="label">Status</label>
              <input type="text" name="Contact_no">
              <input type="Submit" value="Create Ticket">
          </form>
       </div>
       </div>
-      <div class="reservation_main ">
-       <div class="Waiting_list_table item2">
-       <div class="title">Waiting List</div>
-       <table class="table_1">
-           <thead class="table_head_1">
-              <th class="table_head_1_item">First</th>
-              <th class="table_head_1_item">Second</th>
-              <th class="table_head_1_item">Third</th>
-           </thead>
-           <tbody> 
-             <tr>
-                 <td class="table_body_1_item">Shikhar</td>
-                 <td class="table_body_1_item">Rahul Singh</td>
-                 <td class="table_body_1_item">heresh</td>
-             </tr>
-             <tr>
-                 <td class="table_body_1_item">Shikhar</td>
-                 <td class="table_body_1_item">Rahul Singh</td>
-                 <td class="table_body_1_item">heresh</td>
-
-             </tr>
-             <tr>
-                 <td></td>
-                 <td></td>
-                 <td></td>
-             </tr>
-             <tr>
-                 <td></td>
-                 <td></td>
-                 <td></td>
-             </tr>
-             <tr>
-                 <td></td>
-                 <td></td>
-                 <td></td>
-             </tr>
-           </tbody>
-       </table>
-       </div>
-     <div class="Cancelled">
-      <div class="head">Cancelled Tickets</div>
-      <div class="body">
-
-          <div class="ticket">
-           <div class="name"> Shikhar</div>
-           <div class="table_no"></div>
-           <div class="mail_id"></div>
-          </div>
+      <div class="table-matrix mt-4">
+      <form action="/tablematrix/update" method="POST">
+      <div class="flex-item display-4">Table Indices</div>
+      <label for="Matrix_unit" class="flex-item mt-2">Matrix Unit</label>
+      <input type="text" name="Matrix_unit" class="flex-item">
+       <label for="indices_value" class="flex-item">Indices</label>
+      <input type="text" name="indices_value" class="flex-item">
+       <input type="submit" value="Submit">
+      </form>
       </div>
-     </div>
-   </div>
-   </div>
+      <div class="table-matrix mt-4">
+           <form action="/table/indices" method="POST">
+           <div class="flex-item display-4">Switch Indices</div>
+           <label for="Table_indices" class="flex-item mt-2">Indices</label>
+           <input type="text" class="flex-item" name="Table_indices">
+           <input type="submit" value="Submit">
+           </form>
+      </div>
+      </div>
    
 </div>
 

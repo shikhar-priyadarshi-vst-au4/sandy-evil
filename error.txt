@@ -1,2 +1,40 @@
 pattern=[a-zA-Z]{10};
-pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" 
+pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" booking.countDocuments({},(error,count)=>{
+        if(error){
+            console.log("error");
+        }
+        else{
+            console.log(typeof count)
+            counter=count;
+            vacantTab=20-counter;
+        }
+        console.log("Step3");
+    })).then(
+        booking.find({},(error,result)=>{
+    
+            if(error){
+                return callbackfn({
+                    status:false,
+                    message:error
+                });
+            }
+            else{
+                console.log("Step4");
+                result.forEach((item,index)=>{
+                    console.log("Vacant=>"+vacant);   
+                    vacant[Number(item.tableNumber.substring(
+                        item.tableNumber.indexOf('-')+1))-1].reserved=true;
+                })
+                console.log(vacant);
+                console.log("Counter=="+counter);      
+                console.log("no.of bookings==>"+counter);
+                return callbackfn(null,{
+                    status:true,
+                    message:result,
+                    matrix:vacant,
+                    counter:counter,
+                    vacant:vacantTab
+                })
+            }
+        })
+    )}

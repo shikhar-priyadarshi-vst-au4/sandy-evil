@@ -45,9 +45,20 @@ $(document).ready(function(){
          })
     })
     
-    
-    Signout=()=>{
-        $.post('/logout');
-    }
+    $('.signout').on('click',function(){
+        console.log("Signout clicked");
+        $.post('/logout',function(data){
+            console.log('Helloworld');
+            window.location.href='/logout';
+        });
+    })
+
+    /*Signout=()=>{
+        console.log("signout clicked");
+        $.post('/logout',function(data){
+            console.log('Helloworld');
+            window.location.href='/userlogout';
+        });
+    }*/
     
 })
