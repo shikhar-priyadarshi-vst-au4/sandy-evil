@@ -35,16 +35,32 @@ module.exports={
         var data=req.body;
         console.log("Request in response",req.body);
         console.log("success"+data.RESPCODE);
-        if(Number(data.RESPCODE)===01){
-            res.render('response',{
-                result:data
-            });
-        }
-        else{
-            res.send(
-             " Transaction Failure."   
+        Promise.resolve(
+            require('./../../models/order').findOneAndUpdate(
+                {orderId:data.ORDERID},
+                {paymentStatus:data.STATUS},{new:true},
+                (error,doc)=>{
+                    if(!error){
+                        console.log(error);
+                    }
+                    else{
+                        console.log(doc);
+                    }
+                }
             )
-        }
-        
+        ).then(()=>{
+            if(Number(data.RESPCODE)===01){
+                res.render('response',{
+                    result:data
+                });
+            }
+            else{
+                res.send(
+                 " Transaction Failure."   
+                )
+            }
+    
+        })
+                
     }
 }

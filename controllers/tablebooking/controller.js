@@ -41,8 +41,14 @@ controller.menupage=(req,res)=>{
     if(req.session.tableNumber==undefined){
         data.checkuser(req.session.user,req.session.tableNumber,(err,outcome)=>{
             if(!err){
-                console.log("outcome=>",outcome);
-                req.session.tableNumber=outcome[0].tableNumber;
+                if(outcome.length!=0){
+                    console.log("outcome=>",outcome);
+                    req.session.tableNumber=outcome[0].tableNumber;
+                }
+                else{
+                    console.log("User not logged-in");
+                }
+                
             }
             else{
                 req.session.tableNumber="n/a"
@@ -206,6 +212,8 @@ controller.shoppingcart=(req,res)=>{
       
         var cart = new Cart(req.session.cart);
         var order=new Order(req.session.user,req.session.tableNumber,req.session.cart,null)
+        req.session.orderId=cart.orderId;
+        console.log("orderId",req.session.orderId);
         console.log(order);
         Promise.resolve( 
           order.storedetails()
