@@ -1,4 +1,5 @@
 const express=require('express');
+const morgan=require('morgan');
 const app=express();
 const exphbs=require('express-handlebars');
 const hbs=exphbs.create({
@@ -41,6 +42,7 @@ app.use((req,res,next)=>{
     res.locals.session=req.session;
     next();
 })
+app.use(morgan(':method :url :status :res[content-length] - :response-time ms'));
 app.use(require('./app/routes/bookingroute'));
 app.use('/paymentgate',require('./paytmroutes'));//DONE
 db.connect().then(function(){

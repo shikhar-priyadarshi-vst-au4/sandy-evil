@@ -1,21 +1,31 @@
-//order database schema
-/*var mongoose=require('mongoose');
-var orderSchema= new mongoose.Schema({
+//records database schema
+var mongoose=require('mongoose');
+var recordSchema= new mongoose.Schema({
+    username:{
+        type:String
+    },
     orderId:{
         type:String,
-        required:true
+        
     },
-    :{
+    bookingtable:{
         type:String,
-        unique:true,
-        required:true
+        
     },
-    :{
-        type:String,
-        required:true
+    items:{
+        type:Object,
+        
     },
     paymentStatus:{
         type:String,
-        required:true
+    },
+    transaction_id:{
+        type:String
+    },
+    waiter_assigned:{
+        type:String
     }
-},{collection:'Users'});*/
+},{collection:'Records'});
+var Record=mongoose.model('Record',recordSchema); 
+module.exports=Record;
+

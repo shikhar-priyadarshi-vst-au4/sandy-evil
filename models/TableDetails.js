@@ -161,43 +161,6 @@ Table.createbooking=(username,tableNumber,bookingStatus,callbackfn)=>{
          )
 }
 
-/*Table.createAccount=(username,email,password,confirmpassword,callbackfn)=>{
-        if(!username||!email||!password||!confirmpassword)
-        {
-            return callbackfn({
-                status:false,
-                message:"UserCredentials are missing"
-                });
-        }
-        else{
-            if(password===confirmpassword)
-            {   
-               user.create({email:email,
-                username:username,
-                password:password,
-                passwordConfirmation:confirmpassword
-            },function(error,result){   
-                if(error){
-                        return callbackfn({
-                            error:error
-                        });
-                    }
-                    else{
-                        return callbackfn(null,{
-                            response:result
-                        })
-                    }
-                })
-             }
-            else{
-                return callbackfn({
-                    status:false,
-                    message:"password doesn't match"
-                });
-            }
-        }
-
-};*/
 
 Table.product=(callbackfn)=>{
     product.find(function(err,docs){
@@ -212,31 +175,6 @@ Table.product=(callbackfn)=>{
         //console.log(productChunks);
     return callbackfn(null,productChunks);
 })
-}
-
-Table.login=(username,email,password,callbackfn)=>{
-   console.log(username,email,password);
-   if((!username)||(!email)||(!password)){
-       return callbackfn({status:false,
-    message:"UserCredentials are missing"});
-   }
-   else{
-    user.find({username:username, email:email, password:password},(error,result)=>{
-        if(result.length>0){
-            return callbackfn(null,{
-                status:true,
-                message:"You're successfully Logged in",
-                response:result
-                })
-        }
-        else{
-            return callbackfn({
-                status:false,
-                error:"Invalid username or password."
-            })
-        }
-    })
-  }
 }
 
 Table.adminbookingticket=(username,tableNumber,bookingStatus,callbackfn)=>{
@@ -310,5 +248,19 @@ product.findById(id,(error,output)=>{
         })
     }
 })
+}
+
+Table.checkuser=(username,table,callbackfn)=>{
+    console.log(username,table);
+    booking.find({username:username},(error,result)=>{
+        console.log("error",error);
+        console.log("response",result);
+        if(!error){
+         return callbackfn(null,result);
+     }
+     else{
+         return callbackfn(error);
+     }
+    })
 }
 module.exports=Table;

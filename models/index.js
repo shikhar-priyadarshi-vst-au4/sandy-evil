@@ -2,6 +2,7 @@ const mongoose=require('mongoose');
 const booking=require('./CreateBooking');
 const user=require('./User');
 const Product=require('./Product');
+const order=require('./order');
 function connect(){
     return mongoose.connect('mongodb://localhost:27017/restaurant_booking',{
      useNewUrlParser:true   
@@ -84,7 +85,8 @@ module.exports={
     models:{
         booking:booking,
         user:user,
-        product:Product
+        product:Product,
+        order:order
     },
     connect:connect
 }

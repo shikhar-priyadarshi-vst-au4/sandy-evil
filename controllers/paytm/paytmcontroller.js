@@ -23,7 +23,7 @@ module.exports={
             }
         }
         console.log(paramarray);//array treated as an object.
-     paramarray['CALLBACK_URL']="http://localhost:3000/paymentgate/paytm/request";
+     paramarray['CALLBACK_URL']="http://localhost:3000/paymentgate/paytm/response";
      checksum.genchecksum(paramarray,PAYTM_MERCHANT_KEY,function(err,result){
          console.error(err);
          res.render("paytmstatus",
@@ -32,6 +32,19 @@ module.exports={
      })
     },
     response:(req,res)=>{
-        res.send("Successful");
+        var data=req.body;
+        console.log("Request in response",req.body);
+        console.log("success"+data.RESPCODE);
+        if(Number(data.RESPCODE)===01){
+            res.render('response',{
+                result:data
+            });
+        }
+        else{
+            res.send(
+             " Transaction Failure."   
+            )
+        }
+        
     }
 }

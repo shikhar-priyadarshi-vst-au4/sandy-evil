@@ -37,6 +37,7 @@ function genchecksum(params, key, cb) {
 crypt.gen_salt(4, function (err, salt) {
     var sha256 = crypto.createHash('sha256').update(data + salt).digest('hex');
     var check_sum = sha256 + salt;
+    console.log("Key inside in checksum=",key);
     var encrypted = crypt.encrypt(check_sum, key);
       params.CHECKSUMHASH = encrypted;
     cb(undefined, params);

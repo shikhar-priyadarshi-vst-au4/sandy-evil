@@ -8,7 +8,7 @@
         </button>
       </div>
       <div class="modal-body">
-        ...
+        Do you want to logout?
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -89,6 +89,7 @@
 </div>
 <!--TABLE-MATRIX BLOCK END-->
 <!--PAYMENT-GATEWAY AND PREORDER OPTIONS-->
+<small class="d-flex justify-content-center message"></small>
 <section class="bookingcard"> 
      <form action="/create/booking" method="POST" class="form-group">
   <input type="text" name="Customer_name" value="{{username}}" class="form-control w-100 mt-2" readonly="readonly">
@@ -99,7 +100,7 @@
   </form>
 </section>
 
-<div class="mini-container mb-5 mt-5">
+<div class="mini-container mb-1 mt-5">
 <button class="btn btn-outline-secondary w-25">
     Pay
 </button>

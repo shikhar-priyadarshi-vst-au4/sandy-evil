@@ -12,6 +12,7 @@ var crypt = {
     var iv = this.iv;
     var key = custom_key;
     var algo = '256';
+    console.log("key inside in encrypt",key,"and",custom_key);
     switch (key.length) {
     case 16:
       algo = '128';
@@ -28,6 +29,7 @@ var crypt = {
     //var cipher = crypto.createCipher('aes256',key);
     var encrypted = cipher.update(data, 'binary', 'base64');
     encrypted += cipher.final('base64');
+    console.log(encrypted);
     return encrypted;
   },
 

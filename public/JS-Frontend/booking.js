@@ -26,8 +26,30 @@ $(document).ready(function(){
         
     });
     $('.btn-dark').on('click',()=>{
-        window.location.href='/menu';
-    })
+        var customer_name=$('input[name=Customer_name]').val();
+        var table_number=$('input[name=Table_number]').val();
+        $('.alert').remove();
+        $.post('/checkuserbooking',{
+            customer_name:customer_name,
+            table_number:table_number
+        },function(status){
+            console.log(status);
+            if(status.length>0){
+                console.log(status[0].tableNumber);
+                $('input[name=Table_number]').val(status[0].tableNumber);
+                $('<div class="alert alert-success  w-50" role="alert">'+"You already booked"+" "+status[0].tableNumber
+                +". Resetting to "+status[0].tableNumber+", proceed now."+"</div>").prependTo('.message');
+                $('.bookingcard').hide();
+                setTimeout(()=>{window.location.href="/menu";},2000);
+            }
+            else{
+                $('.bookingcard').hide();
+                window.location.href="/menu";
+            }
+            
+        })
+        
+        })
     $('.leftarrow').on('click',()=>{
         console.log($(this));
         $.get('/booking/details',{

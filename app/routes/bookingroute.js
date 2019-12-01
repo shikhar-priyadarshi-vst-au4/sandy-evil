@@ -11,7 +11,8 @@ router.get('/ADMIN_ACCESS',controller.retrieveAdminPage);//LOGIN AND SIGNUP
 router.get('/Admin_dashboard',controller.retrieveDashboard);//retrieve dashboard.
 router.get('/unauthorised',controller.anuthorisedaccess);
 router.get('/add-to-cart/:id',isLoggedIn,controller.addcart);
-router.get('/shopping-cart',controller.shoppingcart);
+router.get('/shopping-cart',isLoggedIn,controller.shoppingcart);
+router.post('/checkuserbooking',controller.checkuserbooking);
 router.post('/table/indices',controller.switchindices);
 router.post('/tablematrix/update',controller.tableMatrix);
 router.post('/admin_bookingticket',controller.adminbookingticket);
@@ -21,13 +22,12 @@ router.post('/create/booking',controller.createbooking);//REQUEST FOR MAKING A B
 router.get('/logout',(req,res)=>{
     res.redirect('/');
 })
-router.get('/LOGIN_ACCESS',alreadyLoggedIn,(req,res)=>{
+router.get('/LOGIN_ACCESS',(req,res)=>{
     var signup_messages=req.flash('signuperror');
     var signin_messages=req.flash('signinerror');
     console.log(signup_messages,signin_messages);
     res.render('Login',{
         CSSlink:'./../../public/stylesheet/Login.css',
-            JSlink:'./../../public/JS-Frontend/booking.js',
             signin_messages:signin_messages,
             error:(signin_messages.length>0),
             signup_messages:signup_messages,
@@ -46,6 +46,7 @@ router.post('/login',passport.authenticate('local.signin',{
 router.post('/admin',controller.adminlogin);
 router.post('/logout',function(req,res,next){
     req.logout();
+    req.session.destroy();
     res.redirect('/');
 });
 //router.use(controller.authentication);
@@ -56,14 +57,6 @@ function isLoggedIn(req,res,next){
     }
     else{
         res.redirect('/unauthorised');
-    }
-}
-function alreadyLoggedIn(req,res,next){
-    if(req.isAuthenticated()){
-        res.redirect('/');
-    }
-    else{
-        return next();
     }
 }
 module.exports=router;

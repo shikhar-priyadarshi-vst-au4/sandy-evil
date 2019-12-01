@@ -7,11 +7,20 @@
   <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
     <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
       <li class="nav-item active">
-        <a class="nav-link" href="/shopping-cart"><i class="fas fa-utensils mx-2"></i>Cart
-        <span class="badge badge-secondary">{{session.cart.totalQty}}</span></a>
+        <a class="nav-link bg-light text-warning rounded-pill mx-1" href="/booking/details">
+        <i class="fas fa-ticket-alt mx-2"></i>Ticket
+        </a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link bg-light text-warning rounded-pill mx-1" href="/shopping-cart"><i class="fas fa-utensils mx-2"></i>Meal
+        <span class="badge badge-warning text-light">{{session.cart.totalQty}}</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/LOGIN_ACCESS"><i class="fas fa-user mx-2"></i>Login</a>
+        {{#if login}}
+        <a class="nav-link bg-light text-warning rounded-pill mx-1" href="/logout"><i class="fas fa-sign-out-alt mx-2"></i>Logout</a>
+        {{else}}
+        <a class="nav-link bg-light text-warning rounded-pill mx-1" href="/LOGIN_ACCESS"><i class="fas fa-sign-in-alt mx-2"></i>Login</a>
+        {{/if}}
       </li>
       
     </ul>
@@ -43,42 +52,7 @@
     {{/each}}
     </div>
 
-     <h2>Customer's Feedbacks</h2>
-            
-  <table class="table table-bordered">
-    <thead>
-      <tr>
-        <th>COMBO</th>
-        <th>AVAILABILITY</th>
-        <th>COMMENTS</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Dish1</td>
-        <td class="bg-info">ON(Status)</td>
-        <td>>CUSTOMER-1 FEEDBACK<br>
-        >CUSTOMER-2 FEEDBACK<br>
-        >CUSTOMER-3 FEEDBACK<br>
-        >CUSTOMER-4 FEEDBACK
-            
-        </td>
-      </tr>
-      <tr>
-        <td>Dish2</td>
-        <td class="bg-danger">OFF(Status)</td>
-        <td>
-        >CUSTOMER-1 FEEDBACK<br>
-        >CUSTOMER-2 FEEDBACK<br>
-        >CUSTOMER-3 FEEDBACK<br>
-        >CUSTOMER-4 FEEDBACK
-        </td>
-      </tr>
-     
-    </tbody>
-  </table>
-
-  <div id="footer">
+    <div id="footer">
     <div id="footer-block1">
         <span>
             <a class="navbar-brand" href="#">
