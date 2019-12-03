@@ -48,7 +48,7 @@ app.use((req,res,next)=>{
     next();
 })
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms'));
-app.use(require('./app/routes/bookingroute'));
+app.use(require(__dirname+'/app/routes/bookingroute'));
 app.use('/paymentgate',require('./paytmroutes'));//DONE
 db.connect().then(function(){
     app.listen(PORT,function(){
