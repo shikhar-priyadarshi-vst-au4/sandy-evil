@@ -5,7 +5,7 @@ const Product=require('./Product');
 const order=require('./order');
 const feedback=require('./feedback');
 function connect(){
-    return mongoose.connect('mongodb+srv://Shikhar4223:qwerty21QA@cluster0-yo1gt.mongodb.net/test?retryWrites=true&w=majority',{
+    return mongoose.connect('mongodb+srv://Shikhar4223:qwerty21QA@cluster0-yo1gt.mongodb.net/restaurant_booking?retryWrites=true&w=majority',{
      useNewUrlParser:true   
     ,useUnifiedTopology:true
     });
