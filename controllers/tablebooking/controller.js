@@ -23,7 +23,7 @@ controller.tableMatrix=(req,res)=>{
 }
 
 controller.homepage=(req, res)=>{
-   return res.render('homepage', {
+        res.render('homepage', {
         title: "HOMEPAGE",
         CSSlink: "./../../public/stylesheet/style.css",
         JSlink:'./../../public/JS-Frontend/Homepage.js'
