@@ -1,0 +1,99 @@
+<div>
+        <nav class="navbar navbar-light bg-warning" id="nav">
+            <a class="navbar-brand rounded-pill" href="#">
+                <img src="https://st2.depositphotos.com/8301258/11963/v/950/depositphotos_119634124-stock-illustration-restaurant-logo-cutlery-design.jpg"
+                    width="80" height="80" alt="" id="logo">FLAVOR
+            </a>
+            <div id="navbar">
+                <ul class="nav">
+                    <li class="nav-item rounded-pill">
+                        <a class="nav-link active rounded-pill" href="/">HOME</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active rounded-pill" href="/about">ABOUT</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active rounded-pill" href="/menu">MENU</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active rounded-pill" href="/booking/details">BOOK</a>
+                    </li>
+                    <li class="nav-item dropdown" id="dropdown">
+                        {{#if login}}
+                        <a href="" class="dropdown-toggle  rounded-pill" data-toggle="dropdown">LOGOUT</a>
+                        {{else}}
+                        <a href="" class="dropdown-toggle rounded-pill" data-toggle="dropdown">LOGIN</a>
+                        {{/if}}
+                        <div class="dropdown-menu bg-warning" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item text-dark  admin" href="/ADMIN_ACCESS">Admin</a>
+                            {{#if login}}
+                            <a class="dropdown-item text-dark  logout" href="/logout">Logout</a>
+                            {{else}}
+                            <a class="dropdown-item  text-dark  login" href="/LOGIN_ACCESS">Login</a>
+                            {{/if}}
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active rounded-pill" href="/feedback">FEEDBACK</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active rounded-pill" href="#">HELP</a>
+                    </li>
+                </ul>
+            </div>
+
+        </nav>
+    </div>
+    <div >
+       <div class="text-light image">
+           <div class="display-1">Food and more.</div>
+       </div>
+       <p class="text-bolder quote">You learn a lot about someone when you share a meal together.</p>
+       <p class="text-bolder quotes">
+           “ Laughter is brightest in the place where the food is.
+       </p>
+       <input type="submit" value="Explore" class="btn px-5 btn-light bg_img text-warning rounded-pill">
+       <img src="./../public/images/black-fork-and-knife-clip-art-940302.jpg"  class="" width="100%" alt="na">
+        
+    </div>
+
+
+    <div id="footer">
+        <div id="footer-block1">
+            <span>
+                <a class="navbar-brand" href="#">
+                    <img src="https://st2.depositphotos.com/8301258/11963/v/950/depositphotos_119634124-stock-illustration-restaurant-logo-cutlery-design.jpg"
+                        width="80" height="80" alt="" id="logo">FLAVOURS
+                </a>
+            </span><br><br>
+            <span>
+                Acquaintances become friends around a table in the safe and controlled environment of a restaurant.
+                Individuals become lovers across a restaurant table, sometimes. Customer Satisfaction and Loyalty. One
+                of the main objectives of a restaurant is to ensure customer satisfaction and build a repeat-customer
+                base.
+            </span>
+        </div>
+        <div id="footer-block2">
+            <span>
+                <h5>Important Links</h5>
+            </span>
+            <span><a href>BLog</a></span><br>
+            <span><a href>Shop Partners</a></span><br>
+            <span><a href>Privacy Policy</a></span><br>
+            <span><a href>Terms & Condition</a></span><br>
+        </div>
+
+        <div id="footer-block3">
+            <span>
+                <h5>Contact Us</h5>
+            </span>
+            <span>
+                BHIVE Workspace, L-148, 5th Main Rd, Sector 6, HSR Layout, Bengaluru, Karnataka 560102
+            </span><br><br>
+            <span>
+                For enquery:
+                admin@flavours.com
+                8123986891 / 7052560736 / 8870438474
+            </span>
+        </div>
+    </div>

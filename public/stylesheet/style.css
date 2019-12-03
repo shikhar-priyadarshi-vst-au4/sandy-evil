@@ -1,0 +1,127 @@
+@import url('https://fonts.googleapis.com/css?family=Fjalla+One&display=swap');
+#nav {
+    height: 70px;
+    box-shadow: 1px 1px 1px 1px #101f2b4d;
+    font-family: 'Fjalla One', sans-serif !important;
+}
+
+#logo {
+    margin: 0px 10px 0px 10px;
+    width: 50px;
+    height: 50px;
+}
+.quote{
+    font-family: 'Fjalla One', sans-serif !important;
+    position: absolute;
+    left: 900px;
+    top: 159px;
+    font-weight: 600;
+    font-size: 30px;
+    color: #FFFFFF;
+    width: 300px;
+}
+.quotes{
+    font-family: 'Fjalla One', sans-serif !important;
+    position: absolute;
+    left: 900px;
+    top: 320px;
+    font-weight: 600;
+    font-size: 30px;
+    color: #FFFFFF;
+    width: 300px;
+}
+.bg_img{
+    position: absolute;
+    bottom: 180px;
+    left: 1000px
+    
+}
+.bg_img:hover{
+    cursor: pointer;
+    background-color: #FFFFFF !important;
+}
+.display-1{
+    font-family: 'Fjalla One', sans-serif !important;
+}
+.image{
+    position:absolute; 
+    
+    left: 38px;
+    top: 70px;
+}
+.background-image {
+    width: 1080px;
+
+}
+a { font-weight: 500;
+    color: #FFFFFF !important;
+    margin-right: 22px !important;
+    text-decoration: none !important;
+    background-color: transparent !important;
+}
+
+a:hover {
+    background-color:  #FFFFFF !important;
+    color:  #fcb00bfd !important;
+}
+
+#footer {
+    background-color: #fcb00bfd;
+    height: 350px;
+    padding: 20px 20px 20px 20px;
+    color: white;
+    position: relative;
+}
+.admin, .logout, .login{
+    color: #FFFFFF;
+}
+#footer-block1 {
+    display: inline-block;
+    width: 40%;
+    margin: 10px 20px 10px 10px;
+}
+
+#footer-block2 {
+    display: inline-block;
+    width: 20%;
+    margin: 10px 20px 0px 20px;
+}
+
+#footer-block3 {
+    display: inline-block;
+    width: 30%;
+    margin: 15px 20px 0px 20px;
+}
+
+#about {
+    background-image: url('./../images/food7.jpg');
+    padding: 180px 80px 180px 80px;
+}
+
+#about-container1 {
+    background-color: #101f2b;
+    border-radius: 10px;
+    border: 5px solid #fcb00bfd;
+    color: white;
+    padding: 80px 80px 80px 80px;
+    text-align: center;
+
+}
+
+#homepage {
+    background-color: #a5cdee;
+}
+
+#dropdown {
+    padding: 8px;
+}
+
+.dropdown-toggle {
+    padding: 10px;
+}
+
+li.active > a {
+    text-decoration: underline;
+     background-color: #999;
+    color: #FFFFFF;
+}
