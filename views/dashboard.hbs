@@ -1,9 +1,9 @@
 <div class="mt-1 container-fluid row">
-<span class="hamburger bg-light border border-light rounded-lg">
+<!--<span class="hamburger bg-light border border-light rounded-lg">
        <span class="border border-dark "></span>
        <span class="border border-dark  mt-2"></span>
        <span class="border border-dark  mt-2"></span>
-   </span>
+   </span>-->
 
 <div class=" col-2 border rounded-lg sidebar d-flex flex-column">
    <div class="sidebar-list ml-3">
@@ -12,6 +12,8 @@
       <div class="sidebar-items py-4" id="reservations"><span class='click'>Reservations</span></div>
        <div class="sidebar-items py-4" id="menu"><span class='click'>Cuisine</span></div>
         <div class="sidebar-items py-4" id="inventory"><span class='click'>Inventory</span></div>
+        <div class="sidebar-items py-4" id="logout"><span class="click signout">Logout</span></div>
+        
    </div>
    
    
@@ -19,13 +21,13 @@
 <div class=" col-9 border dash dashboard-elem pt-2">
 <div class="d-flex justify-content-center main dashboard-elem text-secondary bg-light border py-4 rounded-pill">
     <div class="px-3 dashboard-elem mr-4">Total orders
-        <div class="text-center dashboard-elem ">12</div>
+        <div class="text-center dashboard-elem ">{{order}}</div>
     </div>
 <div class="px-5 border-right dashboard-elem border-left border-warning">No. of bookings
     <div class="text-center dashboard-elem ">{{number}}</div>
 </div>
-<div class="px-5 border-right border-warning dashboard-elem ">Waitlist bucket
-    <div class="text-center dashboard-elem ">12</div>
+<div class="px-5 border-right border-warning dashboard-elem ">Login
+    <div class="text-center dashboard-elem ">{{users}}</div>
 </div>
 <div class="px-5 border-right border-warning dashboard-elem ">Vacant Tables
     <div class="text-center dashboard-elem ">{{vacant}}</div>
@@ -33,10 +35,10 @@
 <div class=" ml-4 px-4 text-center dashboard-elem ">Servers
   <div class="d-flex dashboard-elem ">
     <div class="pr-2 dashboard-elem ">Busy
-        <div class="text-danger dashboard-elem ">2</div>
+        <div class="text-danger dashboard-elem ">0</div>
       </div>
        <div class="border-left border-warning pl-2 dashboard-elem ">Active
-          <div class="text-success dashboard-elem ">4</div>
+          <div class="text-success dashboard-elem ">0</div>
       </div>
     </div>
    </div>
@@ -106,37 +108,20 @@
       <div class="col-12 text-center">
         <table class="table w-100 table-bordered dashboard-elem">
            <thead class="thead-secondary dashboard-elem ">
-               <th>Order_Id</th>
-               <th>Billing_Id</th>
-               <th>Transaction_Status</th>
+               <th>Name</th>
+               <th>Feedback</th>
+               <th>Rating</th>
            </thead>
            <tbody>
+               {{#each feedback}}
                <tr>
-                   <td>12312</td>
-                   <td>321123312</td>
-                   <td>Paid</td>
+                   <td>{{this.username}}</td>
+                   <td>{{this.feedback}} </td>
+                   <td class="{{#if this.star}}text-success{{else}}text-danger{{/if}}">
+                       {{#if this.star}}{{this.star}}{{else}}0{{/if}}/6</td>
                </tr>
-               <tr>
-                   <td>23322</td>
-                   <td>23432234</td>
-                   <td>Paid</td>
-               </tr>
-               <tr>
-                   <td>12321</td>
-                   <td>433453</td>
-                   <td>Paid</td>
-               </tr>
-               <tr>
-                   <td>3242</td>
-                   <td>456456</td>
-                   <td>Paid</td>
-               </tr>
-               <tr>
-                   <td>234325</td>
-                   <td>56454</td>
-                   <td>Paid</td>
-               </tr>
-           </tbody>
+               {{/each}}
+               </tbody>
            </table>
       </div>
   </div>
@@ -150,77 +135,21 @@
               <table class="table ml-3 table-bordered">
                   <thead>
                    <th class="lead text-center border-left border-right">OrderId</th>
+                   <th class="lead text-center border-right">Name</th>
                    <th class="lead text-center border-right">Status</th>
-                   <th class="lead text-center border-right">Server</th>
                     <th class="lead text-center  border-right">Table</th>
                   </thead>
                   <tbody>
+                     {{#each records}}
                      <tr>
-                         <td>order_id</td>
-                         <td>Payment_status</td>
-                         <td>Server_assigned</td>
-                         <td>Table_no</td>
+                         <td>{{this.orderId}}</td>
+                         <td>{{this.username}}</td>
+                         <td>{{#if this.paymentStatus}}{{this.paymentStatus}}{{else}}Unpaid<b class="text-danger font-italic"> (Transc. Failed)</b>{{/if}}</td>
+                         <td>{{this.bookingtable}}</td>
+                         
                      </tr>
-                     <tr>
-                         <td>order_id</td>
-                         <td>Payment_status</td>
-                         <td>Server_assigned</td>
-                         <td>Table_no</td>
-                     </tr>
-                     <tr>
-                         <td>order_id</td>
-                         <td>Payment_status</td>
-                         <td>Server_assigned</td>
-                         <td>Table_no</td>
-                     </tr>
-                     <tr>
-                         <td>order_id</td>
-                         <td>Payment_status</td>
-                         <td>Server_assigned</td>
-                         <td>Table_no</td>
-                     </tr>
-                     <tr>
-                         <td>order_id</td>
-                         <td>Payment_status</td>
-                         <td>Server_assigned</td>
-                         <td>Table_no</td>
-                     </tr>
-                     <tr>
-                         <td>order_id</td>
-                         <td>Payment_status</td>
-                         <td>Server_assigned</td>
-                         <td>Table_no</td>
-                     </tr>
-                     <tr>
-                         <td>order_id</td>
-                         <td>Payment_status</td>
-                         <td>Server_assigned</td>
-                         <td>Table_no</td>
-                     </tr>
-                     <tr>
-                         <td>order_id</td>
-                         <td>Payment_status</td>
-                         <td>Server_assigned</td>
-                         <td>Table_no</td>
-                     </tr>
-                     <tr>
-                         <td>order_id</td>
-                         <td>Payment_status</td>
-                         <td>Server_assigned</td>
-                         <td>Table_no</td>
-                     </tr>
-                     <tr>
-                         <td>order_id</td>
-                         <td>Payment_status</td>
-                         <td>Server_assigned</td>
-                         <td>Table_no</td>
-                     </tr>
-                     <tr>
-                         <td>order_id</td>
-                         <td>Payment_status</td>
-                         <td>Server_assigned</td>
-                         <td>Table_no</td>
-                     </tr>
+                     {{/each}}
+                     
                   </tbody>
               </table>
               </div>
@@ -232,7 +161,7 @@
           <div class="col-4  ml-4">
               <div class="w-100 container-fluid mx-5">
                   <div class="h5 ml-3 text-secondary">Create Order</div>
-                  <form action="" method="" class="form-group w-100">
+                  <form action="/create/order" method="POST" class="form-group w-100">
                       <label for="order_id" class="ml-3 lead">Order Id</label>
                       <input type="text" class="form-control mx-3 order_id" name="order_id"  required>
                       <label for="customer_name" class="ml-3 lead">Name</label>
@@ -240,13 +169,15 @@
                        title="Must be atleast 3 characters" name="customer_name" required>
                       <label for="contact_no" class="ml-3 lead">Contact</label>
                       <input type="text" class="form-control mx-3" pattern="[0-9]{10}" 
-                       title="10-digit number" name="contact_no"  required>
+                       title="10-digit number" name="contact_no">
                       <label for="table_no" class="ml-3 lead">Table</label>
                       <input type="text" class="form-control mx-3" name="table_no"  required>
-                      <label for="server_no" class="ml-3 lead">Waiter</label>
-                      <input type="text" class="form-control mx-3" name="server_no"  required>
                       <label for="order_stack" class="ml-3 lead">Food</label>
-                      <input type="text" class="form-control mx-3" name="order_stack">
+                      <select name="order_stack" id="" style="width: 120%;" class=" border-secondary form-control mx-3">
+                          {{#each products}}
+                          <option>{{this.title}}{{this.price}}</option>
+                          {{/each}}
+                      </select>
                       <input type="submit" class=" btn text-light btn-warning ml-3 mt-3" value="Generate Ticket">
                   </form>
               </div>

@@ -7,18 +7,19 @@ router.get('/menu',controller.menupage);
 router.get('/feedback',controller.feedback);
 router.get('/booking/details',isLoggedIn,controller.retrieve);//RETRIEVING BOOKING PAGE.
 router.get('/ADMIN_ACCESS',controller.retrieveAdminPage);//LOGIN AND SIGNUP 
-//router.get('/LOGIN_ACCESS',controller.retrieveUserPage);//PAGE RETRIEVER.
-router.get('/Admin_dashboard',controller.retrieveDashboard);//retrieve dashboard.
+router.get('/Admin_dashboard',controller.admin,controller.retrieveDashboard);//retrieve dashboard.
 router.get('/unauthorised',controller.anuthorisedaccess);
 router.get('/add-to-cart/:id',isLoggedIn,controller.addcart);
 router.get('/shopping-cart',isLoggedIn,controller.shoppingcart);
 router.post('/checkuserbooking',controller.checkuserbooking);
 router.post('/table/indices',controller.switchindices);
+router.post('/create/order',controller.admincreateorder);
 router.post('/tablematrix/update',controller.tableMatrix);
+router.use(controller.admin);
+router.post('/feedback/report/database',controller.feedbackupdate);
 router.post('/admin_bookingticket',controller.adminbookingticket);
 router.post('/create/booking',controller.createbooking);//REQUEST FOR MAKING A BOOKING. 
-//router.post('/login',controller.userLogin);//REQUEST TO LOGIN
-//router.post('/signup',controller.createAccount);//REQUEST TO CREATE A LOGIN ACCOUNT.
+router.post('/admin/signout',controller.adminsignout);
 router.get('/logout',(req,res)=>{
     res.redirect('/');
 })

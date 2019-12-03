@@ -1,5 +1,8 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-warning">
-  <a class="navbar-brand text-light" href="/">Flavor</a>
+  <a class="navbar-brand text-light rounded-pill" href="/">
+                <img src="https://st2.depositphotos.com/8301258/11963/v/950/depositphotos_119634124-stock-illustration-restaurant-logo-cutlery-design.jpg"
+                    width="80" height="60" alt="" id="logo"> FLAVOR
+            </a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -35,7 +38,7 @@
 <div class="row mx-1">
   {{#each this}}
     <div class="col-sm-6 col-md-3">
-        <div class="thumbnail">
+        <div class="thumbnail border border-secondary mt-5 ">
             <img src="{{this.imagePath}}" alt="..." class="img-responsive rounded-pill">
             <div class="caption text-center">
                 <div class="lead">{{this.title}}</div>

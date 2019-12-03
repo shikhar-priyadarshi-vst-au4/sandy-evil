@@ -1,7 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
-
+@import url('https://fonts.googleapis.com/css?family=Fjalla+One&display=swap');
 #nav {
     height: 70px;
+    font-family: 'Fjalla One', sans-serif !important;
+    box-shadow: 1px 1px 1px 1px #101f2b4d;
     
 }
 

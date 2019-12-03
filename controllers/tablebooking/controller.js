@@ -2,7 +2,7 @@ const controller={};
 const data=require('./../../models/TableDetails');
 const Cart=require('./../../models/cart');
 const Order=require('./../../models/details');
-
+const Records=require('./../../models/customerorder');
 controller.switchindices=(req,res)=>{
     console.log(req.body);
     var {Table_indices}=req.body;
@@ -14,15 +14,16 @@ controller.switchindices=(req,res)=>{
 controller.tableMatrix=(req,res)=>{
    var {Matrix_unit,indices_value}=req.body;
    data.tableMatrix(Matrix_unit,indices_value,(error,response)=>{
-       if(!error)
+       if(response)
        {
-           console.log(response);
+           console.log(response,"returned to function");
        }
    })
+   res.send("done");
 }
 
 controller.homepage=(req, res)=>{
-    res.render('homepage', {
+   return res.render('homepage', {
         title: "HOMEPAGE",
         CSSlink: "./../../public/stylesheet/style.css",
         JSlink:'./../../public/JS-Frontend/Homepage.js'
@@ -71,10 +72,19 @@ controller.menupage=(req,res)=>{
 controller.feedback=(req,res)=>{
     res.render('feedback',{
         title:"FLAVOR",
+        JSlink:"./../../public/JS-Frontend/feedback.js",
         CSSlink:"./../../public/stylesheet/style.css",
         CSSlink1:"./../../public/stylesheet/feedback.css"
     })
 }
+
+controller.feedbackupdate=(req,res)=>{
+    var {username,text,star}=req.body;
+    var feedback=new Records();
+    Promise.resolve(feedback.feedback(username,text,star)).then(res.redirect('/feedback'));
+
+}
+
 controller.retrieve=(req,res)=>{
     
     console.log("Username>>Booking_page"+req.session.user);
@@ -99,23 +109,41 @@ controller.retrieve=(req,res)=>{
     
 }
 controller.retrieveDashboard=(req,res)=>{
-     data.bookingdetails((error,response)=>{
-         if(error){
-             res.send(error);
-         }
-         else{ 
-             console.log(response);
-                res.render('dashboard',{
-                CSSlink:"./../../public/stylesheet/dashboard.css",
-                JSlink:"./../../public/JS-Frontend/dashboard.js",
-                data:response.message,
-                matrix:response.matrix,
-                number:response.counter,
-                vacant:response.vacant
-            })
-        }
-     }); 
+    var records=new Records();
+    var register;
+    Promise.resolve(register={records:records.record(),
+        users:records.user(),
+    products:records.product(),
+number:records.booking(),
+feedback:records.fetch()}).then(()=>{
+        data.bookingdetails((error,response)=>{
+         
+            console.log("Documents==>",register);
+            //console.log("Login's==>",users);
+            //console.log("products==>",products);
+            if(error){
+                res.send(error);
+            }
+            else{ 
+                //console.log(register);
+                   res.render('dashboard',{
+                   CSSlink:"./../../public/stylesheet/dashboard.css",
+                   JSlink:"./../../public/JS-Frontend/dashboard.js",
+                   data:response.message,
+                   feedback:register.feedback[0],
+                   order:register.records[0].length,
+                   matrix:response.matrix,
+                   number:register.number[0],
+                   vacant:response.matrix.length-register.number[0],
+                   records:register.records[0],
+                   products:register.products[0],
+                   users:register.users[0]
+               })
+           }
+        });
     }
+        
+    )}
 controller.createbooking=(req,res)=>{
     var {Customer_name, Table_number, Status}=req.body; 
     console.log(Customer_name, Table_number, Status);
@@ -159,8 +187,8 @@ controller.adminlogin=(req,res)=>{
     console.log(req.body);
     var{Username,Password}=req.body;
     if(Username==='Shikhar' & Password==='admin123')
-    {
-        res.redirect('/');
+   {    req.session.admin=Password;
+        res.redirect('/Admin_dashboard');
     }
     else{
         res.send('<h1>Admin not recognised</h1>');
@@ -259,4 +287,46 @@ controller.checkuserbooking=(req,res)=>{
         }
     })
 }
+controller.admin=(req,res,next)=>{
+    
+    if(!req.session.admin && req.originalUrl=='/Admin_dashboard')
+    {
+        res.redirect('/ADMIN_ACCESS');
+    }
+    else{
+        next();
+    }
+}
+controller.adminsignout=(req,res)=>{
+req.session.destroy();
+res.send("logout");
+}
+
+
+controller.admincreateorder=(req,res)=>{
+    var{order_id,customer_name,contact_no,table_no,order_stack}=req.body;
+    console.log(order_id,customer_name,contact_no,table_no,order_stack);
+    require('./../../models/order').create({username:customer_name,
+        orderId:order_id,
+        bookingtable:table_no,
+        items:order_stack,
+    paymentStatus:"Cash"},(error,result)=>{
+     if(result){
+         console.log(result);
+         Promise.resolve(require('./../../models/CreateBooking').create({username:customer_name,
+        tableNumber:table_no,bookingStatus:"Booked"},(err,created)=>{
+            if(created){
+             console.log(created);
+            }
+            
+        })).then(res.redirect('/Admin_dashboard'))
+         
+     }
+     else{
+         res.send(error);
+     }
+})
+}
+
+
 module.exports=controller;

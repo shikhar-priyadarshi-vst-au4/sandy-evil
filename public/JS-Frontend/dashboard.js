@@ -25,13 +25,13 @@ $(document).ready(function(){
         $('.dashboard-elem').hide();
         $('.createorder-elem').hide();
     })
-    $('.hamburger').on('click',function(){
+    /*$('.hamburger').on('click',function(){
         $('.sidebar').css({"left":"0px"})
         $('.hamburger').css('display','none');
-    });
+    });*/
     var ctx = $('#myChart');
     var myChart = new Chart(ctx, {
-            type: 'bar',
+            type: 'line',
             data: {
                 labels: ['Indian', 'Chinese', 'Italian', 'Mexican', 'Japanese', 'Korean'],
                 datasets: [{
@@ -81,7 +81,11 @@ $(document).ready(function(){
          
        })
                
-
+    $('.signout').on('click',function(){
+        $.post('/admin/signout',function(){
+            window.location.href='/';
+        });
+    })
                     
 
 

@@ -38,3 +38,12 @@ pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" booking.countDocuments({},(error,c
             }
         })
     )}
+{{#each data}}
+
+
+data[0].datum[0]
+data[0].datum[1]
+data[0].datum[2]
+data[0].datum[3]
+
+{data:[datum:[{data1:xxx},{data2:yyy},{data3:zzz},{data4:qqq}]],[{}],[{}],[{}],[{}]}

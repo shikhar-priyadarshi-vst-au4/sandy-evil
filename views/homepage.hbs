@@ -20,16 +20,16 @@
                     </li>
                     <li class="nav-item dropdown" id="dropdown">
                         {{#if login}}
-                        <a href="" class="dropdown-toggle rounded-pill" data-toggle="dropdown">LOGOUT</a>
+                        <a href="" class="dropdown-toggle  rounded-pill" data-toggle="dropdown">LOGOUT</a>
                         {{else}}
                         <a href="" class="dropdown-toggle rounded-pill" data-toggle="dropdown">LOGIN</a>
                         {{/if}}
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item admin" href="/ADMIN_ACCESS">Admin</a>
+                        <div class="dropdown-menu bg-warning" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item text-dark  admin" href="/ADMIN_ACCESS">Admin</a>
                             {{#if login}}
-                            <a class="dropdown-item logout" href="/logout">Logout</a>
+                            <a class="dropdown-item text-dark  logout" href="/logout">Logout</a>
                             {{else}}
-                            <a class="dropdown-item login" href="/LOGIN_ACCESS">Login</a>
+                            <a class="dropdown-item  text-dark  login" href="/LOGIN_ACCESS">Login</a>
                             {{/if}}
                         </div>
                     </li>
@@ -44,13 +44,18 @@
 
         </nav>
     </div>
-
-    <div id="homepage">
-    <img src="./public/images/home delivery.png" style="margin: 50px 100px 120px 0px;">
-    <img src="./public/images/book10.png" width="700px" height="450px" style="display: inline-block;">
-    <img src="./public/images/food9.png" width="1349px" height="" style="display: inline-block;">
-    <img src="./public/images/menu.jpg" style="width: 100%;">
-</div>
+    <div >
+       <div class="text-light image">
+           <div class="display-1">Food and more.</div>
+       </div>
+       <p class="text-bolder quote">You learn a lot about someone when you share a meal together.</p>
+       <p class="text-bolder quotes">
+           “ Laughter is brightest in the place where the food is.
+       </p>
+       <input type="submit" value="Explore" class="btn px-5 btn-light bg_img text-warning rounded-pill">
+       <img src="./../public/images/black-fork-and-knife-clip-art-940302.jpg"  class="" width="100%" alt="na">
+        
+    </div>
 
 
     <div id="footer">

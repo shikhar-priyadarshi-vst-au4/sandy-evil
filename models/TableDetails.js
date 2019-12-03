@@ -8,6 +8,7 @@ var index=0;
 var counter=0;
 var vacantTab=0;
 var vacant;
+var available;
 var Tab;
 var Flag=0;
  data=[{
@@ -87,14 +88,16 @@ Table.tableMatrix=(number,indices,callbackfn)=>{
         }
     }
 
-    tabledata.create({table:matrix},function(error,result){
+    tabledata.create({table:matrix,
+     index:index
+    },function(error,result){
       console.log(result);
       console.error(error);
       tabledata.countDocuments({},(error,count)=>{
           Flag=count;
           console.log("COUNT==>"+Flag);
-          tabledata.find({},(error,value)=>{
-            Tab=value[index].table; 
+        tabledata.find({index:index},(error,value)=>{
+            Tab=value; 
             console.log(Tab);
          })
       })
@@ -106,9 +109,9 @@ Table.retrieve=(callbackfn)=>{
       console.log("Table present in DB");
       Promise.resolve(tabledata.countDocuments({},(error,count)=>{
            Flag=count;
-      })).then(tabledata.find({},(error,value)=>{
+      })).then(tabledata.find({index:index},(error,value)=>{
           console.log(value);
-        Tab=value[index].table; 
+        Tab=value[0].table; 
         console.log(Tab);
      })).then(
             booking.find({},(error,result)=>{
@@ -209,31 +212,63 @@ Table.bookingdetails=(callbackfn)=>{
         //console.log(count);
         Flag=count;
         console.log(Flag);
-      tabledata.find({},(error,table)=>{
-          console.log(table);
-        Tab=table[index].table
-        console.log(Tab);
-        booking.find({},(error,booking)=>{
-            console.log(booking);
-            Promise.resolve(booking.forEach((item,index)=>{
-                 console.log(Tab[Number(item.tableNumber.substring(
-                    item.tableNumber.indexOf('-')+1))-1]);                
-                 Tab[Number(item.tableNumber.substring(item.tableNumber.indexOf('-')+1))-1].reserved=true;
-            })).then(
-                ()=>{
-                 console.log(Tab);
-                 console.log("hello"+index);
-                 return callbackfn(null,{
-                    status:true,
-                    matrix:Tab,
-                    message:booking
+        if(count!=0)
+        {
+            tabledata.find({index:index},(error,table)=>{
+                console.log(table);
+              Tab=table[0].table
+              console.log(Tab);
+              booking.find({},(error,booking)=>{
+                  console.log(booking);
+                  Promise.resolve(booking.forEach((item,index)=>{
+                       console.log(Tab[Number(item.tableNumber.substring(
+                          item.tableNumber.indexOf('-')+1))-1]);                
+                              Tab[Number(item.tableNumber.substring(item.tableNumber.indexOf('-')+1))-1].reserved=true;
+                      })).then(
+                      ()=>{
+                       console.log(Tab);
+                       console.log("hello"+index);
+                       return callbackfn(null,{
+                          status:true,
+                          matrix:Tab,
+                          message:booking
+                      
+                      });
+                  
+              })          
+          })
+      }) 
+        }
+        else{
+            console.log("data=>",data);
+            booking.find({},(error,booking)=>{
+                console.log(booking);
+                Promise.resolve(booking.forEach((item,index)=>{
+                     console.log(data[Number(item.tableNumber.substring(
+                        item.tableNumber.indexOf('-')+1))-1]);                
+                            data[Number(item.tableNumber.substring(item.tableNumber.indexOf('-')+1))-1].reserved=true;
+                    })).then(
+                    ()=>{
+                     console.log(data);
+                     console.log("hello"+index);
+                     return callbackfn(null,{
+                        status:true,
+                        matrix:data,
+                        message:booking,
+                        length:data.length
+                    
+                    });
                 
-                });
-                }
-            )
-        })          
-    })       
-    
+            })          
+        })
+
+
+
+
+
+
+        }
+       
 })}
 Table.addCart=(id,callbackfn)=>{
     console.log("Inside model=>"+id);

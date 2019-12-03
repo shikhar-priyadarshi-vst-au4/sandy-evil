@@ -1,6 +1,8 @@
+@import url('https://fonts.googleapis.com/css?family=Fjalla+One&display=swap');
 #nav {
     height: 70px;
-    
+    box-shadow: 1px 1px 1px 1px #101f2b4d;
+    font-family: 'Fjalla One', sans-serif !important;
 }
 
 #logo {
@@ -8,12 +10,49 @@
     width: 50px;
     height: 50px;
 }
-
+.quote{
+    font-family: 'Fjalla One', sans-serif !important;
+    position: absolute;
+    left: 900px;
+    top: 159px;
+    font-weight: 600;
+    font-size: 30px;
+    color: #FFFFFF;
+    width: 300px;
+}
+.quotes{
+    font-family: 'Fjalla One', sans-serif !important;
+    position: absolute;
+    left: 900px;
+    top: 320px;
+    font-weight: 600;
+    font-size: 30px;
+    color: #FFFFFF;
+    width: 300px;
+}
+.bg_img{
+    position: absolute;
+    bottom: 180px;
+    left: 1000px
+    
+}
+.bg_img:hover{
+    cursor: pointer;
+    background-color: #FFFFFF !important;
+}
+.display-1{
+    font-family: 'Fjalla One', sans-serif !important;
+}
+.image{
+    position:absolute; 
+    
+    left: 38px;
+    top: 70px;
+}
 .background-image {
     width: 1080px;
 
 }
-
 a { font-weight: 500;
     color: #FFFFFF !important;
     margin-right: 22px !important;
@@ -32,10 +71,6 @@ a:hover {
     padding: 20px 20px 20px 20px;
     color: white;
     position: relative;
-}
-.dropdown-menu{
-    background-color: #fcb00bfd !important;
-    border-radius: 15% !important;
 }
 .admin, .logout, .login{
     color: #FFFFFF;
