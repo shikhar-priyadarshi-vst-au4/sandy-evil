@@ -39,7 +39,7 @@ pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" booking.countDocuments({},(error,c
         })
     )}
 {{#each data}}
-
+mongodb+srv://Shikhar4223:qwerty21QA@cluster0-yo1gt.mongodb.net/restaurant_booking?retryWrites=true&w=majority'
 
 data[0].datum[0]
 data[0].datum[1]

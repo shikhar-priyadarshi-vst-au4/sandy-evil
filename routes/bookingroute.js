@@ -1,6 +1,6 @@
 const router=require('express').Router();
 const passport=require('passport');
-const controller=require('../controllers/tablebooking/controller');
+const controller=require('./../controllers/tablebooking/controller');
 router.get('/', controller.homepage);
 router.get('/about',controller.aboutus);
 router.get('/menu',controller.menupage);
