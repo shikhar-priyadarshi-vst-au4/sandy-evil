@@ -47,3 +47,6 @@ data[0].datum[2]
 data[0].datum[3]
 
 {data:[datum:[{data1:xxx},{data2:yyy},{data3:zzz},{data4:qqq}]],[{}],[{}],[{}],[{}]}
+
+mongodb+srv://Shikhar4223:cXdlcnR5MjFRQQ==@cluster0-yo1gt.mongodb.net/test?retryWrites=true&w=majority
+cXdlcnR5MjFRQQ==
