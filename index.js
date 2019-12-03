@@ -5,6 +5,8 @@ const exphbs=require('express-handlebars');
 const hbs=exphbs.create({
     extname:'.hbs'
        });
+
+const PORT=process.env.PORT||'3000';
 const db=require('./models/index');
 const mongoose = require('mongoose');
 const session=require('express-session');
@@ -46,7 +48,7 @@ app.use(morgan(':method :url :status :res[content-length] - :response-time ms'))
 app.use(require('./app/routes/bookingroute'));
 app.use('/paymentgate',require('./paytmroutes'));//DONE
 db.connect().then(function(){
-    app.listen('3000',function(){
+    app.listen(PORT,function(){
         console.log("Server Started");
     })
 }).catch(function(error){
