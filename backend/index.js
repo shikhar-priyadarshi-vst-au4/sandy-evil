@@ -4,15 +4,18 @@ const db = require('./db/index');
 
 const app = express();
  
-app.set('port', process.env.PORT || 3000) 
+app.set('port', process.env.PORT || 5000) 
 
 db.authenticate( ).then(( ) => {
         console.log("database connected")
-        app.listen(app.get('port'), server => {
-        console.info(`Server listen on port ${app.get('port')}`);
+        db.sync().then(( ) => {
+            console.log('database is synchronised');
+            app.listen(app.get('port'), server => {
+                console.info(`Server listen on port ${app.get('port')}`);
+                })
         })
+        
     }).catch(( ) => {
         console.log("database connection failed");
     })
-
 
