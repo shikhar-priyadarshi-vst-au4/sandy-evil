@@ -1,15 +1,15 @@
 const { Sequelize } = require('sequelize');
 
 let { DATABASE_NAME, 
-      USER, 
-      PASSWORD, HOST, DIALECT } = process.env;
+      USER_NAME, 
+      PASSWORD, HOST_NAME, DIALECT } = process.env;
 
 
  let sequelize = new Sequelize(
         DATABASE_NAME, 
-        USER, 
+        USER_NAME, 
         PASSWORD,{
-            host : HOST,
+            host : HOST_NAME,
             dialect : DIALECT
         } );
     
