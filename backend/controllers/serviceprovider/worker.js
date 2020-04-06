@@ -42,8 +42,10 @@ function controller (){
             if(err){
                 res.status(500).json({ error : err.errors[0].message });
             }
-            else {
-                // res.json({ message })
+            else if(!user){
+                res.json({ message :  "not authorised" })
+            }
+            else{
                 next();
             }
         })( req, res, next )

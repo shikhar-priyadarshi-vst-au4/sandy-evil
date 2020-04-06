@@ -1,16 +1,16 @@
 const router = require('express').Router();
 
-const controller = require('../../controllers/serviceprovider/worker');
+const { register, login, isAuthorised } = require('../../controllers/serviceprovider/worker');
 
 // End-point to register worker
-router.post('/register', controller.register);
+router.post('/register', register);
 
 // End-point to login worker
-router.post('/login', controller.login);
+router.post('/login', login);
 
 // Auth-end-point
 // controller.isAuthorised is authorisation middleware
-router.post('/auth', controller.isAuthorised, (req, res) => {
+router.post('/auth', isAuthorised, (req, res) => {
    res.send('access granted ');
 })
 
