@@ -37,7 +37,7 @@ function controller (){
         })(req, res)
     } 
 
-    this.authenticate = ( req, res ) => {
+    this.isAuthorised = ( req, res, next ) => {
         passport.authenticate('jwt',{session : false}, ( err, user, message ) => {
             if(err){
                 res.status(500).json({ error : err.errors[0].message });
@@ -46,9 +46,10 @@ function controller (){
                 res.json({ message });
             }
             else {
-                res.json({ message })
+                // res.json({ message })
+                next();
             }
-        })( req, res )
+        })( req, res, next )
     }
     // this.authenticate = async ( req, res ) => {
     //    let token = req.header('auth-token');

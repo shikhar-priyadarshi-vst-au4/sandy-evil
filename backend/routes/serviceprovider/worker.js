@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const passport = require('passport');
+
 
 const controller = require('../../controllers/worker');
 
@@ -12,9 +12,50 @@ router.post('/register', controller.register);
 router.post('/login', controller.login);
 
 // //Auth-end-point
-router.post('/auth', controller.authenticate)
+// controller.isAuthorised is authorisation middleware
+router.post('/auth', controller.isAuthorised, (req, res) => {
+   res.send('access granted');
+})
 
 module.exports = router;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 // router.post('/register', 
