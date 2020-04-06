@@ -20,8 +20,9 @@ passport.use('register', new LocalStrategy({
             done(null, createUser, 'Worker registered successfully');
         }
       }
-      catch(error){
-         done( error, false, error.message);
+      catch(err){
+          
+         done( err, false );
       }
 }));
 
@@ -39,7 +40,7 @@ passport.use('login', new LocalStrategy(
            }
            
             
-           return done( null, false, { message :'Invalid email or password' });
+           return done( null, false, 'Invalid email or password' );
            
         }
         catch(err){

@@ -11,21 +11,19 @@ let option = {
 
 //passport-jwt strategy for verifying token.
 passport.use('jwt',new JwtStrategy( option, async (jwt_payload, done) => {
-    console.log(jwt_payload);
+    // console.log(jwt_payload);
 try{
     let user = await Worker.findOne( {where: {id: jwt_payload.sub}});  
     if (user) {
-    console.log(user);
-    return done(null, user);
+    return done(null, user, "access authorised");
 } else {
    
-    return done(null, "user not registered");
+    return done(null, false, "user not registered");
 
     // or you could create a new account
 }
 }
 catch(err){
-    console.log(err.message);
     return done(err, false);
 }
 }));
