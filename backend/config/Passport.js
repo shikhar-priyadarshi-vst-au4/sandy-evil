@@ -28,15 +28,19 @@ passport.use('register', new LocalStrategy({
 //Local strategy for Login part.
 passport.use('login', new LocalStrategy(
     {
-        usernameField : 'email'
+        usernameField : 'email',
+        passReqToCallback: true
     },
-   async ( email, password, done) => {
+   async ( req, email, password, done) => {
         try{
-        let userFound = await Worker.findOne({where : {email, password}});        
+        let userFound = await Worker.findOne({where : {email, password}});      
           if(userFound){
             return done(null, userFound);
            }
-        return done( null, false, 'Invalid email or password');
+           
+            
+           return done( null, false, { message :'Invalid email or password' });
+           
         }
         catch(err){
             return done(err, false, err.message);
