@@ -10,7 +10,7 @@ passport.use('register', new LocalStrategy({
    }, async(req,email, password, done) =>{
        let { name, mobileNumber, specialisation, area } = req.body;
       try{
-        let userFound = await Worker.findOne({email});
+        let userFound = await Worker.findOne({where : {email}});
         if(userFound){
             done(null,userFound,'Email is already in use');
         }
@@ -32,7 +32,7 @@ passport.use('login', new LocalStrategy(
     },
    async ( email, password, done) => {
         try{
-        let userFound = await Worker.findOne({email, password});        
+        let userFound = await Worker.findOne({where : {email, password}});        
           if(userFound){
             return done(null, userFound);
            }
