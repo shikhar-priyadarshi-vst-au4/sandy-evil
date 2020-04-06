@@ -7,7 +7,7 @@ const Worker = sequelize.define('Worker',{
         type : Sequelize.STRING,
         allowNull : false
     },
-    mailId : {
+    email : {
         type : Sequelize.STRING,
         allowNull : false
     },
@@ -16,12 +16,12 @@ const Worker = sequelize.define('Worker',{
         allowNull : false
     },
     mobileNumber : {
-        type : Sequelize.INTEGER,
+        type : Sequelize.STRING,
         allowNull : false,
         unique : true
     },
     specialisation : {
-        type : Sequelize.TEXT,
+        type : Sequelize.STRING,
         allowNull : false
     },
     area : {
