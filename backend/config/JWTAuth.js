@@ -16,11 +16,12 @@ try{
     let user = await Worker.findOne( {where: {id: jwt_payload.sub}});  
     if (user) {
     return done(null, user, "access authorised");
-} else {
+    
+// } else {
    
-    return done(null, false, "user not registered");
+//     return done(null, false, "user not registered");
 
-    // or you could create a new account
+//     // or you could create a new account
 }
 }
 catch(err){

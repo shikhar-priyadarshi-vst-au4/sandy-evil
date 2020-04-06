@@ -1,7 +1,7 @@
 const { 
     tokenGenerator, 
     //tokenValidator 
-                   } = require('../config/Tokengenerate');
+                   } = require('../../config/Tokengenerate');
 
 
 const passport = require('passport');
@@ -41,9 +41,6 @@ function controller (){
         passport.authenticate('jwt',{session : false}, ( err, user, message ) => {
             if(err){
                 res.status(500).json({ error : err.errors[0].message });
-            }
-            else if( !user ){
-                res.json({ message });
             }
             else {
                 // res.json({ message })

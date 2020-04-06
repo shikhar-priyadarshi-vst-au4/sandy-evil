@@ -3,6 +3,11 @@ const sequelize = require('../db/index');
 const { Sequelize } = require('sequelize');
 
 const Worker = sequelize.define('Worker',{
+    id: {
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV1,
+        primaryKey: true 
+    },
     name : {
         type : Sequelize.STRING,
         allowNull : false

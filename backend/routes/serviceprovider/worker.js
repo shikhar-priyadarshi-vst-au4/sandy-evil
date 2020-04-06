@@ -1,9 +1,6 @@
 const router = require('express').Router();
 
-
-const controller = require('../../controllers/worker');
-
-// const Worker = require('../../models/Worker');
+const controller = require('../../controllers/serviceprovider/worker');
 
 // End-point to register worker
 router.post('/register', controller.register);
@@ -11,10 +8,10 @@ router.post('/register', controller.register);
 // End-point to login worker
 router.post('/login', controller.login);
 
-// //Auth-end-point
+// Auth-end-point
 // controller.isAuthorised is authorisation middleware
 router.post('/auth', controller.isAuthorised, (req, res) => {
-   res.send('access granted');
+   res.send('access granted ');
 })
 
 module.exports = router;
