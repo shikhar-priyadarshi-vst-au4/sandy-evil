@@ -5,7 +5,8 @@ import { Text, CardImage } from '../Styled/Styled'
 const useStyle = makeStyles((theme) => ({
     card : {
         margin : theme.spacing(2),
-        padding : theme.spacing(0)
+        padding : theme.spacing(0),
+        borderRadius : '0.5em',
     }
 }))
 

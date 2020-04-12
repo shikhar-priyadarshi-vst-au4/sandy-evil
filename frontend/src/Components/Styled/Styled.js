@@ -63,6 +63,8 @@ margin : 1em;
 export const CardImage = Styled.img`
  width : ${props => props.weight||'350px'};
  height : ${props => props.weight||'200px'};
+ border-top-left-radius: 0.5em;
+ border-top-right-radius: 0.5em;
  @media screen and (max-width : 768px){
     width : ${props => props.weight||'370px'};
     height : ${props => props.weight||'300px'};
