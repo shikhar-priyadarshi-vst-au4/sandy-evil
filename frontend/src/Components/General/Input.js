@@ -13,10 +13,14 @@ const useStyles = makeStyles((theme) => ({
         margin : theme.spacing(1)
     }
   }));
-export const Input = ({ city, service, setCity, setService, handleChange },...rest) => {
+export const Input = ( { city, service, 
+                        setCity, setService,
+                        handleChange, part }, ...rest ) => {
     const classes = useStyles();
     return(
         <Fragment>
+        {part === 'homepage-header' && <Fragment>
+           
             <TextField id="outlined-search" label="Search " type="search" variant="outlined"
              value={service}
              onChange = {(event) => handleChange(event,setService)}/>
@@ -37,6 +41,8 @@ export const Input = ({ city, service, setCity, setService, handleChange },...re
                         key = {index}>{name}</MenuItem>)}
                     </Select>
              </FormControl>
+
+        </Fragment>}
         </Fragment>
     )
 }

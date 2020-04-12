@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, Fragment } from 'react';
 import { makeStyles, useMediaQuery } from '@material-ui/core';
 import {Input} from './Input';
 import {KeyStroke} from './Button';
@@ -50,16 +50,20 @@ export const Form = ( props ) => {
         }   
     }
     return (
-        <form className = {classes.root}>
+        <Fragment>
+        {props.part === "homepage-header" && <form className = {classes.root}>
              <Input city = { city }
              setCity = {setCity}
              service = { service }
              setService = {setService} 
-             handleChange = { handleChange } /> 
+             handleChange = { handleChange }
+             {...props} /> 
              <KeyStroke filterOut={filterOut}/>
              {!!search && <List 
              cancelCard = { cancelCard }
-             search = {search} />}
-        </form>
+             search = {search}
+             {...props} />}
+        </form>}
+        </Fragment>
     )
 }

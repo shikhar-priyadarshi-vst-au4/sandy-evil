@@ -50,6 +50,6 @@ export const categories = [
     { name : 'Salon'},
     { name : 'Carpenter'},
     { name : 'Plumber'},
-    { name : 'Technician'},
+    { name : 'Electrician'},
     { name : 'Cleaner'}
 ]

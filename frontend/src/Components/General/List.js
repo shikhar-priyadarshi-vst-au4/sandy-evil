@@ -4,7 +4,7 @@ import { makeStyles,
 import  Alert from '@material-ui/lab/Alert';         
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
-
+import { Card } from './index';
 const useStyle = makeStyles((theme) => ({
     list : {
         display : 'flex',
@@ -43,11 +43,11 @@ const useStyle = makeStyles((theme) => ({
 }));         
 
 
-export const List = ({ search : { city, services} , cancelCard, categories },...rest) => {
+export const List = ({ search : { city , services} = '', cancelCard, part, categories },...rest) => {
     const classes = useStyle();
     return ( <Fragment>
 
-        { services && !!services.length? <div className = {classes.list}>
+        { part === 'homepage-header' && (!!services.length? <div className = {classes.list}>
             <Paper elevation={3} >
                <div className={classes.info}>
                <FontAwesomeIcon icon={faTimes}
@@ -67,8 +67,10 @@ export const List = ({ search : { city, services} , cancelCard, categories },...
                </div>
                
                 </Paper> 
-        </div>: <Alert severity="info"  onClose={() => {cancelCard( )}}>Service is not available!</Alert>}
+        </div>: <Alert severity="info"  onClose={() => {cancelCard( )}}>Service is not available!</Alert>)}
         
-        
+        { part === 'homepage-section' && (!!categories.length? <Fragment>
+            {categories.map(({name},index) => <Card name={name} key={index} />)}
+        </Fragment>:"")}
         </Fragment>)
 }
