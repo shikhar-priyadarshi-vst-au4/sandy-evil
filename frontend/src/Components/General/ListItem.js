@@ -1,5 +1,5 @@
 import React from 'react';
 
-export const List = (props) => {
+export const ListItem = (props) => {
     return ( <div>List</div>)
 }

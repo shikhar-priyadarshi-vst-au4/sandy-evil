@@ -43,10 +43,11 @@ const useStyle = makeStyles((theme) => ({
 }));         
 
 
-export const List = ({ search : { city, services} , cancelCard },...rest) => {
+export const List = ({ search : { city, services} , cancelCard, categories },...rest) => {
     const classes = useStyle();
     return ( <Fragment>
-        {!!services.length? <div className = {classes.list}>
+
+        { services && !!services.length? <div className = {classes.list}>
             <Paper elevation={3} >
                <div className={classes.info}>
                <FontAwesomeIcon icon={faTimes}
@@ -67,5 +68,7 @@ export const List = ({ search : { city, services} , cancelCard },...rest) => {
                
                 </Paper> 
         </div>: <Alert severity="info"  onClose={() => {cancelCard( )}}>Service is not available!</Alert>}
+        
+        
         </Fragment>)
 }

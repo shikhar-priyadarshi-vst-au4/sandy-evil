@@ -46,3 +46,10 @@ export const services = [
         services : [ "Salon", "Carpenter", "Technician"]
     }
 ];
+export const categories = [
+    { name : 'Salon'},
+    { name : 'Carpenter'},
+    { name : 'Plumber'},
+    { name : 'Technician'},
+    { name : 'Cleaner'}
+]
