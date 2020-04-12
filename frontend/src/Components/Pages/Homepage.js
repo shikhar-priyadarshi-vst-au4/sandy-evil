@@ -15,7 +15,7 @@ export const Main = ( props ) => {
                     <Block/>
                     <Navbar mainBar = {mainBar} />
                     <div style={{display:"flex"}}>
-                    <Image src = {'worker.jpg'} alt="failed"/>
+                    <Image src = {'images/worker.jpg'} alt="failed"/>
                     <Form/>
                     </div>
                  </Header>                

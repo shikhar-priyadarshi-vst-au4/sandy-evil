@@ -85,7 +85,7 @@ export const Navbar = ( props ) => {
         <Nav>
          <NavElem>
          <Brand>
-         <Image src={'towny_logo.png'}  alt="loading..."/>
+         <Image src={'images/towny_logo.png'}  alt="loading..."/>
          <Bar onClick = {() => toggleClick()}>
              <FontAwesomeIcon icon = {faBars} size={'2x'}/>
          </Bar>
