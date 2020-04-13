@@ -26,7 +26,7 @@ export const Card = (props) => {
 
         { part === 'homepage-section_quality' && <Paper variant="outlined"
           className={classes.card}>
-            <Flex wrap={'none'}>
+            <Flex wrap={'none'} sm_wrap={'none'}>
                 <FontAwesomeIcon icon={icon} 
                 style={{margin:"0.5em 1em"}}
                 size={'3x'}/>
@@ -35,7 +35,7 @@ export const Card = (props) => {
                     <Text size={'1em'} weight={'200'} fontColor={'#63686e'} padding={'0.4em'}>{body}</Text>
                 </div>
             </Flex>
-            </Paper>}        
+            </Paper>}         
         </Fragment>
     )
 } 

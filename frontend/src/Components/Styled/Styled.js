@@ -46,6 +46,7 @@ export const Text = Styled.div`
  font-weight : ${props => props.weight|| '500'} ;
  letter-spacing : ${props => props.spacing || '1.5px'};
  color : ${props => props.fontColor || '#272727'};
+ text-decoration : none;
  padding : ${props => props.padding || '0em'};
  @media screen and (max-width : 768px){
     font-size : ${props => props.size || '1em'};
@@ -60,6 +61,7 @@ align-items : ${props => props.alignItems||'none'};
 margin : 1em 1em;
 @media screen and (max-width:768px){
 margin : 1em;
+flex-wrap : ${props => props.sm_wrap||'wrap'};
 }`;
 
 export const CardImage = Styled.img`
@@ -71,3 +73,19 @@ export const CardImage = Styled.img`
     width : ${props => props.weight||'370px'};
     height : ${props => props.weight||'300px'};
 }`;
+
+
+export const FooterStyle = Styled.footer`
+border-top: 1px solid #272727;
+`;
+
+export const Margin = Styled.div`
+margin : 0 8em 1em 0;
+@media screen and (max-width:768px){
+    margin : 1em 0;
+}`;
+
+export const Anchor = Styled(Text)`
+&:hover{
+    font-weight : 500;
+}`; 

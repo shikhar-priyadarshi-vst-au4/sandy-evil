@@ -1,11 +1,12 @@
 import React  from 'react';
 import {Navbar} from '../Navbar/Navbar';
+import {Footer} from '../Footer/Footer';
 import { Form, List } from '../General/index.js';
 import {mainBar, categories, qualities} from '../Data/data';
 import { Container, Header,
             Block, Image,
             Section, Text,
-            Flex } from '../Styled/Styled';
+            Flex} from '../Styled/Styled';
 
 export const Main = ( props ) => {
     
@@ -22,13 +23,15 @@ export const Main = ( props ) => {
              <Section>
                  <Text>What We Offers!</Text>
                  <Flex>
-                     <List part = "homepage-section" 
-                     categories={categories} />
+                    <List part = "homepage-section" 
+                    categories={categories} />
                  </Flex>
              </Section>
              <Section>
-             <List part="homepage-section_quality" qualities={qualities}/>
+                <List part="homepage-section_quality" qualities={qualities}/>
+                <Footer/>
              </Section>
+            
             </Container>
     )
 

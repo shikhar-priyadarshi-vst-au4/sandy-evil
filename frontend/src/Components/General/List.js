@@ -46,6 +46,7 @@ const useStyle = makeStyles((theme) => ({
 export const List = ({ search : { city , services} = '', 
                        cancelCard, part, categories, qualities },...rest) => {
     const classes = useStyle();
+    
     return ( <Fragment>
 
         { part === 'homepage-header' && (!!services.length? <div className = {classes.list}>
