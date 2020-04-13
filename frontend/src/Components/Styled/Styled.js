@@ -54,7 +54,7 @@ export const Text = Styled.div`
 }`;        
 
 export const Flex = Styled.div`
-display : flex;
+display : ${props => props.display||'flex'};
 flex-wrap : ${props => props.wrap||'wrap'};
 justify-content : ${props => props.justifyContent||'none'};
 align-items : ${props => props.alignItems||'none'};
@@ -89,3 +89,26 @@ export const Anchor = Styled(Text)`
 &:hover{
     font-weight : 500;
 }`; 
+
+export const GridContainer = Styled.div`
+display : grid;
+grid-template : 700px / 700px auto;
+@media screen and (max-width : 768px) {
+    grid-template : 300px / auto;
+
+}
+`;
+export const ItemOne = Styled.div`
+background-color : #33313b;
+border : 1px solid #272727;
+`;
+export const ItemTwo = Styled.div`
+border : 1px solid #ffffff;
+`;
+
+export const Position = Styled.div`
+margin : ${props => props.margin || '6em 4em'};
+@media screen and (max-width : 768px){
+    margin : ${props => props.sm_margin || '2em 4em'};
+    
+}`;

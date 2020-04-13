@@ -4,6 +4,7 @@ import {Input} from './Input';
 import {KeyStroke} from './Button';
 import { List } from './List';
 import { services } from '../Data/data';
+import { Text, Position } from '../Styled/Styled';
 const useStyles = makeStyles((theme) => ({
     root: {
       '& .MuiTextField-root': {
@@ -24,6 +25,9 @@ const useStyles = makeStyles((theme) => ({
     border:"1px solid #272727",
     zIndex:"0", 
     background : "#ffffff"
+    },
+    career:{
+        margin: "2em 1em", 
     }
   }));
 
@@ -58,12 +62,21 @@ export const Form = ( props ) => {
              setService = {setService} 
              handleChange = { handleChange }
              {...props} /> 
-             <KeyStroke filterOut={filterOut}/>
+             <KeyStroke filterOut={filterOut} {...props}/>
              {!!search && <List 
              cancelCard = { cancelCard }
              search = {search}
              {...props} />}
         </form>}
+        {props.part === 'career' &&<form className = {classes.career}>
+         <Input part={'career'} /> 
+         <Position margin={'0.5em 1em'} sm_margin={'0.5em 1em'} >
+         <Text size={'0.8em'} weight={'500'} 
+         fontColor={'#63686e'} padding={'0.4em'}>
+             On click, i agree to all terms & conditions laid down</Text>
+             </Position>
+         <KeyStroke {...props}/>
+         </form>}
         </Fragment>
     )
 }

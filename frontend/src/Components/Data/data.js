@@ -21,6 +21,7 @@ export const mainBar = [
         path : '/customer/create'
     }
 ];
+//value to be retrieve from server (optional)
 export const locations = [
     {
         name : "Lucknow"
@@ -33,6 +34,7 @@ export const locations = [
         name : "Mumbai"
     },
 ]
+//value to be retrieve from server
 export const services = [
     {
         city : 'Lucknow',
@@ -70,3 +72,5 @@ export const qualities = [{
     body:`Super convenient, guaranteed service from
           booking to delivery`,
     icon : faCheckCircle}]
+
+export const inputFields = ['Fullname','Email','Password','Mobile'];    
