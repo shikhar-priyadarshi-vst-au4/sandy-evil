@@ -54,7 +54,9 @@ export const Text = Styled.div`
 
 export const Flex = Styled.div`
 display : flex;
-flex-wrap : wrap;
+flex-wrap : ${props => props.wrap||'wrap'};
+justify-content : ${props => props.justifyContent||'none'};
+align-items : ${props => props.alignItems||'none'};
 margin : 1em 1em;
 @media screen and (max-width:768px){
 margin : 1em;

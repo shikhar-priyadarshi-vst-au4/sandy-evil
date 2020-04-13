@@ -1,7 +1,7 @@
 import React  from 'react';
 import {Navbar} from '../Navbar/Navbar';
 import { Form, List } from '../General/index.js';
-import {mainBar, categories} from '../Data/data';
+import {mainBar, categories, qualities} from '../Data/data';
 import { Container, Header,
             Block, Image,
             Section, Text,
@@ -27,7 +27,7 @@ export const Main = ( props ) => {
                  </Flex>
              </Section>
              <Section>
-                 1
+             <List part="homepage-section_quality" qualities={qualities}/>
              </Section>
             </Container>
     )

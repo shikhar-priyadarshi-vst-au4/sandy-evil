@@ -1,3 +1,4 @@
+import {faMedal, faUserCheck, faCheckCircle, } from '@fortawesome/free-solid-svg-icons';
 export const mainBar = [
     {
         navLinkName : "Services",
@@ -48,8 +49,24 @@ export const services = [
 ];
 export const categories = [
     { name : 'Salon'},
-    { name : 'Carpenter'},
-    { name : 'Plumber'},
-    { name : 'Electrician'},
-    { name : 'Cleaner'}
+    { name : 'Carpenters'},
+    { name : 'Plumbers'},
+    { name : 'Electricians'},
+    { name : 'Cleaners'}
 ]
+export const qualities = [{
+    title : `High Quality & Trusted Professionals`,
+    body:`We provide Towny trained professionals, 
+          verified, background checked and high 
+          quality professionals`,
+    icon : faMedal},
+    {
+    title : `Match to Your Needs`,
+    body:`We match you with the right professionals
+          with budget friendly`,
+    icon : faUserCheck},
+    {
+    title : `Hassel Free Service`,
+    body:`Super convenient, guaranteed service from
+          booking to delivery`,
+    icon : faCheckCircle}]

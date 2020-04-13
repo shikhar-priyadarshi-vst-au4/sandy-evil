@@ -43,7 +43,8 @@ const useStyle = makeStyles((theme) => ({
 }));         
 
 
-export const List = ({ search : { city , services} = '', cancelCard, part, categories },...rest) => {
+export const List = ({ search : { city , services} = '', 
+                       cancelCard, part, categories, qualities },...rest) => {
     const classes = useStyle();
     return ( <Fragment>
 
@@ -70,7 +71,11 @@ export const List = ({ search : { city , services} = '', cancelCard, part, categ
         </div>: <Alert severity="info"  onClose={() => {cancelCard( )}}>Service is not available!</Alert>)}
         
         { part === 'homepage-section' && (!!categories.length? <Fragment>
-            {categories.map(({name},index) => <Card name={name} key={index} />)}
+            {categories.map(({name},index) => <Card name={name} key={index} part = {'homepage-section'} />)}
         </Fragment>:"")}
+        { part === 'homepage-section_quality' && qualities.map((data, index) =><Card 
+                                                key={index}
+                                                part={'homepage-section_quality'}
+                                                {...data} />)} 
         </Fragment>)
 }

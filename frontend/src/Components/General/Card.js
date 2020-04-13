@@ -1,7 +1,8 @@
 import React, { Fragment } from 'react';
 import { makeStyles,
          Paper} from '@material-ui/core';
-import { Text, CardImage } from '../Styled/Styled'
+import { Text, CardImage, Flex } from '../Styled/Styled'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 const useStyle = makeStyles((theme) => ({
     card : {
         margin : theme.spacing(2),
@@ -15,13 +16,26 @@ const useStyle = makeStyles((theme) => ({
 export const Card = (props) => {
     
     const classes = useStyle();
-    const {name} = props;
+    const { name, part, title, body, icon } = props;
     return(
         <Fragment>
-          <Paper elevation={1} className={classes.card}>
+        { part === 'homepage-section' && <Paper elevation={1} className={classes.card}>
               <CardImage src={`images/${name}.jpg`} />
               <Text size={'1em'} weight={'400'} fontColor={'#63686e'} padding={'0.8em'}>{name}</Text>
-              </Paper>       
+              </Paper>   }
+
+        { part === 'homepage-section_quality' && <Paper variant="outlined"
+          className={classes.card}>
+            <Flex wrap={'none'}>
+                <FontAwesomeIcon icon={icon} 
+                style={{margin:"0.5em 1em"}}
+                size={'3x'}/>
+                <div style={{margin:"1em 0.5em"}}>
+                    <Text size={'1em'} weight={'500'} fontColor={'#63686e'} padding={'0.4em'}>{title}</Text>
+                    <Text size={'1em'} weight={'200'} fontColor={'#63686e'} padding={'0.4em'}>{body}</Text>
+                </div>
+            </Flex>
+            </Paper>}        
         </Fragment>
     )
 } 
