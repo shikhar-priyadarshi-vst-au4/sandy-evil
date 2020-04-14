@@ -7,8 +7,7 @@ import {FormControl,
         Select } from '@material-ui/core';
 import grey from '@material-ui/core/colors/grey';
 import { Flex,} from '../Styled/Styled'
-import {locations, inputFields, categories} from '../Data/data';        
-
+import {locations, categories} from '../Data/data';        
 const useStyles = makeStyles((theme) => ({
     formControl :{
         margin : theme.spacing(1)
@@ -24,8 +23,14 @@ const theme = createMuiTheme({
   });  
 export const Input = ( { city, service, 
                         setCity, setService,
-                        handleChange, part }, ...rest ) => {
+                        createProfile, setCreateProfile,
+                        handleChange,  part }, ...rest ) => {
     const classes = useStyles();
+    const inputs = createProfile?Object.entries(createProfile):"";
+    const ChangeHandler = (e) => {
+        let { name, value } = e.target;
+          setCreateProfile({...createProfile, [name] : value});
+      }
     return(
         <Fragment>
         {part === 'homepage-header' && <Fragment>
@@ -56,14 +61,17 @@ export const Input = ( { city, service,
         {part === 'career' && <Fragment>
         <ThemeProvider theme={theme}>
         <Flex wrap={'none'} style={{flexDirection:"column"}} >
-        {inputFields.map((field, index) => <TextField
-        id="outlined-secondary"
+        {inputs.slice(0,4).map((field, index) => <TextField
+        id={`outlined-secondary-${index}`}
         key = {index}
-        label={`${field}`}
+        label={`${field[0]}`}
         variant="outlined"
         color="primary"
         margin="normal"
-        type={(field === 'Password')?field.toLowerCase():""}
+        name={field[0]}
+        value = {field[1]}
+        type={(field[0] === 'Password')?field[0].toLowerCase():""}
+        onChange = {(e) => ChangeHandler(e)}
         fullWidth/>
         )}
         <FormControl variant="outlined" className={classes.career}>
@@ -72,6 +80,9 @@ export const Input = ( { city, service,
                     labelId="demo-simple-select-outlined-label"
                     id="demo-simple-select-outlined"
                     label="Choose your Area"
+                    value={inputs[4][1]}
+                    name={inputs[4][0]}
+                    onChange = {(e) => ChangeHandler(e)}
                     fullWidth>
                     <MenuItem value="">
                         <em>Choose an Area</em>
@@ -87,9 +98,12 @@ export const Input = ( { city, service,
                     labelId="demo-simple-select-outlined-label"
                     id="demo-simple-select-outlined"
                     label="Choose your specification"
+                    value={inputs[5][1]}
+                    name={inputs[5][0]}
+                    onChange = {(e) => ChangeHandler(e)}
                     fullWidth>
                     <MenuItem value="">
-                        <em>Choose an Area</em>
+                        <em>Select option</em>
                     </MenuItem>
                         {categories.map(({name}, index) =>  <MenuItem 
                         value={name}
@@ -106,34 +120,3 @@ export const Input = ( { city, service,
 
 //menu-item should be in list item
 
-/* <TextField
-        id="outlined-secondary"
-        label="Fullname"
-        variant="outlined"
-        color="primary"
-        margin="normal"
-        fullWidth/>
-        <TextField
-        id="outlined-secondary"
-        label="Email"
-        variant="outlined"
-        color="primary"
-        margin="normal"
-        fullWidth/>
-        <TextField
-        id="outlined-secondary"
-        label="Password"
-        variant="outlined"
-        color="primary"
-        margin="normal"
-        type="password"
-        fullWidth/>
-        
-        <TextField
-        id="outlined-secondary"
-        label="Mobile"
-        variant="outlined"
-        color="primary"
-        margin="normal"
-        fullWidth/>
-         */

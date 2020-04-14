@@ -12,12 +12,14 @@ passport.use('register', new LocalStrategy({
       try{
         let userFound = await Worker.findOne({where : {email}});
         if(userFound){
-            done(null,userFound,'Email is already in use');
+            done(null,userFound,{message : 'Email is already in use', 
+            status: false, error : false} );
         }
         else{
             let createUser = await Worker.create({ name, email, password, mobileNumber,
             specialisation, area });
-            done(null, createUser, 'Worker registered successfully');
+            done(null, createUser, {message : 'Worker registered successfully', 
+            status: true, error : false});
         }
       }
       catch(err){

@@ -1,7 +1,10 @@
 import React, { useState, Fragment } from 'react';
 import { makeStyles, useMediaQuery } from '@material-ui/core';
+import { connect } from 'react-redux'
+import { register, removeError } from '../../Actions/index'
 import {Input} from './Input';
 import {KeyStroke} from './Button';
+import { AlertBox } from './Alert';
 import { List } from './List';
 import { services } from '../Data/data';
 import { Text, Position } from '../Styled/Styled';
@@ -31,12 +34,17 @@ const useStyles = makeStyles((theme) => ({
     }
   }));
 
-export const Form = ( props ) => {
+const Form = ( props ) => {
     const classes = useStyles();
     const matches = useMediaQuery('(max-width:1024px)');
     const [ city, setCity ] = useState('');
     const [ service, setService ] = useState('');
     const [ search, setSearch ] = useState('');
+    const [ createProfile, setCreateProfile ] = useState({ 
+        Fullname : "", Email:"", 
+        Password: "", Number: "", 
+        Area : "", Specialisation:""  });
+
     const handleChange = (event, cb) => {
          cb(event.target.value);
     }
@@ -53,6 +61,19 @@ export const Form = ( props ) => {
             await setSearch(result);
         }   
     }
+    
+    const createAccount = () => {
+         let {  Fullname: name, Email: email, 
+                Password : password, Number : mobileNumber,
+                Specialisation : specialisation, Area : area } = createProfile;
+         let data = { name, email, 
+            password, mobileNumber,
+            specialisation, area }    
+          props.dispatch(register(data));
+    }
+    const handleError = () => {
+        props.dispatch(removeError())
+    }  
     return (
         <Fragment>
         {props.part === "homepage-header" && <form className = {classes.root}>
@@ -68,15 +89,20 @@ export const Form = ( props ) => {
              search = {search}
              {...props} />}
         </form>}
-        {props.part === 'career' &&<form className = {classes.career}>
-         <Input part={'career'} /> 
+        {props.part === 'career' && (!props.error?<form className = {classes.career}>
+         <Input part={'career'}  setCreateProfile={ setCreateProfile } createProfile={createProfile}/> 
          <Position margin={'0.5em 1em'} sm_margin={'0.5em 1em'} >
          <Text size={'0.8em'} weight={'500'} 
-         fontColor={'#63686e'} padding={'0.4em'}>
-             On click, i agree to all terms & conditions laid down</Text>
+         fontcolor={'#63686e'} padding={'0.4em'}>
+             On click, you agreed to all terms & conditions laid down</Text>
              </Position>
-         <KeyStroke {...props}/>
-         </form>}
+         <KeyStroke {...props} createAccount={createAccount}/>
+         </form> : <Fragment>
+             <AlertBox response={props.response}/>
+             <KeyStroke {...props} handleError={handleError} />
+             </Fragment>)}
         </Fragment>
     )
 }
+
+export default connect()(Form);

@@ -1,29 +1,61 @@
 import React, { Fragment, useState } from 'react';
+import {connect} from 'react-redux';
 import { GridContainer, Text, ItemOne, ItemTwo, Position } from '../Styled/Styled'
-import { Form } from '../General/index'
-export const Career = (props) => {
+import { Form, AlertDialog, KeyStroke } from '../General/index'
+import { mapStateToProps } from '../StateTransition'
+import { closeModal } from '../../Actions';
+const Career = (props) => {
     
-    const [ hopOn, setHopOn ] = useState('SignUp'); 
-
+    const [ signUp, setSignUp ] = useState(true); 
+    const handleClose = () => {
+       props.dispatch(closeModal());    
+    };
+  
     return(
     <Fragment>
+        {props.profileCreated &&<Position position={'absolute'}> 
+          <AlertDialog {...props} handleClose={handleClose}/>
+         </Position>}
         <GridContainer>
             <ItemOne>
                 <Position >
-                <Text fontColor ={'#ffffff'} size={'2em'} weight={'600'} spacing={'0.1em'}>Welcome to Towny</Text>
+                <Text fontcolor ={'#ffffff'} size={'2em'} weight={'600'} spacing={'0.1em'}>Welcome to Towny</Text>
                 <Position margin ={'2em 0.2em'} sm_margin = {'2em 0.2em'}>
-                <Text fontColor ={'#ffffff'} size={'1.4em'} weight={'400'} spacing={'0.1em'}>Join Us!</Text>
-                <Text fontColor ={'#ffffff'} size={'1.4em'} weight={'400'} spacing={'0.1em'}>To begin an incredible journey</Text>
-                </Position>
+                <Text fontcolor ={'#ffffff'} size={'1.4em'} weight={'400'} spacing={'0.1em'}>Join Us!</Text>
+                <Text fontcolor ={'#ffffff'} size={'1.4em'} weight={'400'} spacing={'0.1em'}>To begin an incredible journey</Text>
+                <KeyStroke part={'career-login'} signUp={signUp} setSignUp={setSignUp}/>
+              </Position>
                 </Position>
             </ItemOne>
             <ItemTwo>
-                { hopOn === 'SignUp' && <Form part = {'career'}/> }
+                {  signUp  && <Form part = {'career'} {...props}/> }
             </ItemTwo>
         </GridContainer>
     </Fragment>
         )
 }
+export default connect(mapStateToProps)(Career) ;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //snapshot lifecycle in react
 //useMediaquery (Custom hook)

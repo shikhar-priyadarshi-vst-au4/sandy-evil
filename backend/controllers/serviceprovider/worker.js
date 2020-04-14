@@ -12,10 +12,12 @@ function controller (){
         passport.authenticate('register', { session : false }, async ( err, user, message ) => {
             
             if(err){
-                res.status(500).json({ error : err.errors[0].message });
+                res.status(500).json({ message : err.errors[0].message, 
+                    status : false, 
+                    error : true });
             }
             else if ( user ){
-                res.json ( { message });
+                res.json ( { ...message });
             }
         })( req, res )
     } 

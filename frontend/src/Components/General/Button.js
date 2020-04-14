@@ -1,6 +1,8 @@
 import React, { Fragment } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {Button} from '@material-ui/core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowCircleRight } from '@fortawesome/free-solid-svg-icons';
 
 const useStyles = makeStyles((theme) => ({
     btn_homepage : {
@@ -10,6 +12,11 @@ const useStyles = makeStyles((theme) => ({
     btn_career :{
       margin : theme.spacing(2),
         padding : theme.spacing(2)
+    },
+    btn_login:{
+      marginTop : theme.spacing(2),
+      padding : "1em 3em",
+      letterSpacing : "0.1em"
     }
   }));
 
@@ -25,11 +32,18 @@ export const KeyStroke = (props) => {
         </Button>}
 
         {props.part === "career" && <Button variant="contained"
-          color="secondary" 
+          color={"secondary"} 
+          onClick = {()=>props.error?props.handleError():props.createAccount()}
           className = {classes.btn_career}>
-          Create Account
+          {props.error?<FontAwesomeIcon icon={faArrowCircleRight} 
+          style={{padding : '0em 2em'}} size={'2x'}/>:'Create Account'}
         </Button>}
-
+      {props.part === 'career-login' && <Button variant="contained"
+          color="secondary" 
+          onClick = {()=> props.setSignUp(!props.signUp)}
+          className = {classes.btn_login}>
+          {props.signUp?"Login": "Create Account"}
+        </Button>}
       </Fragment> 
     
     )

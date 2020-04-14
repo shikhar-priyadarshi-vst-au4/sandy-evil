@@ -73,4 +73,3 @@ export const qualities = [{
           booking to delivery`,
     icon : faCheckCircle}]
 
-export const inputFields = ['Fullname','Email','Password','Mobile'];    

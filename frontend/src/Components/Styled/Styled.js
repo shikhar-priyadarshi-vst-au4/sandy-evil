@@ -45,7 +45,7 @@ export const Text = Styled.div`
  font-size : ${props => props.size || '1.2em'} ;
  font-weight : ${props => props.weight|| '500'} ;
  letter-spacing : ${props => props.spacing || '1.5px'};
- color : ${props => props.fontColor || '#272727'};
+ color : ${props => props.fontcolor || '#272727'};
  text-decoration : none;
  padding : ${props => props.padding || '0em'};
  @media screen and (max-width : 768px){
@@ -107,6 +107,7 @@ border : 1px solid #ffffff;
 `;
 
 export const Position = Styled.div`
+position : ${props => props.position || 'static'};
 margin : ${props => props.margin || '6em 4em'};
 @media screen and (max-width : 768px){
     margin : ${props => props.sm_margin || '2em 4em'};

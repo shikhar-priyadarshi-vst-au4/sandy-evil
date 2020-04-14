@@ -21,7 +21,7 @@ export const Card = (props) => {
         <Fragment>
         { part === 'homepage-section' && <Paper elevation={1} className={classes.card}>
               <CardImage src={`images/${name}.jpg`} />
-              <Text size={'1em'} weight={'400'} fontColor={'#63686e'} padding={'0.8em'}>{name}</Text>
+              <Text size={'1em'} weight={'400'} fontcolor={'#63686e'} padding={'0.8em'}>{name}</Text>
               </Paper>   }
 
         { part === 'homepage-section_quality' && <Paper variant="outlined"
@@ -31,8 +31,8 @@ export const Card = (props) => {
                 style={{margin:"0.5em 1em"}}
                 size={'3x'}/>
                 <div style={{margin:"1em 0.5em"}}>
-                    <Text size={'1em'} weight={'500'} fontColor={'#63686e'} padding={'0.4em'}>{title}</Text>
-                    <Text size={'1em'} weight={'200'} fontColor={'#63686e'} padding={'0.4em'}>{body}</Text>
+                    <Text size={'1em'} weight={'500'} fontcolor={'#63686e'} padding={'0.4em'}>{title}</Text>
+                    <Text size={'1em'} weight={'200'} fontcolor={'#63686e'} padding={'0.4em'}>{body}</Text>
                 </div>
             </Flex>
             </Paper>}         
