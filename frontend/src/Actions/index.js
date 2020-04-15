@@ -1,9 +1,11 @@
 //Account Action constants
 const CREATE_ACCOUNT = 'CREATE_ACCOUNT';
+const LOGIN_ACCOUNT = 'LOGIN_ACCOUNT';
 
 //Error Action constants
 const RESPONSE_ERROR = 'RESPONSE_ERROR';
-const INPUT_ERROR = 'INPUT_ERROR'; 
+const INPUT_ERROR = 'INPUT_ERROR';
+const LOGIN_ERROR = 'LOGIN_ERROR';
 const REMOVE_ERROR_ALERT = 'REMOVE_ERROR_ALERT';
 
 //Modal Action constants
@@ -61,6 +63,41 @@ export const register = ({ name, email,
      }                          
 }
 
+export const login = ({ email, password }) => {
+      if(!email || !password){
+        return ({
+            type : INPUT_ERROR,
+            payload : 'Fill the remaining field'
+        })
+      }
+      else{
+          return async dispatch => {
+             try{
+                 let { error, user, token, message } = await (await fetch()).json();
+                 if( !error ){
+                    if(!!token.length){
+                        localStorage.setItem('access-token', token);
+                        return dispatch({
+                        type : LOGIN_ACCOUNT,
+                        payload : { user , message }  
+                       });
+                    }
+                    return dispatch({
+                        type : LOGIN_ERROR,
+                        payload : message
+                    })   
+                 }
+                 return dispatch({
+                     type : RESPONSE_ERROR,
+                     payload : message
+                 }) 
+             }
+             catch(err){
+                 return dispatch(responseError(err));
+             }
+          }
+      }
+}
 export const closeModal = () => {
      return ({
          type : CLOSE_MODAL
@@ -82,7 +119,9 @@ export const removeError = ( ) =>{
 
 export { 
     INPUT_ERROR, 
+    LOGIN_ERROR,
     RESPONSE_ERROR, 
     CREATE_ACCOUNT, 
+    LOGIN_ACCOUNT,
     CLOSE_MODAL, 
     REMOVE_ERROR_ALERT}

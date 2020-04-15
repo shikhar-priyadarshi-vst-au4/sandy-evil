@@ -24,15 +24,15 @@ function controller (){
     this.login = ( req , res ) => {
         passport.authenticate('login', { session : false }, async ( err, user, message ) => {
           if(err){
-              res.status(500).json({ message });
+              res.status(500).json({ error : true, user, token:"", message });
           }
           else if(!user) {
-              res.json({ message });
+              res.json({ error : false, user, token:"", message });
           }
           else {
             let token = await tokenGenerator(user.id);
                     if(token){
-                        res.json({ token });
+                        res.json({ error : false, user, token, message });
                     }
           }
 

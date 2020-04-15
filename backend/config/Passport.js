@@ -38,7 +38,7 @@ passport.use('login', new LocalStrategy(
         try{
         let userFound = await Worker.findOne({where : {email, password}});      
           if(userFound){
-            return done(null, userFound);
+            return done(null, userFound, 'Logged in successfully');
            }
            
             
