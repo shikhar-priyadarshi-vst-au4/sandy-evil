@@ -111,10 +111,13 @@ const Form = ( props ) => {
              <AlertBox response={props.response}/>
              <KeyStroke {...props} handleError={handleError} />
              </Fragment>)}
-        {props.part === 'career-login' && <form className = {classes.career}>
+        {props.part === 'career-login' && (!props.loginError?<form className = {classes.career}>
         <Input part={'career-login'} loginFields={loginFields} setLoginFields={setLoginFields} />
         <KeyStroke {...props} formPart={'career-login'} loginAccount={loginAccount}/>
-            </form>}     
+            </form> : <Fragment>
+             <AlertBox response={props.response}/>
+             <KeyStroke {...props} formPart={'career-login'} handleError={handleError} />
+             </Fragment>)}     
         </Fragment>
     )
 }

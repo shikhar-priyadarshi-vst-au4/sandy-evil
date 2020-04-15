@@ -45,9 +45,11 @@ export const KeyStroke = (props) => {
         </Button>}
       {props.part === 'career-login' &&  <Button variant="contained"
           color="secondary" 
-          onClick = {()=> props.formPart==='career-login'?props.loginAccount():props.setSignUp(!props.signUp)}
+          onClick = {()=> props.formPart==='career-login'?(props.loginError ? props.handleError()
+          : props.loginAccount()) : props.setSignUp(!props.signUp)}
           className = {classes[props.formPart==='career-login'?"form_btn_login":"btn_login"]}>
-          {props.formPart==='career-login'?"Login":(props.signUp?"Login": "Create Account")}
+          {props.formPart==='career-login'?(props.loginError?<FontAwesomeIcon icon={faArrowCircleRight} 
+          style={{padding : '0em 2em'}} size={'2x'}/>:"Login"):(props.signUp?"Login": "Create Account")}
         </Button>}
       </Fragment> 
     

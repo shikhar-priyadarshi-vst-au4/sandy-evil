@@ -32,8 +32,7 @@ export const workerReducer = (state = initState, action) => {
             return stateCopy;
         case LOGIN_ERROR :
             stateCopy.response = action.payload;
-            //stateCopy.loginError = true;
-            stateCopy.error = true;
+            stateCopy.loginError = true;    
             return stateCopy;
         case CREATE_ACCOUNT:
             stateCopy.response = action.payload;
