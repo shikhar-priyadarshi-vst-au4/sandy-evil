@@ -73,7 +73,14 @@ export const login = ({ email, password }) => {
       else{
           return async dispatch => {
              try{
-                 let { error, user, token, message } = await (await fetch()).json();
+                 let { error, user, token, message } = await (await fetch('http://localhost:8000/worker/login',{
+                    method : 'POST',
+                    headers : {
+                        'Content-Type' : 'application/json'
+                    },
+                    body : JSON.stringify({
+                             email,  password
+                    })})).json();
                  if( !error ){
                     if(!!token.length){
                         localStorage.setItem('access-token', token);

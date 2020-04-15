@@ -1,7 +1,7 @@
 import React, { useState, Fragment } from 'react';
 import { makeStyles, useMediaQuery } from '@material-ui/core';
 import { connect } from 'react-redux'
-import { register, removeError } from '../../Actions/index'
+import { register, removeError, login } from '../../Actions/index'
 import {Input} from './Input';
 import {KeyStroke} from './Button';
 import { AlertBox } from './Alert';
@@ -44,6 +44,10 @@ const Form = ( props ) => {
         Fullname : "", Email:"", 
         Password: "", Number: "", 
         Area : "", Specialisation:""  });
+    const [ loginFields, setLoginFields ] = useState({
+        Email : "",
+        Password : ""  
+    })    
 
     const handleChange = (event, cb) => {
          cb(event.target.value);
@@ -70,6 +74,12 @@ const Form = ( props ) => {
             password, mobileNumber,
             specialisation, area }    
           props.dispatch(register(data));
+    }
+    const loginAccount = () => {
+        let { Email : email, Password : password } = loginFields
+        console.log(email, password);
+        let data = { email, password}
+        props.dispatch(login(data));
     }
     const handleError = () => {
         props.dispatch(removeError())
@@ -101,6 +111,10 @@ const Form = ( props ) => {
              <AlertBox response={props.response}/>
              <KeyStroke {...props} handleError={handleError} />
              </Fragment>)}
+        {props.part === 'career-login' && <form className = {classes.career}>
+        <Input part={'career-login'} loginFields={loginFields} setLoginFields={setLoginFields} />
+        <KeyStroke {...props} formPart={'career-login'} loginAccount={loginAccount}/>
+            </form>}     
         </Fragment>
     )
 }

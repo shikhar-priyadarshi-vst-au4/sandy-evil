@@ -2,6 +2,8 @@ import { INPUT_ERROR,
          RESPONSE_ERROR,
          CLOSE_MODAL, 
          CREATE_ACCOUNT,
+         LOGIN_ACCOUNT,
+         LOGIN_ERROR,
          REMOVE_ERROR_ALERT } from '../Actions/index';
 
 
@@ -10,7 +12,9 @@ let initState = {
     profileCreated : false,
     isAuthenticated : false,
     error : false,
-    response : ""
+    loginError : false,
+    response : "",
+    data : ""
 }
 
 export const workerReducer = (state = initState, action) => {
@@ -25,16 +29,31 @@ export const workerReducer = (state = initState, action) => {
             stateCopy.response = action.payload;
             stateCopy.error = true;
             return stateCopy;
+        case LOGIN_ERROR :
+            stateCopy.response = action.payload;
+            //stateCopy.loginError = true;
+            stateCopy.error = true;
+            return stateCopy;
         case CREATE_ACCOUNT:
             stateCopy.response = action.payload;
             stateCopy.profileCreated = true;
+            return stateCopy;
+        case LOGIN_ACCOUNT : 
+            stateCopy.data = {...action.payload.user};
+            stateCopy.response = action.payload.message;
+            stateCopy.isAuthenticated = true;
             return stateCopy;
         case CLOSE_MODAL :
             stateCopy.profileCreated = false;   
             return stateCopy;
         case REMOVE_ERROR_ALERT :
             stateCopy.response = "";
-            stateCopy.error = false;
+            if(stateCopy.error){
+                stateCopy.error = false;
+            }
+            if(stateCopy.loginError){
+                stateCopy.loginError = false;
+            }
             return stateCopy;    
         default : 
             return stateCopy;        

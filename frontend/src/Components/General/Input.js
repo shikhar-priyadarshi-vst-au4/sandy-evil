@@ -24,15 +24,17 @@ const theme = createMuiTheme({
 export const Input = ( { city, service, 
                         setCity, setService,
                         createProfile, setCreateProfile,
+                        loginFields, setLoginFields,
                         handleChange,  part }, ...rest ) => {
     const classes = useStyles();
-    const inputs = createProfile?Object.entries(createProfile):"";
-    const ChangeHandler = (e) => {
+    const inputs = Object.entries(createProfile?createProfile:loginFields);
+    const ChangeHandler = (e, cb, state) => {
         let { name, value } = e.target;
-          setCreateProfile({...createProfile, [name] : value});
+          cb({...state, [name] : value});
       }
     return(
         <Fragment>
+        
         {part === 'homepage-header' && <Fragment>
            
             <TextField id="outlined-search" label="Search " type="search" variant="outlined"
@@ -71,7 +73,7 @@ export const Input = ( { city, service,
         name={field[0]}
         value = {field[1]}
         type={(field[0] === 'Password')?field[0].toLowerCase():""}
-        onChange = {(e) => ChangeHandler(e)}
+        onChange = {(e) => ChangeHandler(e, setCreateProfile, createProfile)}
         fullWidth/>
         )}
         <FormControl variant="outlined" className={classes.career}>
@@ -82,7 +84,7 @@ export const Input = ( { city, service,
                     label="Choose your Area"
                     value={inputs[4][1]}
                     name={inputs[4][0]}
-                    onChange = {(e) => ChangeHandler(e)}
+                    onChange = {(e) => ChangeHandler(e, setCreateProfile, createProfile)}
                     fullWidth>
                     <MenuItem value="">
                         <em>Choose an Area</em>
@@ -100,7 +102,7 @@ export const Input = ( { city, service,
                     label="Choose your specification"
                     value={inputs[5][1]}
                     name={inputs[5][0]}
-                    onChange = {(e) => ChangeHandler(e)}
+                    onChange = {(e) => ChangeHandler(e, setCreateProfile, createProfile)}
                     fullWidth>
                     <MenuItem value="">
                         <em>Select option</em>
@@ -113,6 +115,26 @@ export const Input = ( { city, service,
         </Flex>
         </ThemeProvider>
             </Fragment>}
+            
+            {part === 'career-login' && <Fragment>
+        <ThemeProvider theme={theme}>
+        <Flex wrap={'none'} style={{flexDirection:"column"}} >
+        {inputs.map((field, index) => <TextField
+        id={`outlined-secondary-${index}`}
+        key = {index}
+        label={`${field[0]}`}
+        variant="outlined"
+        color="primary"
+        margin="normal"
+        name={field[0]}
+        value = {field[1]}
+        type={(field[0] === 'Password')?field[0].toLowerCase():""}
+        onChange = {(e) => ChangeHandler(e, setLoginFields, loginFields)}
+        fullWidth/>
+        )}
+            </Flex>
+            </ThemeProvider>
+        </Fragment>}
         </Fragment>
     )
 }

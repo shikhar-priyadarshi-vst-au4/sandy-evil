@@ -3,12 +3,16 @@ export const mapStateToProps = (state) => {
                             profileCreated,
                             isAuthenticated,
                             response,
-                            error  }, 
+                            loginError,
+                            error,
+                            data}, 
          } = state;
     return({
             profileCreated,
             isAuthenticated,
             response,
-            error 
+            loginError,
+            error,
+            data 
     })
 }

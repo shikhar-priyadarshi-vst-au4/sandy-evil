@@ -17,6 +17,11 @@ const useStyles = makeStyles((theme) => ({
       marginTop : theme.spacing(2),
       padding : "1em 3em",
       letterSpacing : "0.1em"
+    },
+    form_btn_login : {
+      margin : "1em",
+      padding : "1em 3em",
+      letterSpacing : "0.1em"
     }
   }));
 
@@ -38,11 +43,11 @@ export const KeyStroke = (props) => {
           {props.error?<FontAwesomeIcon icon={faArrowCircleRight} 
           style={{padding : '0em 2em'}} size={'2x'}/>:'Create Account'}
         </Button>}
-      {props.part === 'career-login' && <Button variant="contained"
+      {props.part === 'career-login' &&  <Button variant="contained"
           color="secondary" 
-          onClick = {()=> props.setSignUp(!props.signUp)}
-          className = {classes.btn_login}>
-          {props.signUp?"Login": "Create Account"}
+          onClick = {()=> props.formPart==='career-login'?props.loginAccount():props.setSignUp(!props.signUp)}
+          className = {classes[props.formPart==='career-login'?"form_btn_login":"btn_login"]}>
+          {props.formPart==='career-login'?"Login":(props.signUp?"Login": "Create Account")}
         </Button>}
       </Fragment> 
     
