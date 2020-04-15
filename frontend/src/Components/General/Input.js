@@ -27,7 +27,7 @@ export const Input = ( { city, service,
                         loginFields, setLoginFields,
                         handleChange,  part }, ...rest ) => {
     const classes = useStyles();
-    const inputs = Object.entries(createProfile?createProfile:loginFields);
+    const inputs = (createProfile||loginFields)?Object.entries(createProfile?createProfile:loginFields):"";
     const ChangeHandler = (e, cb, state) => {
         let { name, value } = e.target;
           cb({...state, [name] : value});
