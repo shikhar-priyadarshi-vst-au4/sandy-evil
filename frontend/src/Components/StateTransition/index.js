@@ -2,6 +2,7 @@ export const mapStateToProps = (state) => {
     let { workerReducer : {
                             profileCreated,
                             isAuthenticated,
+                            isLoggedIn,
                             response,
                             loginError,
                             error,
@@ -10,6 +11,7 @@ export const mapStateToProps = (state) => {
     return({
             profileCreated,
             isAuthenticated,
+            isLoggedIn,
             response,
             loginError,
             error,

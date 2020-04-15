@@ -7,15 +7,19 @@ import { closeModal } from '../../Actions';
 const Career = (props) => {
     
     const [ signUp, setSignUp ] = useState(true); 
-    const handleClose = () => {
-       props.dispatch(closeModal());    
+    const handleClose = (property) => {
+       props.dispatch(closeModal(property));    
     };
   
     return(
     <Fragment>
         {props.profileCreated &&<Position position={'absolute'}> 
-          <AlertDialog {...props} handleClose={handleClose}/>
+          <AlertDialog {...props} part = {'career'} handleClose={handleClose}/>
          </Position>}
+         {props.isLoggedIn &&<Position position={'absolute'}> 
+          <AlertDialog {...props} part = {'career-login'} handleClose={handleClose}/>
+         </Position>}
+        
         <GridContainer>
             <ItemOne>
                 <Position >

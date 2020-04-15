@@ -105,9 +105,10 @@ export const login = ({ email, password }) => {
           }
       }
 }
-export const closeModal = () => {
+export const closeModal = (property) => {
      return ({
-         type : CLOSE_MODAL
+         type : CLOSE_MODAL,
+         payload : property
      })
 }
 

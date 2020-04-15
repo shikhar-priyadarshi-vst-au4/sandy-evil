@@ -11,6 +11,7 @@ import { INPUT_ERROR,
 let initState = {
     profileCreated : false,
     isAuthenticated : false,
+    isLoggedIn : false,
     error : false,
     loginError : false,
     response : "",
@@ -41,10 +42,11 @@ export const workerReducer = (state = initState, action) => {
         case LOGIN_ACCOUNT : 
             stateCopy.data = {...action.payload.user};
             stateCopy.response = action.payload.message;
+            stateCopy.isLoggedIn = true;
             stateCopy.isAuthenticated = true;
             return stateCopy;
         case CLOSE_MODAL :
-            stateCopy.profileCreated = false;   
+            stateCopy[action.payload] = false;   
             return stateCopy;
         case REMOVE_ERROR_ALERT :
             stateCopy.response = "";
