@@ -13,14 +13,14 @@ router.post('/register', register);
 router.post('/login', login);
 
 
-router.post('/upload', multerUploads, upload );
+router.post('/upload', isAuthorised , multerUploads, upload);
 
 
-// Auth-end-point
-// controller.isAuthorised is authorisation middleware
-router.post('/auth', isAuthorised, (req, res) => {
-   res.send('access granted ');
-})
+// // Auth-end-point
+// // controller.isAuthorised is authorisation middleware
+// router.post('/auth', isAuthorised, (req, res) => {
+//    res.send('access granted ');
+// })
 
 module.exports = router;
 

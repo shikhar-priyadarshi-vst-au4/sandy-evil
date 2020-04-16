@@ -7,6 +7,10 @@ const Worker = sequelize.define('Worker',{
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV1,
         primaryKey: true 
+    }, 
+    image : {
+        type : Sequelize.STRING,
+        allowNull : true
     },
     name : {
         type : Sequelize.STRING,

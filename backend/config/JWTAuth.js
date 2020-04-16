@@ -21,7 +21,6 @@ try{
     
     } 
     else {
-   console.log('here');
     return done(null, false);
 
     // or you could create a new account

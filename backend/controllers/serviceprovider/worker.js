@@ -8,7 +8,7 @@ const passport = require('passport');
 
 const {  uploader } = require('../../middleware/cloudinary');
 const {  dataUri } = require('../../middleware/multer');
-
+const Worker = require('../../models/Worker');
 function controller (){
     
     this.register = ( req, res ) => {
@@ -51,6 +51,7 @@ function controller (){
                 res.json({ message :  "not authorised" })
             }
             else{
+                res.locals.user = user;
                 next();
             }
         })( req, res, next )
@@ -61,16 +62,16 @@ function controller (){
         const file = dataUri(req).content;
         try{
            let result = await uploader.upload(file);
-           const image = result.url;
+           let image = result.url;
+           let { id } = res.locals.user;
+           let data = await Worker.update({ image }, { where : { id }, returning : true });
            res.status(200).json({
-              messge: 'Your image has been uploded successfully to cloudinary',
-              data: {
-              image
-              }
+              message: 'Your image has been uploded successfully to cloudinary',
+              data
               })
         }catch(err){
            res.status(400).json({
-              messge: 'someting went wrong while processing your request',
+              message: 'someting went wrong while processing your request',
               data: {
               err
               }
