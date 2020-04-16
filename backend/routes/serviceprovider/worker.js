@@ -1,12 +1,20 @@
 const router = require('express').Router();
 
-const { register, login, isAuthorised } = require('../../controllers/serviceprovider/worker');
+const { register, login, isAuthorised, upload } = require('../../controllers/serviceprovider/worker');
+const { cloudinaryConfig  } = require('../../middleware/cloudinary');
+const { multerUploads } = require('../../middleware/multer');
+
+router.use('*', cloudinaryConfig);
 
 // End-point to register worker
 router.post('/register', register);
 
 // End-point to login worker
 router.post('/login', login);
+
+
+router.post('/upload', multerUploads, upload );
+
 
 // Auth-end-point
 // controller.isAuthorised is authorisation middleware
@@ -25,7 +33,20 @@ module.exports = router;
 
 
 
-
+// return uploader.upload(file).then((result) => {
+   // const image = result.url;
+   // return res.status(200).json({
+   // messge: 'Your image has been uploded successfully to cloudinary',
+   // data: {
+   // image
+   // }
+   // })
+   // }).catch((err) => res.status(400).json({
+   // messge: 'someting went wrong while processing your request',
+   // data: {
+   // err
+   // }
+   // }))
 
 
 

@@ -6,6 +6,9 @@ const {
 
 const passport = require('passport');
 
+const {  uploader } = require('../../middleware/cloudinary');
+const {  dataUri } = require('../../middleware/multer');
+
 function controller (){
     
     this.register = ( req, res ) => {
@@ -52,6 +55,29 @@ function controller (){
             }
         })( req, res, next )
     }
+
+    this.upload = async (req, res) => {
+        if(req.file) {
+        const file = dataUri(req).content;
+        try{
+           let result = await uploader.upload(file);
+           const image = result.url;
+           res.status(200).json({
+              messge: 'Your image has been uploded successfully to cloudinary',
+              data: {
+              image
+              }
+              })
+        }catch(err){
+           res.status(400).json({
+              messge: 'someting went wrong while processing your request',
+              data: {
+              err
+              }
+              })
+          }
+        }
+     }
     // this.authenticate = async ( req, res ) => {
     //    let token = req.header('auth-token');
     //    let id = tokenValidator(token);
