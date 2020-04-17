@@ -47,6 +47,7 @@ export const Text = Styled.div`
  letter-spacing : ${props => props.spacing || '1.5px'};
  color : ${props => props.fontcolor || '#272727'};
  text-decoration : none;
+ cursor : ${props => props.cursor || 'default'};
  padding : ${props => props.padding || '0em'};
  @media screen and (max-width : 768px){
     font-size : ${props => props.size || '1em'};

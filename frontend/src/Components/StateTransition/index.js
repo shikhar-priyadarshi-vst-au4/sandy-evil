@@ -1,5 +1,5 @@
 export const mapStateToProps = (state) => {
-    let { workerReducer : {
+    let { AccountReducer : {
                             profileCreated,
                             isAuthenticated,
                             isLoggedIn,

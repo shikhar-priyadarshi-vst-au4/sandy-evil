@@ -1,4 +1,4 @@
 import { Main } from './Homepage';
 import  Career  from './Career';
-
-export { Main, Career };
+import  WorkerDashboard from './Dashboard'
+export { Main, Career, WorkerDashboard };

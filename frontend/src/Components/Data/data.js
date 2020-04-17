@@ -73,3 +73,4 @@ export const qualities = [{
           booking to delivery`,
     icon : faCheckCircle}]
 
+export const profileOptions = ["User Profile", "Account Settings", "Check Your Tickets" , "Service Categories", "Check Your History", "Sign Out"];    

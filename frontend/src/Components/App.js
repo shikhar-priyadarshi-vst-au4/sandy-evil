@@ -3,9 +3,9 @@ import {  BrowserRouter as Router,
           Switch, 
           //Redirect,
           Route } from 'react-router-dom';
-import { Main, Career } from './Pages/index';
+import { Main, Career, WorkerDashboard } from './Pages/index';
 import 'typeface-roboto';
-//import { ProtectedRoute } from './ProtectedRoute';
+import { ProtectedRoute } from './ProtectedRoute';
 
 
 export function App() {
@@ -14,15 +14,16 @@ export function App() {
      <Switch>
        <Route path = {'/'} exact component = {Main}/>
        <Route path = {'/careers'} component = {Career} />
-       <Route path = {'/worker/login'}  render={ ( ) => <div>worker login</div> } />
+       <Route path = {'/dummyprofilepage'} component={WorkerDashboard}/>
+       <ProtectedRoute path = {'/worker/dashboard/:id'} 
+                       isAuthenticated = {'false'} 
+                       component = {<div></div>} />
        <Route path = {'*'} render ={ ( ) => <div>Error page</div> } />
      </Switch>
      </Router>
   );
 }
 
-/*{ <ProtectedRoute path = {'/worker/dashboard/:id'} 
-                       isAuthenticated = {'true'} 
-                       component = {WorkerDashboard} /> }*/
+/*{  }*/
        
 

@@ -18,7 +18,7 @@ let initState = {
     data : ""
 }
 
-export const workerReducer = (state = initState, action) => {
+export const AccountReducer = (state = initState, action) => {
     let stateCopy = {...state};
     switch(action.type){
         

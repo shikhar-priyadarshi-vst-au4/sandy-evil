@@ -3,7 +3,7 @@ import Form from './Form';
 import {Input} from './Input';
 import {Card} from './Card';
 import {List} from './List';
-import {ListItem} from './ListItem';
+import {Image} from './Image';
 import AlertDialog from './Dialog';
 import {AlertBox} from './Alert'
 export { KeyStroke,
@@ -11,6 +11,6 @@ export { KeyStroke,
             Input, 
             Card, 
             List, 
-            ListItem,
+            Image,
             AlertDialog,
             AlertBox };
