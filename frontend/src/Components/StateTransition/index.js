@@ -6,7 +6,15 @@ export const mapStateToProps = (state) => {
                             response,
                             loginError,
                             error,
-                            data}, 
+                            data },
+         ProfileReducer : {
+                            imageUrl ,
+                            name ,
+                            email ,
+                            number ,
+                            specialisation ,
+                            password ,
+                            area },                     
          } = state;
     return({
             profileCreated,
@@ -18,3 +26,10 @@ export const mapStateToProps = (state) => {
             data 
     })
 }
+
+
+// AccountReducer,
+//             ProfileReducer,
+//             ServiceReducer,
+//             TicketReducer,
+//             HistoryReducer
