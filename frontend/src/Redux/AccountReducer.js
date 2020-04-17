@@ -56,6 +56,16 @@ export const AccountReducer = (state = initState, action) => {
                 stateCopy.loginError = false;
             }
             return stateCopy;    
+        case LOGOUT :
+            // stateCopy.data = "";
+            // stateCopy.profileCreated = false;
+            // stateCopy.isAuthenticated = false;
+            // stateCopy.isLoggedIn = false;
+            // stateCopy.error = false;
+            // stateCopy.loginError = false;
+            // stateCopy.response = "";
+            // stateCopy.data = "";
+            return initState;    
         default : 
             return stateCopy;        
             
