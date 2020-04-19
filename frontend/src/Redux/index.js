@@ -1,10 +1,10 @@
 import {combineReducers} from 'redux';
 
 import { AccountReducer } from './AccountReducer';
-import { ProfileReducer } from './WorkerReducers/ProfileReducer';
-import { ServiceReducer } from './WorkerReducers/ServiceReducer';
-import { TicketReducer  } from './WorkerReducers/TicketReducer';
-import { HistoryReducer } from './WorkerReducers/HistoryReducer'
+import { ProfileReducer } from './ProfileReducer';
+import { ServiceReducer } from './ServiceReducer';
+import { TicketReducer  } from './TicketReducer';
+import { HistoryReducer } from './HistoryReducer';
 
 export const rootReducer = combineReducers({
             AccountReducer,

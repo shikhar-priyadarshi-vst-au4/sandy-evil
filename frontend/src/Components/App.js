@@ -1,29 +1,44 @@
-import React  from 'react';
-import {  BrowserRouter as Router,
-          Switch, 
-          //Redirect,
+import React, { 
+  //useEffect, 
+  Component, } from 'react';
+import {  Switch, 
           Route } from 'react-router-dom';
 import { Main, Career, WorkerDashboard } from './Pages/index';
+import { connect } from 'react-redux'
 import 'typeface-roboto';
-import { ProtectedRoute } from './ProtectedRoute';
+import { ProtectedRoute }  from './ProtectedRoute';
+import { mapStateToProps } from './StateTransition';
+import { validateToken } from '../Actions/index' 
 
-
-export function App() {
+// const App = (props) => {
+//   let {isAuthenticated} = props;
+//   useEffect(()=>{
+//     props.dispatch(validateToken());
+//   },[isAuthenticated]);    
+//   console.log(isAuthenticated);
+  class App extends Component {
+   
+  componentDidMount(){
+    this.props.dispatch(validateToken());
+  }  
+  render(){
+   let { isAuthenticated } = this.props;
+   console.log(isAuthenticated);
+  
   return (
-    <Router>
      <Switch>
        <Route path = {'/'} exact component = {Main}/>
        <Route path = {'/careers'} component = {Career} />
-       <Route path = {'/dummyprofilepage'} component={WorkerDashboard}/>
-       <ProtectedRoute path = {'/worker/dashboard/:id'} 
-                       isAuthenticated = {'false'} 
-                       component = {<div></div>} />
+       <ProtectedRoute path = {'/dashboard'}
+                       isAuthenticated = {isAuthenticated} 
+                       component = {WorkerDashboard} />   
        <Route path = {'*'} render ={ ( ) => <div>Error page</div> } />
      </Switch>
-     </Router>
+     
   );
+  }
 }
 
-/*{  }*/
+export default connect(mapStateToProps)(App);
        
 

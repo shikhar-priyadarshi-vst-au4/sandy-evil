@@ -3,14 +3,13 @@ import {connect} from 'react-redux';
 import { GridContainer, Text, ItemOne, ItemTwo, Position } from '../Styled/Styled'
 import { Form, AlertDialog, KeyStroke } from '../General/index'
 import { mapStateToProps } from '../StateTransition'
-import { closeModal } from '../../Actions';
+import { closeModal, } from '../../Actions/index';
 const Career = (props) => {
     
     const [ signUp, setSignUp ] = useState(true); 
-    const handleClose = (property) => {
-       props.dispatch(closeModal(property));    
+    const handleClose = async (property) => {
+      await props.dispatch(closeModal(property));    
     };
-  
     return(
     <Fragment>
         {props.profileCreated &&<Position position={'absolute'}> 

@@ -1,4 +1,4 @@
-import React  from 'react';
+import React from 'react';
 import {Navbar} from '../Navbar/Navbar';
 import {Footer} from '../Footer/Footer';
 import { Form, List } from '../General/index.js';
@@ -7,9 +7,10 @@ import { Container, Header,
             Block, Image,
             Section, Text,
             Flex} from '../Styled/Styled';
+import {connect} from 'react-redux';           
+import { mapStateToProps } from '../StateTransition';
 
-export const Main = ( props ) => {
-    
+ const Main = ( props ) => {
     return(
             <Container>
                  <Header>
@@ -36,4 +37,4 @@ export const Main = ( props ) => {
     )
 
 }
-//<List categories = {categories} />
+export default connect(mapStateToProps)(Main)

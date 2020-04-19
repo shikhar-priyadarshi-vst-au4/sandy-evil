@@ -1,6 +1,9 @@
+import {HOST, PORT, links} from './links';
+
 //Account Action constants
 const CREATE_ACCOUNT = 'CREATE_ACCOUNT';
 const LOGIN_ACCOUNT = 'LOGIN_ACCOUNT';
+const LOGOUT = 'LOGOUT';
 
 //Error Action constants
 const RESPONSE_ERROR = 'RESPONSE_ERROR';
@@ -10,6 +13,10 @@ const REMOVE_ERROR_ALERT = 'REMOVE_ERROR_ALERT';
 
 //Modal Action constants
 const CLOSE_MODAL = 'CLOSE_MODAL';
+
+//Token Action constants
+const NOTOKEN = 'NOTOKEN';
+const VALIDTOKEN = 'VALIDTOKEN';
 
 export const register = ({ name, email, 
                             password, mobileNumber,
@@ -24,7 +31,7 @@ export const register = ({ name, email,
       else {
          return async dispatch => {
              try{
-                let { message, status, error } = await (await fetch('http://localhost:8000/worker/register',{
+                let { message, status, error } = await (await fetch(`http://${HOST}:${PORT}${links[0].register}`,{
                     method : 'POST',
                     headers : {
                         'Content-Type' : 'application/json'
@@ -73,7 +80,7 @@ export const login = ({ email, password }) => {
       else{
           return async dispatch => {
              try{
-                 let { error, user, token, message } = await (await fetch('http://localhost:8000/worker/login',{
+                 let { error, user, token, message } = await (await fetch(`http://${HOST}:${PORT}${links[1].login}`,{
                     method : 'POST',
                     headers : {
                         'Content-Type' : 'application/json'
@@ -105,6 +112,13 @@ export const login = ({ email, password }) => {
           }
       }
 }
+export const logout = () => { 
+    localStorage.removeItem('access-token');
+    
+    return({
+        type : LOGOUT
+    })
+}
 export const closeModal = (property) => {
      return ({
          type : CLOSE_MODAL,
@@ -124,12 +138,46 @@ export const removeError = ( ) =>{
         type : REMOVE_ERROR_ALERT
     })
 }
-
+export const validateToken = ( ) => {
+    
+        
+        return async dispatch => {
+            let gettoken = localStorage.getItem('access-token');
+            if(!gettoken){
+               return dispatch(noToken());   
+            }
+            else{   
+            try {
+                let { token, message, data } = await (await fetch(`http://${HOST}:${PORT}${links[3].tokenAuth}${gettoken}`,{
+                    method : 'POST',
+                    headers : {
+                     'Content-Type' : 'application/json'
+                  }})).json();
+                if(token){
+                  
+                    return dispatch({
+                        type : VALIDTOKEN,
+                        payload : { message, data}
+                    })
+                }
+                //not valid token - auto logout
+                return dispatch(logout());
+            }
+            catch(err){
+                return dispatch(logout());
+            }
+    }
+ } 
+}
+export const noToken = ( ) => ( { type : NOTOKEN } );
 export { 
     INPUT_ERROR, 
     LOGIN_ERROR,
     RESPONSE_ERROR, 
     CREATE_ACCOUNT, 
     LOGIN_ACCOUNT,
-    CLOSE_MODAL, 
+    LOGOUT,
+    CLOSE_MODAL,
+    NOTOKEN, 
+    VALIDTOKEN,
     REMOVE_ERROR_ALERT}

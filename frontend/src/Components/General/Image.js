@@ -10,13 +10,9 @@ const useStyles = makeStyles((theme) => ({
         margin : "1em 8em"
     },
     image : {
-        margin : "1em 9em",
-        width: theme.spacing(20),
-        height: theme.spacing(20),
-    },
-    card : {
-        display : "flex",
-        justifyContent : "center"
+        margin : "0.8em 0.5em",
+        width: theme.spacing(5),
+        height: theme.spacing(5),
     },
     list : {
         width : '100%',
@@ -25,15 +21,12 @@ const useStyles = makeStyles((theme) => ({
     }
   }));
 
-export const Image = ({imageSelected, imageHandler},...rest) => {
+export const Image = ({ image, imageHandler,...rest }) => {
     const classes = useStyles();    
     let inputRef = createRef();
-    
     return(<Fragment>
-        { !imageSelected.length ? 
-             <Card variant={'outlined'} className={classes.card}>
-               <Avatar alt="Remy Sharp" src="images/Carpenters.jpg" className={classes.image} /> : 
-               </Card>:
+        { image && !!image.length ? 
+               <Avatar alt="Remy Sharp" src={image} className={classes.image} />:
               <div className={classes.Skeleton}>
               <input type="file" 
                      style = {{display : "none"}}

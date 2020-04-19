@@ -111,6 +111,18 @@ export const Position = Styled.div`
 position : ${props => props.position || 'static'};
 margin : ${props => props.margin || '6em 4em'};
 @media screen and (max-width : 768px){
-    margin : ${props => props.sm_margin || '2em 4em'};
-    
+    margin : ${props => props.sm_margin || '2em 4em'};    
 }`;
+
+export const Chip = Styled(Position)`
+z-index : '1';
+left : ${props => props.left || '0em'};
+top : ${props => props.top || '0em'};
+@media screen and (max-width : 768px){
+    left : ${props => props.sm_left || '0em'};
+    top : ${props => props.sm_top || '0em'};
+    
+}
+`;
+
+

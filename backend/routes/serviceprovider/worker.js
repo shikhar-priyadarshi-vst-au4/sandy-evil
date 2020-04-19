@@ -1,6 +1,7 @@
 const router = require('express').Router();
 
-const { register, login, isAuthorised, upload } = require('../../controllers/serviceprovider/worker');
+const { register, login, 
+   isAuthorised, upload, retrieve } = require('../../controllers/serviceprovider/worker');
 const { cloudinaryConfig  } = require('../../middleware/cloudinary');
 const { multerUploads } = require('../../middleware/multer');
 
@@ -17,10 +18,8 @@ router.post('/upload', isAuthorised , multerUploads, upload);
 
 
 // // Auth-end-point
-// // controller.isAuthorised is authorisation middleware
-// router.post('/auth', isAuthorised, (req, res) => {
-//    res.send('access granted ');
-// })
+//controller.isAuthorised is authorisation middleware
+router.post('/auth', isAuthorised, retrieve );
 
 module.exports = router;
 

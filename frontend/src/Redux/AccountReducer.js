@@ -1,8 +1,11 @@
 import { INPUT_ERROR, 
          RESPONSE_ERROR,
-         CLOSE_MODAL, 
+         CLOSE_MODAL,
+         NOTOKEN, 
+         VALIDTOKEN,
          CREATE_ACCOUNT,
          LOGIN_ACCOUNT,
+         LOGOUT,
          LOGIN_ERROR,
          REMOVE_ERROR_ALERT } from '../Actions/index';
 
@@ -56,15 +59,13 @@ export const AccountReducer = (state = initState, action) => {
                 stateCopy.loginError = false;
             }
             return stateCopy;    
+        case VALIDTOKEN :
+             let {message, data} = action.payload;
+             stateCopy.isAuthenticated = true;
+             stateCopy.data = data;
+             return stateCopy; 
         case LOGOUT :
-            // stateCopy.data = "";
-            // stateCopy.profileCreated = false;
-            // stateCopy.isAuthenticated = false;
-            // stateCopy.isLoggedIn = false;
-            // stateCopy.error = false;
-            // stateCopy.loginError = false;
-            // stateCopy.response = "";
-            // stateCopy.data = "";
+        case NOTOKEN :    
             return initState;    
         default : 
             return stateCopy;        

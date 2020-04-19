@@ -58,6 +58,7 @@ function controller (){
     }
 
     this.upload = async (req, res) => {
+        
         if(req.file) {
         const file = dataUri(req).content;
         try{
@@ -66,7 +67,7 @@ function controller (){
            let { id } = res.locals.user;
            let data = await Worker.update({ image }, { where : { id }, returning : true });
            res.status(200).json({
-              message: 'Your image has been uploded successfully to cloudinary',
+              message: 'Your image has been uploaded successfully ',
               data
               })
         }catch(err){
@@ -78,6 +79,13 @@ function controller (){
               })
           }
         }
+     }
+    this.retrieve = ( req, res ) => {
+          res.json({
+              token : true,
+              message : 'Valid token',
+              data : res.locals.user
+          });
      }
     // this.authenticate = async ( req, res ) => {
     //    let token = req.header('auth-token');

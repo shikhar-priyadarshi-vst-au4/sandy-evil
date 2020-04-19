@@ -2,8 +2,9 @@ import React from 'react';
 import { Button, Dialog, 
          DialogActions, DialogContent, 
          DialogContentText, DialogTitle } from '@material-ui/core';
-export default function AlertDialog( { profileCreated, isLoggedIn, part, handleClose } ) {
-
+import {Link} from 'react-router-dom';         
+export default function AlertDialog( { profileCreated, isLoggedIn, part, handleClose, data }, ...rest ) {
+  console.log(data);
   return (
     <div>
       <Dialog
@@ -20,10 +21,13 @@ export default function AlertDialog( { profileCreated, isLoggedIn, part, handleC
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => handleClose(part === 'career-login'?"isLoggedIn" : "profileCreated")}
+          <Button 
+          onClick={() => handleClose(part === 'career-login'?"isLoggedIn" : "profileCreated")}
            color="primary" autoFocus>
             Proceed
           </Button>
+          <Link style = {{textDecoration : "none"}} 
+          to={`/dashboard`}><Button color="primary">Go to dashboard</Button></Link>
         </DialogActions>
       </Dialog>
     </div>

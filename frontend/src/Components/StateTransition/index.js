@@ -3,12 +3,12 @@ export const mapStateToProps = (state) => {
                             profileCreated,
                             isAuthenticated,
                             isLoggedIn,
+                            error,
                             response,
                             loginError,
-                            error,
                             data },
-         ProfileReducer : {
-                            imageUrl ,
+         ProfileReducer : { id,
+                            image ,
                             name ,
                             email ,
                             number ,
@@ -23,7 +23,15 @@ export const mapStateToProps = (state) => {
             response,
             loginError,
             error,
-            data 
+            data,
+            id,
+            image ,
+            name ,
+            email ,
+            number ,
+            specialisation ,
+            password ,
+            area 
     })
 }
 
