@@ -22,7 +22,7 @@ import { mapStateToProps } from '../StateTransition';
                     </div>
                  </Header>                
              <Section>
-                 <Text>What We Offers!</Text>
+                 <Text size={'1.4em'}>What We Offers!</Text>
                  <Flex>
                     <List part = "homepage-section" 
                     categories={categories} />

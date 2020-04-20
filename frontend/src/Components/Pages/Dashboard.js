@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { Paper, Grid,
      makeStyles} from '@material-ui/core';
 import { mapStateToProps } from '../StateTransition';
-import {  Text, Chip } from '../Styled/Styled'
-import { Image, Form } from '../General/index'
+import {  Text, Chip, Position } from '../Styled/Styled'
+import { Image, List } from '../General/index'
 import { profileOptions } from '../Data/data'
 import { imageUpdate, extractUser } from '../../Actions/worker'
 const useStyles = makeStyles((theme) => ({
@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
     }
   }));
 const WorkerDashboard = ( props ) => {
-    const [ option, setOption ] = useState("");
+    const [ option, setOption ] = useState('User Profile');
     const classes = useStyles();
     //CDM
     useEffect(( ) => {
@@ -60,20 +60,20 @@ const WorkerDashboard = ( props ) => {
     console.log(props);
     return(
         <div className = {classes.root}>
-       <Chip position={'fixed'}
+       <Chip position={'absolute'}
           margin = {'0em'} sm_margin = {'0em'}
-          left = {'69em'}  sm_left = {'18em'}
-          top = {'0.5em'}  sm_top = {'1em'}
-          >
+          left = {'69em'}  sm_left = {'17em'}
+          top = {'0.5em'}  sm_top = {'1em'}>
               <Paper variant="outlined"
               className={classes.chip}>              
                 <Image image = {props.image}
                 imageHandler={imageHandler}/>     
                  
                  <Text padding={'1em 1em'} size={'0.5em'} 
+                  sm_size = {'0.5em'}
                   weight={'350'} spacing={'0.1em'} 
                   fontcolor = {" #33313b"} 
-                  style={{margin : "2em 0em"}}>{props.name}</Text>
+                  style={{margin : "3em 1em"}}>{props.name}</Text>
               </Paper>
           </Chip>
         <Grid container style={{zIndex : "0"}} >
@@ -81,50 +81,64 @@ const WorkerDashboard = ( props ) => {
           
         
         <Grid item xs={6} sm={3} className={classes.grid}>
+        <Position position={'relative'} sm_margin={'0em'}
+          margin={'0em'}>    
           
           <Paper elevation={2} style={{backgroundColor : '#ffffff'}} className={classes.paper}>
-              
+          <Position position={'fixed'} sm_margin={'0em'}
+            style={{zIndex : '2'}}
+             margin={'0em'}>    
+        
                  <Paper className={classes.paper_head}
                  elevation={5}>
-                   <Text
-                   padding={'1em 0em'} size={'1.4em'} 
+                   <Text sm_padding = {'1.5em 0.5em'}
+                   padding={'2em 2em'} size={'1.4em'} 
+                   sm_size = {'0.85em'}
                    fontcolor = {"#ffffff"}
                    weight={'500'} spacing={'0.1em'}>Towny Dashboard</Text>
-                    <Text
-                    padding={'1em 0em'} size={'1em'} 
+                    <Text sm_padding = {'1.5em 0.5em'}
+                    padding={'2em 2em'} size={'1em'} 
+                    sm_size = {'0.85em'}
                     fontcolor = {"#ffffff"}
                     weight={'500'} spacing={'0.1em'}>Welcome {props.name}</Text>
                  </Paper>
                  {profileOptions.map((val,index) => <Paper className = {classes.paper_text} elevation={3} key={index}>
                  <Text  
                   className = {classes.text} 
-                  padding={'1em 0em'} size={'1em'} 
+                  padding={'1em 0em'} 
+                  sm_padding={'1em 0em'} 
+                  size={'1em'} 
+                  sm_size = {'0.85em'}
                   fontcolor = {"#33313b"}
                   weight={'350'} spacing={'0.1em'} 
                   cursor = {'pointer'}
                   onClick = {() =>  val==='Sign Out'?{}:setOption(val) }>{val}</Text> 
                   </Paper>)}  
-                                  
-
+           </Position>                       
           </Paper>
-
+          </Position>
+          
         </Grid>
 
         <Grid item xs={6} sm={9} className={classes.grid}>
+        <Position position={'relative'} sm_margin={'0em'}
+          margin={'0em'}>    
         
         <Paper elevation={2} className={classes.paper}>
-            { option === 'User Profile' && <Form part = 'Dashboard-User_Profile' /> }
+            { option === 'User Profile' && <List 
+            {...props}
+            part = {'dashboard-profile'}/>}
+        
+            { option === 'Account Settings' && <List 
+            {...props}
+            part = {'dashboard-settings'}/>}
+            {option ==='Check Your Tickets' && 'Check Your Tickets'} 
         
         </Paper>
-        
+        </Position>
         </Grid>
 
       </Grid>         
     </div>)
 }
 export default connect(mapStateToProps)(WorkerDashboard);
-
-
-
-               
-// {/* <div><img src={`${imageSelected}`}/></div> */}

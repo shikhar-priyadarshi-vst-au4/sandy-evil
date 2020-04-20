@@ -11,7 +11,7 @@ export const ProtectedRoute = ( { component : Component, ...rest } ) => {
                     return <Component {...rest} />
                 }
                 else{
-                    return <div>loading</div>
+                    return <div>loading....</div>
                     // return <Redirect to = {
                     //     {
                     //         pathname : '/',

@@ -10,12 +10,6 @@ import { ProtectedRoute }  from './ProtectedRoute';
 import { mapStateToProps } from './StateTransition';
 import { validateToken } from '../Actions/index' 
 
-// const App = (props) => {
-//   let {isAuthenticated} = props;
-//   useEffect(()=>{
-//     props.dispatch(validateToken());
-//   },[isAuthenticated]);    
-//   console.log(isAuthenticated);
   class App extends Component {
    
   componentDidMount(){
@@ -23,7 +17,6 @@ import { validateToken } from '../Actions/index'
   }  
   render(){
    let { isAuthenticated } = this.props;
-   console.log(isAuthenticated);
   
   return (
      <Switch>

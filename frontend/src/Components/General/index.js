@@ -5,7 +5,7 @@ import {Card} from './Card';
 import {List} from './List';
 import {Image} from './Image';
 import AlertDialog from './Dialog';
-import {AlertBox} from './Alert'
+import {AlertBox} from './Alert';
 export { KeyStroke,
             Form, 
             Input, 
@@ -13,4 +13,4 @@ export { KeyStroke,
             List, 
             Image,
             AlertDialog,
-            AlertBox };
+            AlertBox, };

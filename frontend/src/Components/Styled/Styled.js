@@ -50,8 +50,10 @@ export const Text = Styled.div`
  cursor : ${props => props.cursor || 'default'};
  padding : ${props => props.padding || '0em'};
  @media screen and (max-width : 768px){
-    font-size : ${props => props.size || '1em'};
-    font-weight : ${props => props.weight|| '500'};
+    font-size : ${props => props.sm_size || '1em'};
+    font-weight : ${props => props.sm_weight|| '500'};
+    padding : ${props => props.sm_padding || '0em'};
+    margin : ${props => props.sm_margin || '0em'};
 }`;        
 
 export const Flex = Styled.div`
@@ -87,6 +89,7 @@ margin : 0 8em 1em 0;
 }`;
 
 export const Anchor = Styled(Text)`
+cursor : pointer;
 &:hover{
     font-weight : 500;
 }`; 
@@ -115,7 +118,7 @@ margin : ${props => props.margin || '6em 4em'};
 }`;
 
 export const Chip = Styled(Position)`
-z-index : '1';
+z-index : 1;
 left : ${props => props.left || '0em'};
 top : ${props => props.top || '0em'};
 @media screen and (max-width : 768px){

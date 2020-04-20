@@ -4,7 +4,9 @@ import { makeStyles,
 import  Alert from '@material-ui/lab/Alert';         
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
-import { Card } from './index';
+import { Card, AlertBox} from './index';
+import { chunk } from 'lodash';
+import { Text, Position, Flex } from '../Styled/Styled'
 const useStyle = makeStyles((theme) => ({
     list : {
         display : 'flex',
@@ -39,14 +41,14 @@ const useStyle = makeStyles((theme) => ({
         border: '1px solid #ff1e56',
         borderRadius : '0.8em',
         color:'#ff1e56',
-    }
+    },
 }));         
 
 
 export const List = ({ search : { city , services} = '', 
-                       cancelCard, part, categories, qualities },...rest) => {
+                       cancelCard, part, categories, qualities, ...rest}) => {
     const classes = useStyle();
-    
+    let details = !!rest.data?chunk(Object.entries(rest.data),2):[];
     return ( <Fragment>
 
         { part === 'homepage-header' && (!!services.length? <div className = {classes.list}>
@@ -78,5 +80,37 @@ export const List = ({ search : { city , services} = '',
                                                 key={index}
                                                 part={'homepage-section_quality'}
                                                 {...data} />)} 
+        
+        { part === 'dashboard-profile' && 
+        <Fragment>
+                <Position margin={'6em 0em'}
+                sm_margin = {'8em 0em'}>
+            <Text>User Details</Text>
+            <hr/>
+            {details.map((val,index) => 
+             <Flex key={index}>
+             {val.map((item, id) => <Position key={id}
+             sm_margin = {'0em'}
+             margin={'1em 2em'}>
+            <Text  sm_margin = {'1em'}
+            sm_size = {'0.2em'}
+            size={'0.8em'}>{item[0].slice(0,1).toUpperCase().concat(item[0].slice(1))}</Text>
+             <Text sm_margin = {'1em'}  
+             sm_size = {'0.2em'}
+             size={'1.6em'}>{(['image','password','id'].includes(item[0]))?"********":item[1]}</Text>
+             </Position>
+             )}
+               </Flex>        
+            )}
+            </Position>
+             
+            </Fragment>
+        }
+        { part === 'dashboard-settings' && <Fragment>
+            <AlertBox part = 'dashboard-settings'/>
+            </Fragment>}
         </Fragment>)
 }
+
+
+
