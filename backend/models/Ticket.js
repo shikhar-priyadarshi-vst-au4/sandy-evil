@@ -1,7 +1,7 @@
 const sequelize = require('../db/index');
 const { Sequelize } = require('sequelize');
 
-const Booking = sequelize.define('Booking',{
+const Ticket = sequelize.define('Ticket',{
     profile_id: {
         type : Sequelize.UUID,
         allowNull : false
@@ -22,4 +22,4 @@ const Booking = sequelize.define('Booking',{
 }, { timestamps: false });
 
 
-module.exports = Booking;
+module.exports = Ticket;
