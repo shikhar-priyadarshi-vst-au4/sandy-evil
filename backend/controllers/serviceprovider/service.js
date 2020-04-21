@@ -1,5 +1,5 @@
 const Category = require('../../models/Category');
-
+const Service = require('../../models/Service');
 function serviceController() {
     this.inject = async ( req, res ) => {
         let {  category , services } = req.body;
@@ -30,7 +30,6 @@ function serviceController() {
     this.render = async( req, res ) => {
         let { category } = req.query;
         let data;
-        console.log(category);
         if(!!category){
             try{
                 switch (category.toUpperCase()) {
@@ -61,6 +60,34 @@ function serviceController() {
             })
         }
         
+    }
+    this.register = async (req, res) => {
+        let { profile_id, services } = req.body;
+        if(!!profile_id && !!services){
+           try{
+               let data = await Service.create({
+                  profile_id,
+                  services 
+               });
+               if(data){
+                res.json({
+                    data
+                 }) 
+               }
+           }
+           catch(error){
+               res.json({
+                   error
+               })
+           }     
+        }
+        else{
+            res.json({
+                status : false,
+                msg : "No data"
+            })
+        }
+
     }
 }
 

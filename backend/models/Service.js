@@ -11,12 +11,8 @@ const Service = sequelize.define('Service',{
         type : Sequelize.UUID,
         allowNull : false
     },
-    service_name : {
-        type : Sequelize.STRING,
-        allowNull : false
-    },
-    service_charge : {
-        type : Sequelize.DOUBLE,
+    services : {
+        type : Sequelize.ARRAY(Sequelize.JSON),
         allowNull : false
     }
 }, { timestamps: false });
