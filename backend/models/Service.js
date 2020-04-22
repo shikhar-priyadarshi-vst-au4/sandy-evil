@@ -11,8 +11,8 @@ const Service = sequelize.define('Service',{
         type : Sequelize.UUID,
         allowNull : false
     },
-    services : {
-        type : Sequelize.ARRAY(Sequelize.JSON),
+    category_id : {
+        type : Sequelize.UUID,
         allowNull : false
     }
 }, { timestamps: false });

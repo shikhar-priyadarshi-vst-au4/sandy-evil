@@ -1,5 +1,10 @@
+const async = require('async');
 const Category = require('../../models/Category');
 const Service = require('../../models/Service');
+
+Service.belongsTo(Category,{foreignKey : 'category_id'});
+
+
 function serviceController() {
     this.inject = async ( req, res ) => {
         let {  category , services } = req.body;
@@ -62,24 +67,25 @@ function serviceController() {
         
     }
     this.register = async (req, res) => {
-        let { profile_id, services } = req.body;
-        if(!!profile_id && !!services){
-           try{
-               let data = await Service.create({
-                  profile_id,
-                  services 
-               });
-               if(data){
-                res.json({
-                    data
-                 }) 
-               }
-           }
-           catch(error){
-               res.json({
-                   error
-               })
-           }     
+        let { profile_id, category_id } = req.body;
+        if(!!profile_id && !!category_id){
+            try{
+          
+                let data = await Service.create({
+                    profile_id,
+                    category_id
+                });
+                  if(data){
+                      res.status(200).json({
+                          data
+                      })
+                  }
+               }catch(error){
+                   res.status(500).json({
+                       error
+                   })
+               }        
+              
         }
         else{
             res.json({
@@ -89,37 +95,20 @@ function serviceController() {
         }
 
     }
+    this.retrieve = async (req, res) => {
+        let { profile_id } = req.body;
+        if(!!profile_id){
+            let data = await Service.findOne( { where : { profile_id }, include : [{
+                model : Category
+            }] } )
+            res.json({data});
+        }else{
+            res.json({
+                status : false,
+                msg : "No data"
+            })
+        }
+    }
 }
 
 module.exports =  new serviceController();
-
-// let { id: profile_id , 
-//     name : service_name , 
-//     charge : service_charge } = req.body;
-//     if( !!profile_id && 
-//         !!service_name && !!service_charge ){
-//        try{
-          
-//         let data = await Service.create({ 
-//                         profile_id,
-//                         service_name, 
-//                         service_charge});
-//           if(data){
-//               res.status(200).json({
-//                 data     
-//               });
-//           }
-//        }catch(error){
-//            res.status(500).json({
-//                error
-//            })
-//        }
-//         }
-//     else{
-//         res.status(400).json({
-//             status : false,
-//             msg : "Validation Error! Some data is empty"
-//         })
-//     }         
-// }
-// }
