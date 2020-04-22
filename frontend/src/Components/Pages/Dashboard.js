@@ -6,7 +6,7 @@ import { mapStateToProps } from '../StateTransition';
 import {  Text, Chip, Position } from '../Styled/Styled'
 import { Image, List } from '../General/index'
 import { profileOptions } from '../Data/data'
-import { imageUpdate, extractUser } from '../../Actions/worker'
+import { imageUpdate, extractUser, retrieveServices, categoryId } from '../../Actions/worker'
 const useStyles = makeStyles((theme) => ({
     root: {
       flexGrow : 1
@@ -46,10 +46,21 @@ const WorkerDashboard = ( props ) => {
     const [ option, setOption ] = useState('User Profile');
     const classes = useStyles();
     //CDM
-    useEffect(( ) => {
-      props.dispatch(extractUser(props.data))
-     },[props.image]);
+    useEffect(()=>{
+      props.dispatch(retrieveServices());
+    },[])
     
+    //CDU
+    useEffect(( ) => {
+      props.dispatch(extractUser(props.data));
+    //  props.dispatch(categoryId(props.data.specialisation));
+     },[props.image]);
+     useEffect(()=>{
+       if(props.services.length>0){
+         console.log(props.services);
+        props.dispatch(categoryId(props.data.specialisation));
+       }
+     },[props.services])
      const imageHandler = ( event ) => {
       let file = event.target.files[0];
       console.log(file);
@@ -125,6 +136,7 @@ const WorkerDashboard = ( props ) => {
           margin={'0em'}>    
         
         <Paper elevation={2} className={classes.paper}>
+           
             { option === 'User Profile' && <List 
             {...props}
             part = {'dashboard-profile'}/>}
@@ -132,6 +144,7 @@ const WorkerDashboard = ( props ) => {
             { option === 'Account Settings' && <List 
             {...props}
             part = {'dashboard-settings'}/>}
+            
             {option ==='Check Your Tickets' && 'Check Your Tickets'} 
         
         </Paper>

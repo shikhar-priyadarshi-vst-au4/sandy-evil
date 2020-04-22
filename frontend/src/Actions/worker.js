@@ -3,6 +3,9 @@ import {noToken, logout} from './index'
 const IMAGE_UPDATE = 'IMAGE_UPDATE';
 const IMAGE_ERROR = 'IMAGE_ERROR';
 const FETCH_USER = 'FETCH_USER';
+const ALLSERVICES = 'ALLSERVICES';
+const FILTERSERVICE = 'FILTERSERVICE';
+const SERVICEID = 'SERVICEID';
 const UPDATE_DETAILS = 'UPDATE_DETAILS';
 
 export const imageUpdate = ( file ) => {
@@ -38,6 +41,7 @@ export const imageUpdate = ( file ) => {
    }
 export const extractUser = ( user ) => {
     if(user){
+        //filterFromServices(user.id, user.specialisation);
         return ({ 
             type : FETCH_USER,
             payload : user
@@ -45,9 +49,49 @@ export const extractUser = ( user ) => {
     }
     return (logout());
 }
+export const retrieveServices = (  ) => {
+   return async dispatch => {
+      
+      try{
+         let services = await (await fetch(`http://${HOST}:${PORT}${links[4].render}all`,{
+             method : 'GET',
+             headers : {
+                 "Content-Type" : "application/json"
+             }
+         })).json();
+         if(services){
+            return dispatch({
+                type : ALLSERVICES,
+                payload : services.data
+            })
+           
+         }
+       }
+       catch(error){
+              return dispatch({
+                  type : 'ERROR'
+              })
+       }
+   }
+}
+export const categoryId = (work) => {
+    return ({
+        type : SERVICEID,
+        payload : work.slice(0,1).toUpperCase().concat(work.slice(1))
+    })
+}
+// export const filterFromServices = ( id, work) => {
+//         return async dispatch => {
+//             try{
+//                 let {profile_id} = await (await fetch(`http://${HOST}:${PORT}${link[]}`)).json();
+//             }catch(error){
+
+//             }
+//         }
+// }
 export const updateUser = ( data, property ) => {
     //update user creditenials
     console.log('Update');
 }    
-export { IMAGE_UPDATE, FETCH_USER, UPDATE_DETAILS };
+export { IMAGE_UPDATE, FETCH_USER, ALLSERVICES, FILTERSERVICE, SERVICEID, UPDATE_DETAILS };
 

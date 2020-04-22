@@ -3,6 +3,9 @@ export const PORT = process.env.REACT_APP_API_PORT;
 export const links = [
     { register : "/worker/register" },
     { login : "/worker/login" },
-    { upload:"/worker/upload/?jwt=" },
-    { tokenAuth : "/worker/auth/?jwt="}
+    { upload:"/worker/upload?jwt=" },
+    { tokenAuth : "/worker/auth?jwt="},
+    { render : "/services/render?category="},
+    { register : "/services/register?jwt="},
+    { retrieve : "/services/retrieve?jwt="}
 ]

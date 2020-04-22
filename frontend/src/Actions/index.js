@@ -44,6 +44,7 @@ export const register = ({ name, email,
                 })).json();
                 if(!error){
                     if(status){
+                        
                         return dispatch({
                             type : CREATE_ACCOUNT,
                             payload : message

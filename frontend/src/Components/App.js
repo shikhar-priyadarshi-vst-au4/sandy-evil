@@ -8,13 +8,19 @@ import { connect } from 'react-redux'
 import 'typeface-roboto';
 import { ProtectedRoute }  from './ProtectedRoute';
 import { mapStateToProps } from './StateTransition';
-import { validateToken } from '../Actions/index' 
+import { validateToken } from '../Actions/index';
+import { retrieveServices } from '../Actions/worker'; 
 
   class App extends Component {
    
   componentDidMount(){
     this.props.dispatch(validateToken());
-  }  
+  } 
+  componentDidUpdate(prevProp){
+    if(prevProp.services.length !== this.props.services.length){
+      this.props.dispatch(retrieveServices());
+    }
+  } 
   render(){
    let { isAuthenticated } = this.props;
   
