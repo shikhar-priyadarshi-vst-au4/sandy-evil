@@ -6,7 +6,8 @@ import { mapStateToProps } from '../StateTransition';
 import {  Text, Chip, Position } from '../Styled/Styled'
 import { Image, List } from '../General/index'
 import { profileOptions } from '../Data/data'
-import { imageUpdate, extractUser, retrieveServices, categoryId } from '../../Actions/worker'
+import { imageUpdate, extractUser, 
+  retrieveServices, registerServices, categoryId } from '../../Actions/worker'
 const useStyles = makeStyles((theme) => ({
     root: {
       flexGrow : 1
@@ -14,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
     paper: {
       padding: theme.spacing(1),
       color: theme.palette.text.secondary,
-      height : "1000px",
+      height : "2000px",
     },
     grid : {
     },
@@ -53,14 +54,18 @@ const WorkerDashboard = ( props ) => {
     //CDU
     useEffect(( ) => {
       props.dispatch(extractUser(props.data));
-    //  props.dispatch(categoryId(props.data.specialisation));
      },[props.image]);
      useEffect(()=>{
        if(props.services.length>0){
          console.log(props.services);
         props.dispatch(categoryId(props.data.specialisation));
        }
-     },[props.services])
+       if(!!props.category_id){
+         console.log(props.category_id); 
+        props.dispatch(registerServices({profile_id : props.id,
+        category_id : props.category_id}));
+       }
+     },[props.services, props.category_id])
      const imageHandler = ( event ) => {
       let file = event.target.files[0];
       console.log(file);
@@ -145,7 +150,8 @@ const WorkerDashboard = ( props ) => {
             {...props}
             part = {'dashboard-settings'}/>}
             
-            {option ==='Check Your Tickets' && 'Check Your Tickets'} 
+            {option ==='Check Your Tickets' && 'Check Your Tickets'}
+            {option === 'Service Categories' && <List {...props} part = {'dashboard-categories'}/>} 
         
         </Paper>
         </Position>

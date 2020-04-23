@@ -30,6 +30,7 @@ export const register = ({ name, email,
       }
       else {
          return async dispatch => {
+             
              try{
                 let { message, status, error } = await (await fetch(`http://${HOST}:${PORT}${links[0].register}`,{
                     method : 'POST',

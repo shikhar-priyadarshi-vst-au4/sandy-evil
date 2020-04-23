@@ -15,12 +15,8 @@ import { retrieveServices } from '../Actions/worker';
    
   componentDidMount(){
     this.props.dispatch(validateToken());
-  } 
-  componentDidUpdate(prevProp){
-    if(prevProp.services.length !== this.props.services.length){
-      this.props.dispatch(retrieveServices());
-    }
-  } 
+    this.props.dispatch(retrieveServices());
+  }  
   render(){
    let { isAuthenticated } = this.props;
   

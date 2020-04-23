@@ -1,4 +1,4 @@
-import {ALLSERVICES, SERVICEID} from "../Actions/worker"
+import {ALLSERVICES, SERVICEID, FILTERSERVICE} from "../Actions/worker"
 let categoryState = {
     services : [],
     filtered : [],
@@ -19,7 +19,11 @@ export const ServiceReducer = ( state = categoryState, { type, payload}) => {
              let data = stateCopy.services.find((val) => val.category === payload);
              console.log(data);
              stateCopy.category_id = data.id;
-             return stateCopy;       
+             return stateCopy;
+        case FILTERSERVICE :
+             stateCopy.filtered = [...payload?.Category?.services];
+             console.log(stateCopy.filtered);
+             return stateCopy;            
         default :
              return stateCopy;     
     }

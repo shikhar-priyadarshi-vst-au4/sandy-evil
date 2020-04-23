@@ -41,7 +41,6 @@ export const imageUpdate = ( file ) => {
    }
 export const extractUser = ( user ) => {
     if(user){
-        //filterFromServices(user.id, user.specialisation);
         return ({ 
             type : FETCH_USER,
             payload : user
@@ -80,15 +79,41 @@ export const categoryId = (work) => {
         payload : work.slice(0,1).toUpperCase().concat(work.slice(1))
     })
 }
-// export const filterFromServices = ( id, work) => {
-//         return async dispatch => {
-//             try{
-//                 let {profile_id} = await (await fetch(`http://${HOST}:${PORT}${link[]}`)).json();
-//             }catch(error){
+export const registerServices = ( data ) => {
+       let {profile_id, category_id} = data;
+       console.log(profile_id, category_id);
+       if(!!profile_id && !!category_id){
+           
+        return async dispatch => {
+            try{
+                let getToken = localStorage.getItem('access-token');
+                if(getToken){
+                    let result = await (await 
+                        fetch(`http://${HOST}:${PORT}${links[5].register}${getToken}`,{
+                            method : "POST",
+                            headers : {
+                                'Content-Type' : 'application/json'
+                            },
+                            body : JSON.stringify(data)
+                        })).json();
+                        
+                   return dispatch({
+                       type : FILTERSERVICE,
+                       payload : result.data[0]
+                   });        
+                }
+                return dispatch(noToken());
+            }catch(error){
+                return dispatch({
+                    type : 'ERROR'
+                })
+            }
+        }
+    }    
+}
+export const filterService = ( id ) => {
 
-//             }
-//         }
-// }
+}
 export const updateUser = ( data, property ) => {
     //update user creditenials
     console.log('Update');

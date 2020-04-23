@@ -71,9 +71,12 @@ function serviceController() {
         if(!!profile_id && !!category_id){
             try{
           
-                let data = await Service.create({
-                    profile_id,
-                    category_id
+                let data = await Service.findOrCreate({
+                   where:{ profile_id,
+                    category_id},
+                    include : [{
+                        model : Category
+                    }]
                 });
                   if(data){
                       res.status(200).json({
@@ -95,20 +98,7 @@ function serviceController() {
         }
 
     }
-    this.retrieve = async (req, res) => {
-        let { profile_id } = req.body;
-        if(!!profile_id){
-            let data = await Service.findOne( { where : { profile_id }, include : [{
-                model : Category
-            }] } )
-            res.json({data});
-        }else{
-            res.json({
-                status : false,
-                msg : "No data"
-            })
-        }
-    }
+    
 }
 
 module.exports =  new serviceController();

@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { makeStyles,
-         Paper } from '@material-ui/core';
+         Paper, Grid } from '@material-ui/core';
 import  Alert from '@material-ui/lab/Alert';         
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
@@ -42,6 +42,17 @@ const useStyle = makeStyles((theme) => ({
         borderRadius : '0.8em',
         color:'#ff1e56',
     },
+    container : {
+        margin : "8em 0em"
+    },
+    item : {
+        padding : theme.spacing(1),
+        margin  : theme.spacing(3)
+    },
+    paper : {
+        padding : '1em 1em',
+        backgroundColor : '#606470',
+    }
 }));         
 
 
@@ -109,6 +120,43 @@ export const List = ({ search : { city , services} = '',
         { part === 'dashboard-settings' && <Fragment>
             <AlertBox part = 'dashboard-settings'/>
             </Fragment>}
+        { part === 'dashboard-categories' && <Grid container 
+         className={classes.container}>
+             <Grid item xs={12}>
+             <Text size={'1em'}>Services as per profile</Text>
+             <hr/>
+             </Grid>
+             
+             {rest?.filtered?.map((value, index) => {
+                 return(<Grid item xs={12} sm={3} key={index} className = {classes.item}>
+                     <Paper variant="outlined" className={classes.paper}>
+                        <Text sm_margin = {'1em'}  
+                            sm_size = {'0.2em'}
+                            style={{margin : "0.5em 0em"}}
+                            fontcolor = {'#ffffff'}
+                            size={'1.2em'}>{`Service ${index+1}`}</Text>
+                        <Text sm_margin = {'1em'}  
+                            style={{margin : "0.3em 0em"}}
+                            sm_size = {'0.2em'}
+                            fontcolor = {'#ffffff'}
+                            size={'0.8em'}>{value.service}</Text>
+                        <Text sm_margin = {'1em'}
+                            style={{margin : "0.1em 0em"}}
+                            sm_size = {'0.2em'}
+                            fontcolor = {'#ffffff'}
+                            size={'0.5em'}> &#8377;{value.price}(Base Price)</Text>
+                        <div>
+                                <Text sm_size = {'0.2em'} size={'0.5em'}
+                            fontcolor={'#facf5a'} style={{margin : "1em 0em"}}>*Additional charges as per company norms</Text>
+                                <Text sm_size = {'0.2em'} size={'0.5em'}
+                            fontcolor={'#facf5a'} style={{margin : "1em 0em"}}>*Client statisfication is higher priority</Text>
+                                <Text sm_size = {'0.2em'} size={'0.5em'}
+                            fontcolor={'#facf5a'} style={{margin : "1em 0em"}}>*Incase of emergency, contact area captian</Text>
+                            </div>
+                     </Paper>
+                 </Grid>)
+             })}
+            </Grid>}    
         </Fragment>)
 }
 

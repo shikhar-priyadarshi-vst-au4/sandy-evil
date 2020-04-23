@@ -12,6 +12,7 @@ const Worker = require('../../models/Worker');
 function controller (){
     
     this.register = ( req, res ) => {
+        req.provider = "Worker";
         passport.authenticate('register', { session : false }, async ( err, user, message ) => {
             
             if(err){
