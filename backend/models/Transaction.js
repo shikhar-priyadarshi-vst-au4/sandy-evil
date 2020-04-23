@@ -2,7 +2,7 @@ const sequelize = require('../db/index');
 const { Sequelize } = require('sequelize');
 
 const Transaction = sequelize.define('Transaction',{
-    assignment_id : {
+    ticket_id : {
         type : Sequelize.UUID,
         allowNull : false
     },

@@ -26,6 +26,7 @@ function controller (){
         })( req, res )
     } 
     this.login = ( req , res ) => {
+        req.provider = "Worker";
         passport.authenticate('login', { session : false }, async ( err, user, message ) => {
           if(err){
               res.status(500).json({ error : true, user, token:"", message });
@@ -44,6 +45,7 @@ function controller (){
     } 
 
     this.isAuthorised = ( req, res, next ) => {
+        req.provider = "Worker";
         passport.authenticate('jwt',{session : false}, ( err, user, message ) => {
             if(err){
                 res.status(500).json({ error : err.errors[0].message });

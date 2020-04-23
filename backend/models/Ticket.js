@@ -10,8 +10,8 @@ const Ticket = sequelize.define('Ticket',{
         type : Sequelize.UUID,
         allowNull : false
     },
-    slot_assigned: {
-        type : Sequelize.INTEGER,
+    service: {
+        type : Sequelize.ARRAY(Sequelize.STRING),
         allowNull : false
         },
     status : {

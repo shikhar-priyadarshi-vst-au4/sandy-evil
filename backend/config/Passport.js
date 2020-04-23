@@ -38,8 +38,9 @@ passport.use('login', new LocalStrategy(
         passReqToCallback: true
     },
    async ( req, email, password, done) => {
+        let provider = req.provider;
         try{
-        let userFound = await Worker.findOne({where : {email, password}});      
+        let userFound = await ( provider === 'Worker'? Worker : Customer ).findOne({where : {email, password}});      
           if(userFound){
             return done(null, userFound, 'Logged in successfully');
            }
