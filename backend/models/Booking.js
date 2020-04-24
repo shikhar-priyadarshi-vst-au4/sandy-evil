@@ -24,7 +24,7 @@ const Booking = sequelize.define('Booking',{
       allowNull : false
   },
   balance : {
-      type : Sequelize.FLOAT,
+      type : Sequelize.DOUBLE,
       allowNull : false
   }
 })
