@@ -13,6 +13,10 @@ const Booking = sequelize.define('Booking',{
   },
   worker_id : {
       type : Sequelize.UUID,
+      allowNull : true
+  },
+  service_id : {
+      type : Sequelize.UUID,
       allowNull : false
   },
   services : {
@@ -20,12 +24,12 @@ const Booking = sequelize.define('Booking',{
       allowNull : false
   },
   status : {
-      type : Sequelize.ENUM(['Accept, Decline, Pending']),
+      type : Sequelize.ENUM(['Accept, Decline, Pending, Complete']),
       allowNull : false
   },
   balance : {
       type : Sequelize.DOUBLE,
-      allowNull : false
+      allowNull : true
   }
 })
 
