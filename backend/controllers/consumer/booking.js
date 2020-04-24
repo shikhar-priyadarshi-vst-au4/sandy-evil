@@ -64,6 +64,25 @@ function controller(){
         })
       }
   }
+  this.assign = async( req, res ) => {
+      let { bookingId : id , worker_id } = req.params;
+      if( !!id && !!worker_id){
+            try{
+            let data = Booking.update({worker_id,
+            status : 'Accept' },{where : {id}, 
+            returning: true});
+            if(!!data){
+                res.json({
+                    status : true,
+                    data
+                })
+            }
+        }
+        catch(error){
+            res.json({status : false, error})
+        }
+      } 
+  }
   // to cancel the booking
   this.cancel = async( req, res ) => {
       let { bookingId : id } = req.params;
