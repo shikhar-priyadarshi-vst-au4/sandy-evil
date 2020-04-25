@@ -3,7 +3,7 @@ import Styled from 'styled-components';
 import {Link} from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
-
+import { Logo } from './logo'
 const Nav = Styled.nav`
 position : relative;
 top : 2em;
@@ -49,7 +49,7 @@ display : flex;
 
 const List = Styled.div`
 text-decoration : none;
-margin : 1em 0.5em;
+margin : 1.2em 0.5em;
 letter-spacing : 0.1em;
 color : #4a4a48;
 font-size : 0.8em;
@@ -66,12 +66,18 @@ cursor : pointer;
 }`;
 
 const Bar = Styled.div`
+margin : 1em 0em 1em 2em;
 @media screen and (min-width : 1025px){
     display : none;
-}
+}`;
+const BrandName = Styled.div`
+display : flex;
+cursor : pointer;
 `;
-const Image = Styled.img`
-width : 80px;`;
+const Name = Styled.div`
+margin : 0.2em;
+font-size : 2em;    
+`;
 export const Navbar = ( props ) => {
     const [ toggle, setToggle ] = useState(false);
     
@@ -85,7 +91,10 @@ export const Navbar = ( props ) => {
         <Nav>
          <NavElem>
          <Brand>
-         <Image src={'images/towny_logo.png'}  alt="loading..."/>
+         <BrandName>
+         <Logo/>
+         <Name>Towny</Name>
+         </BrandName>
          <Bar onClick = {() => toggleClick()}>
              <FontAwesomeIcon icon = {faBars} size={'2x'}/>
          </Bar>
