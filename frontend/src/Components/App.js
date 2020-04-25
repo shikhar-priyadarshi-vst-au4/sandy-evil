@@ -1,16 +1,12 @@
-import React, { 
-  //useEffect, 
-  Component, } from 'react';
-import {  Switch, 
-          Route } from 'react-router-dom';
-import { Main, Career, WorkerDashboard } from './Pages/index';
+import React, { Component } from 'react';
+import {  Switch, Route } from 'react-router-dom';
+import { Main, Career, WorkerDashboard, Account, Booking } from './Pages/index';
 import { connect } from 'react-redux'
-import 'typeface-roboto';
 import { ProtectedRoute }  from './ProtectedRoute';
 import { mapStateToProps } from './StateTransition';
 import { validateToken } from '../Actions/index';
 import { retrieveServices } from '../Actions/worker'; 
-import Account from './Pages/Account';
+import 'typeface-roboto';
 
   class App extends Component {
    
@@ -27,6 +23,7 @@ import Account from './Pages/Account';
        <Route path = {'/careers'} component = {Career} />
        <Route path = {'/login'}  render={(props)=><Account part={'login'} {...props}/>}/> 
        <Route path = {'/signup'}  render={(props)=><Account part={'signup'} {...props}/>}/> 
+       <Route path = {'/booking'} component = {Booking}/>
        <ProtectedRoute path = {'/dashboard'}
                        isAuthenticated = {isAuthenticated} 
                        component = {WorkerDashboard} />   
@@ -40,3 +37,4 @@ import Account from './Pages/Account';
 export default connect(mapStateToProps)(App);
        
 
+// /booking/:customer_id/:service_id

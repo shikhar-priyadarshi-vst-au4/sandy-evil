@@ -25,7 +25,7 @@ import { mapStateToProps } from '../StateTransition';
                  <Text size={'1.4em'}>What We Offers!</Text>
                  <Flex>
                     <List part = "homepage-section" 
-                    categories={categories} />
+                    categories = {props.services} />
                  </Flex>
              </Section>
              <Section>

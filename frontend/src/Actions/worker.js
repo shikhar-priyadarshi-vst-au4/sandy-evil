@@ -1,4 +1,4 @@
-import {HOST, PORT, links} from './links';
+import {HOST, PORT, worker_links} from './links';
 import {noToken, logout} from './index'
 const IMAGE_UPDATE = 'IMAGE_UPDATE';
 const IMAGE_ERROR = 'IMAGE_ERROR';
@@ -20,7 +20,7 @@ export const imageUpdate = ( file ) => {
                         body : formData
                     };
                 try{
-                    let data = await (await fetch(`http://${HOST}:${PORT}${links.upload}${getToken}`, 
+                    let data = await (await fetch(`http://${HOST}:${PORT}${worker_links[2].upload}${getToken}`, 
                     option)).json();
                     console.log(data);
                     return ({
@@ -52,7 +52,7 @@ export const retrieveServices = (  ) => {
    return async dispatch => {
       
       try{
-         let services = await (await fetch(`http://${HOST}:${PORT}${links[4].render}all`,{
+         let services = await (await fetch(`http://${HOST}:${PORT}${worker_links[4].render}all`,{
              method : 'GET',
              headers : {
                  "Content-Type" : "application/json"
@@ -89,7 +89,7 @@ export const registerServices = ( data ) => {
                 let getToken = localStorage.getItem('access-token');
                 if(getToken){
                     let result = await (await 
-                        fetch(`http://${HOST}:${PORT}${links[5].register}${getToken}`,{
+                        fetch(`http://${HOST}:${PORT}${worker_links[5].register}${getToken}`,{
                             method : "POST",
                             headers : {
                                 'Content-Type' : 'application/json'
@@ -110,9 +110,6 @@ export const registerServices = ( data ) => {
             }
         }
     }    
-}
-export const filterService = ( id ) => {
-
 }
 export const updateUser = ( data, property ) => {
     //update user creditenials

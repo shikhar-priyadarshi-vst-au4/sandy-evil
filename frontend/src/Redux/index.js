@@ -13,3 +13,14 @@ export const rootReducer = combineReducers({
             TicketReducer,
             HistoryReducer
 });
+
+//Worker
+//Account Reducer - track of login/ signup 
+//Profile Reducer - track of worker dashboard(Worker Info)
+//Service Reducer - track of services assigned to worker
+//Ticket Reducer - keep the track of ticket accepted / declined
+//History Reducer - Worker activities
+
+//Customer 
+//Customer Profile Reducer
+//Booking Reducer

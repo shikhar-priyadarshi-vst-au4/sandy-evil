@@ -1,13 +1,15 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import { makeStyles,
          Paper} from '@material-ui/core';
 import { Text, CardImage, Flex } from '../Styled/Styled'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Link } from 'react-router-dom';
 const useStyle = makeStyles((theme) => ({
     card : {
         margin : theme.spacing(2),
         padding : theme.spacing(0),
         borderRadius : '0.5em',
+        cursor : 'pointer',
     }
 }))
 
@@ -16,13 +18,20 @@ const useStyle = makeStyles((theme) => ({
 export const Card = (props) => {
     
     const classes = useStyle();
-    const { name, part, title, body, icon } = props;
+    let [elevation, setElevation] = useState(1);
+    const { name, service_id, part, title, body, icon } = props;
+    console.log(props);
     return(
         <Fragment>
-        { part === 'homepage-section' && <Paper elevation={1} className={classes.card}>
-              <CardImage src={`images/${name}.jpg`} />
-              <Text size={'1em'} sm_size={'1em'} weight={'400'} fontcolor={'#63686e'} padding={'0.8em'} sm_padding={'0.8em'}>{name}</Text>
-              </Paper>   }
+        { part === 'homepage-section' && name && <Link to = {`/booking/${service_id}`} style={{textDecoration : "none"}}><Paper 
+        elevation={elevation} onMouseOver={()=>setElevation(8)} 
+        onMouseOut={()=>setElevation(1)}
+        className={classes.card}>
+              <CardImage src={`images/${name.concat(name==='Salon'?"":"s")}.jpg`} />
+              <Text size={'1em'} sm_size={'1em'} weight={'400'} 
+              cursor = {'pointer'}
+              fontcolor={'#63686e'} padding={'0.8em'} sm_padding={'0.8em'}>{name}</Text>
+              </Paper></Link>   }
 
         { part === 'homepage-section_quality' && <Paper variant="outlined"
           className={classes.card}>

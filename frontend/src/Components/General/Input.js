@@ -164,7 +164,7 @@ export const Input = ( { city, service,
         name={field[0]}
         value = {field[1]}
         type={(field[0] === 'Password')?field[0].toLowerCase():""}
-        //onChange = {(e) => ChangeHandler(e, setCreateProfile, createProfile)}
+        onChange = {(e) => ChangeHandler(e, setLoginFields, loginFields)}
         fullWidth/>)}</Flex>            
             </Fragment>}
         </Fragment>

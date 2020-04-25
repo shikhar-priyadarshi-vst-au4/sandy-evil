@@ -60,6 +60,17 @@ const Form = ( props ) => {
         Password : ""  
     })    
 
+    const [ customerProfile, setCustomerProfile ] = useState({
+        Fullname : "", Email:"", 
+        Password: "", Number: "", 
+        Area : ""
+    })
+
+    const [ customerLogin, setCustomerLogin ] = useState({
+        Email : "",
+        Password : ""  
+    })
+
     const handleChange = (event, cb) => {
          cb(event.target.value);
     }
@@ -139,15 +150,15 @@ const Form = ( props ) => {
             />
             </form>}
          {props.part === 'signup' && <form className = {classes.career}>
-             <Input part={'signup'} createProfile={createProfile} 
-             setCreateProfile={setCreateProfile}/>
+             <Input part={'signup'} createProfile={customerProfile} 
+             setCreateProfile={setCustomerProfile}/>
              <Typography  variant="caption" display="block" style={{margin:"1em 1.4em"}} 
              gutterBottom>On click of create account, I agreed to all term & conditions.</Typography>
              <KeyStroke part = {'signup'}/>
              </form>}             
          {props.part === 'login' && <form className = {classes.career}>
-             <Input part={'login'} loginFields={loginFields}
-             setLoginFields={setLoginFields}
+             <Input part={'login'} loginFields={customerLogin}
+             setLoginFields={setCustomerLogin}
              />
              <Flex margin={'0em'} sm_margin={'0em'}>
              <Typography  variant="caption" display="block" style={{margin:"1em 1.4em"}} 

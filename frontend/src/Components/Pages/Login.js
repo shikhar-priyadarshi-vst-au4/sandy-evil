@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
-import {Grid, Paper} from '@material-ui/core';
-import {Image, Form} from '../General/index'
-import {connect} from 'react-redux';
+import { Grid } from '@material-ui/core';
+import { Image, Form } from '../General/index'
+import { connect } from 'react-redux';
 const Login = (props) => {
     return (
         <Fragment>

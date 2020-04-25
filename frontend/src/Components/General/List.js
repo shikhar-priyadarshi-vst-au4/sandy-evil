@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { Card, AlertBox} from './index';
 import { chunk } from 'lodash';
+import { Link } from 'react-router-dom';
 import { Text, Position, Flex } from '../Styled/Styled'
 const useStyle = makeStyles((theme) => ({
     list : {
@@ -60,6 +61,7 @@ export const List = ({ search : { city , services} = '',
                        cancelCard, part, categories, qualities, ...rest}) => {
     const classes = useStyle();
     let details = !!rest.data?chunk(Object.entries(rest.data),2):[];
+    console.log(categories);
     return ( <Fragment>
 
         { part === 'homepage-header' && (!!services.length? <div className = {classes.list}>
@@ -85,7 +87,8 @@ export const List = ({ search : { city , services} = '',
         </div>: <Alert severity="info"  onClose={() => {cancelCard( )}}>Service is not available!</Alert>)}
         
         { part === 'homepage-section' && (!!categories.length? <Fragment>
-            {categories.map(({name},index) => <Card name={name} key={index} part = {'homepage-section'} />)}
+            {categories.map(({id,category}) => <Card name={category} service_id = {id}
+            key={id} part = {'homepage-section'} />)}
         </Fragment>:"")}
         { part === 'homepage-section_quality' && qualities.map((data, index) =><Card 
                                                 key={index}
