@@ -5,7 +5,8 @@ Feedback.belongsTo(Worker,{foreignKey : 'profile_id'});
 
 function controller() {
    this.feedback = async ( req, res) => {
-       let { profile_id, feedback, rating } = req.body;
+     let {profile_id} = req.params;  
+     let { feedback, rating } = req.body;
        try{
         if(!!profile_id && !!feedback && !!rating){
             let data = await Feedback.findOrCreate({
@@ -20,6 +21,12 @@ function controller() {
                     data
                 })
             }
+        }
+        else{
+            res.json({
+                status : false,
+                message : 'Incomplete data'
+            })
         }
     }
     catch(error){

@@ -2,6 +2,11 @@ const sequelize = require('../db/index');
 const { Sequelize } = require('sequelize');
 
 const Ticket = sequelize.define('Ticket',{
+    id : {
+        type : Sequelize.UUID,
+        defaultValue : Sequelize.UUIDV1,
+        primaryKey : true
+    },
     profile_id: {
         type : Sequelize.UUID,
         allowNull : false
@@ -10,16 +15,20 @@ const Ticket = sequelize.define('Ticket',{
         type : Sequelize.UUID,
         allowNull : false
     },
-    service: {
+    booking_id :{
+        type : Sequelize.UUID,
+        allowNull : false
+    },
+    services: {
         type : Sequelize.ARRAY(Sequelize.STRING),
         allowNull : false
         },
-    status : {
+    action : {
         type : Sequelize.ENUM,
-        values: ['Active', 'Completed'],
+        values: ['Accept', 'Decline', 'Pending', 'Completed'],
         defaultValue : 'Active'
     }
-}, { timestamps: false });
+});
 
 
 module.exports = Ticket;
