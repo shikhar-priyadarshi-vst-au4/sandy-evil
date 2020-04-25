@@ -14,11 +14,11 @@ export const mainBar = [
     },
     {
         navLinkName : "Login",
-        path : '/customer/login'
+        path : '/login'
     },
     {
         navLinkName : "Create Account",
-        path : '/customer/create'
+        path : '/signup'
     }
 ];
 //value to be retrieve from server (optional)

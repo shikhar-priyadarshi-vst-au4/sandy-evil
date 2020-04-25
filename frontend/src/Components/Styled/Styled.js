@@ -61,9 +61,9 @@ display : ${props => props.display||'flex'};
 flex-wrap : ${props => props.wrap||'wrap'};
 justify-content : ${props => props.justifyContent||'none'};
 align-items : ${props => props.alignItems||'none'};
-margin : 1em 1em;
+margin : ${props => props.margin ||'1em 1em'};
 @media screen and (max-width:768px){
-margin : 1em;
+margin : ${props => props.sm_margin || '1em'};
 flex-wrap : ${props => props.sm_wrap||'wrap'};
 }`;
 
@@ -125,7 +125,14 @@ top : ${props => props.top || '0em'};
     left : ${props => props.sm_left || '0em'};
     top : ${props => props.sm_top || '0em'};
     
-}
-`;
+}`;
 
+export const CustomPosition = Styled(Position)`
+z-index : ${props => props.index || '0'};
+top : ${props => props.top || '0em'};
+left : ${props => props.left || '0em'};
+@media screen and (max-width : 768px){
+    top : ${props => props.sm_top || '0em'};
+    left : ${props => props.sm_left || '0em'};
+}`;
 

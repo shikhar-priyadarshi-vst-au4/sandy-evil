@@ -10,6 +10,7 @@ import { ProtectedRoute }  from './ProtectedRoute';
 import { mapStateToProps } from './StateTransition';
 import { validateToken } from '../Actions/index';
 import { retrieveServices } from '../Actions/worker'; 
+import Account from './Pages/Account';
 
   class App extends Component {
    
@@ -24,6 +25,8 @@ import { retrieveServices } from '../Actions/worker';
      <Switch>
        <Route path = {'/'} exact component = {Main}/>
        <Route path = {'/careers'} component = {Career} />
+       <Route path = {'/login'}  render={(props)=><Account part={'login'} {...props}/>}/> 
+       <Route path = {'/signup'}  render={(props)=><Account part={'signup'} {...props}/>}/> 
        <ProtectedRoute path = {'/dashboard'}
                        isAuthenticated = {isAuthenticated} 
                        component = {WorkerDashboard} />   

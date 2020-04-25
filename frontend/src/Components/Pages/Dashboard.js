@@ -82,7 +82,7 @@ const WorkerDashboard = ( props ) => {
           top = {'0.5em'}  sm_top = {'1em'}>
               <Paper variant="outlined"
               className={classes.chip}>              
-                <Image image = {props.image}
+                <Image part={'dashboard'} image = {props.image}
                 imageHandler={imageHandler}/>     
                  
                  <Text padding={'1em 1em'} size={'0.5em'} 

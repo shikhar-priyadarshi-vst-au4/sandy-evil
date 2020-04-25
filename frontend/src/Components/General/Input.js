@@ -135,6 +135,38 @@ export const Input = ( { city, service,
             </Flex>
             </ThemeProvider>
         </Fragment>}
+        {part==="signup" && <Fragment>
+            <Flex wrap={'none'} style={{flexDirection:"column"}} >
+        {inputs.slice(0).map((field, index) => 
+        field[0]!=='Specialisation'?<TextField
+        id={`outlined-secondary-${index}`}
+        key = {index}
+        label={`${field[0]}`}
+        variant="outlined"
+        color="primary"
+        margin="normal"
+        name={field[0]}
+        value = {field[1]}
+        type={(field[0] === 'Password')?field[0].toLowerCase():""}
+        //onChange = {(e) => ChangeHandler(e, setCreateProfile, createProfile)}
+        fullWidth/>:"")}</Flex>            
+            </Fragment>}
+        {part==="login" && <Fragment>
+            <Flex wrap={'none'} style={{flexDirection:"column"}} >
+        {inputs.slice(0).map((field, index) => 
+        <TextField
+        id={`outlined-secondary-${index}`}
+        key = {index}
+        label={`${field[0]}`}
+        variant="outlined"
+        color="primary"
+        margin="normal"
+        name={field[0]}
+        value = {field[1]}
+        type={(field[0] === 'Password')?field[0].toLowerCase():""}
+        //onChange = {(e) => ChangeHandler(e, setCreateProfile, createProfile)}
+        fullWidth/>)}</Flex>            
+            </Fragment>}
         </Fragment>
     )
 }

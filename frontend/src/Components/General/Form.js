@@ -1,5 +1,5 @@
 import React, { useState, Fragment } from 'react';
-import { makeStyles, useMediaQuery } from '@material-ui/core';
+import { makeStyles, useMediaQuery, Typography } from '@material-ui/core';
 import { connect } from 'react-redux'
 import { register, removeError, login } from '../../Actions/index'
 import {Input} from './Input';
@@ -7,7 +7,7 @@ import {KeyStroke} from './Button';
 import { AlertBox } from './Alert';
 import { List } from './List';
 import { services } from '../Data/data';
-import { Text, Position } from '../Styled/Styled';
+import { Text, Position, Flex } from '../Styled/Styled';
 const useStyles = makeStyles((theme) => ({
     root: {
       '& .MuiTextField-root': {
@@ -31,6 +31,17 @@ const useStyles = makeStyles((theme) => ({
     },
     career:{
         margin: "2em 1em", 
+    },
+    signup : {
+      cursor : "pointer",   
+     ['&:hover']:{
+       color : '#ffffff',
+       borderRadius : '1em',
+       backgroundColor : '#f62a66',
+       border : '0.5px solid #ffffff',
+       padding : '0em 1em',
+       margin : '0em 0em'
+     }
     }
   }));
 
@@ -126,7 +137,26 @@ const Form = ( props ) => {
             <KeyStroke {...props} 
             formPart={'Dashboard-User_Profile'} 
             />
-            </form>}          
+            </form>}
+         {props.part === 'signup' && <form className = {classes.career}>
+             <Input part={'signup'} createProfile={createProfile} 
+             setCreateProfile={setCreateProfile}/>
+             <Typography  variant="caption" display="block" style={{margin:"1em 1.4em"}} 
+             gutterBottom>On click of create account, I agreed to all term & conditions.</Typography>
+             <KeyStroke part = {'signup'}/>
+             </form>}             
+         {props.part === 'login' && <form className = {classes.career}>
+             <Input part={'login'} loginFields={loginFields}
+             setLoginFields={setLoginFields}
+             />
+             <Flex margin={'0em'} sm_margin={'0em'}>
+             <Typography  variant="caption" display="block" style={{margin:"1em 1.4em"}} 
+             gutterBottom>Don't have an account?</Typography>
+             <Typography variant="caption" display="block" 
+             className={classes.signup} style={{margin:"1em 0em"}}>SignUp</Typography>
+             </Flex>
+             <KeyStroke part = {'login'}/>
+             </form>}             
         </Fragment>
     )
 }
