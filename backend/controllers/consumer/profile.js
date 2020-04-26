@@ -26,12 +26,12 @@ function controller(){
             res.status(500).json({ error : true, user, token:"", message });
         }
         else if(!user) {
-            res.json({ error : false, user, token:"", message });
+            res.json({ error : false, status:false, user, token:"", message });
         }
         else {
           let token = await tokenGenerator(user.id);
                   if(token){
-                      res.json({ error : false, user, token, message });
+                      res.json({ error : false, status:true,user, token, message });
                   }
         }
 
@@ -41,10 +41,10 @@ function controller(){
     req.provider = "Customer";
     passport.authenticate('jwt',{session : false}, ( err, user, message ) => {
         if(err){
-            res.status(500).json({ error : err.errors[0].message });
+            res.status(500).json({ status: false, error : err.errors[0].message });
         }
         else if(!user){
-            res.json({ message :  "not authorised" })
+            res.json({ status:false, message :  "not authorised" })
         }
         else{
             res.locals.user = user;
@@ -77,7 +77,7 @@ this.upload = async (req, res) => {
  }
  this.retrieve = ( req, res ) => {
     res.json({
-        token : true,
+        status : true,
         message : 'Valid token',
         data : res.locals.user
     });

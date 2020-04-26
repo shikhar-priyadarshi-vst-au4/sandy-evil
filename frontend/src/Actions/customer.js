@@ -32,10 +32,10 @@ export const customerRegister = (value) => {
          FetchAPI(client_links[0].Register,
             {METHOD : 'POST', VALUE : value},( error, data ) => {
             if(!error){
-               return dispatch({
-                   type : CUSTOMER_REGISTER,
-                   payload : true
-               }) 
+                return dispatch({
+                    type : CUSTOMER_REGISTER,
+                    payload : data
+                }) 
             }
          })
     }
@@ -50,7 +50,7 @@ export const customerLoginInitiate = (value) => {
                 localStorage.setItem('customer-token',token)
                 return dispatch({
                     type : CUSTOMER_LOGIN,
-                    payload : { data, status : true}  
+                    payload : data  
                 })
                } 
                return dispatch({
@@ -59,6 +59,13 @@ export const customerLoginInitiate = (value) => {
             }
          })
       }  
+    }
+    
+    export const customerLogoutInitiate = () => {
+         localStorage.removeItem('customer-token');
+         return ({
+             type : CUSTOMER_LOGOUT
+         })   
     }
 
 export {
