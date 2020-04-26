@@ -55,7 +55,7 @@ export const KeyStroke = (props) => {
           props.part === 'signup' && 
           <Button variant="contained"
           color={"secondary"} 
-          //onClick = {()=>props.error?props.handleError():props.createAccount()}
+          onClick = {()=>props.customerCreateAccount()}
           className = {classes.btn_career}>
           {'Create Account'}
         </Button>
@@ -64,7 +64,7 @@ export const KeyStroke = (props) => {
           props.part === 'login' && 
           <Button variant="contained"
           color={"secondary"} 
-          //onClick = {()=>props.error?props.handleError():props.createAccount()}
+          onClick = {()=>props.customerLoginAccount()}
           className = {classes.form_btn_login}>
           {'Login'}
         </Button>
@@ -76,3 +76,4 @@ export const KeyStroke = (props) => {
 
 // {props.error?<FontAwesomeIcon icon={faArrowCircleRight} 
 //           style={{padding : '0em 2em'}} size={'2x'}/>:
+//props.error?props.handleError():props.createAccount()

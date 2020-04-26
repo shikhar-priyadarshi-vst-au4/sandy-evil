@@ -1,19 +1,20 @@
-import {client_links} from './links'
+import {client_links, HOST, PORT} from './links'
 const CUSTOMER_REGISTER = 'CUSTOMER_REGISTER';
 const CUSTOMER_LOGIN = 'CUSTOMER_LOGIN';
 const CUSTOMER_LOGOUT = 'CUSTOMER_LOGOUT';
 
+const RESET_ALL = 'RESET_ALL';
 
 const FetchAPI = async (LINK, {METHOD, VALUE} , cb) => {
     let OPTION = {
         method : `${METHOD}`,
-        header : {
+        headers : {
             "Content-Type" : "application/json"
         },
         body : JSON.stringify(VALUE)
-    }  
+    } 
     try{
-        let data = await (await fetch(LINK, OPTION)).json();
+        let data = await (await fetch(`http://${HOST}:${PORT}${LINK}`, OPTION)).json();        
         if(data){
             return cb (null, data);
         }
@@ -26,26 +27,34 @@ const FetchAPI = async (LINK, {METHOD, VALUE} , cb) => {
 
 
 export const customerRegister = (value) => {    
+    
     return  dispatch => {
          FetchAPI(client_links[0].Register,
             {METHOD : 'POST', VALUE : value},( error, data ) => {
             if(!error){
                return dispatch({
                    type : CUSTOMER_REGISTER,
-                   data 
+                   payload : true
                }) 
             }
          })
     }
 }
 
-export const customerLogin = (value) => {
+export const customerLoginInitiate = (value) => {
     return  dispatch => {
         FetchAPI(client_links[1].Login, {METHOD : 'POST', VALUE : value},( error, data ) => {
             if(!error){
+               let {token} = data;
+               if(!!token){
+                localStorage.setItem('customer-token',token)
+                return dispatch({
+                    type : CUSTOMER_LOGIN,
+                    payload : { data, status : true}  
+                })
+               } 
                return dispatch({
-                   type : CUSTOMER_LOGIN,
-                   data 
+                   type : RESET_ALL
                }) 
             }
          })
@@ -55,6 +64,7 @@ export const customerLogin = (value) => {
 export {
     CUSTOMER_REGISTER,
     CUSTOMER_LOGIN,
-    CUSTOMER_LOGOUT
+    CUSTOMER_LOGOUT,
+    RESET_ALL
 } 
 

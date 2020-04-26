@@ -5,13 +5,15 @@ import { ProfileReducer } from './ProfileReducer';
 import { ServiceReducer } from './ServiceReducer';
 import { TicketReducer  } from './TicketReducer';
 import { HistoryReducer } from './HistoryReducer';
+import { CustomerReducer } from './CustomerReducer';
 
 export const rootReducer = combineReducers({
             AccountReducer,
             ProfileReducer,
             ServiceReducer,
             TicketReducer,
-            HistoryReducer
+            HistoryReducer,
+            CustomerReducer
 });
 
 //Worker

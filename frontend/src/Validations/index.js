@@ -2,56 +2,49 @@ import validator from 'validator';
 
 //email id validation
 export const isEmail = (email) => {
-    if(isEmpty(email)){
         if(!validator.isEmail(email)){
-            return 'Incorrect email'
+            return {status : true, msg :'Incorrect email'}
         }
-    }
-    else{
-        return 'Enter your email id'
-    }
-    
+        else{
+            return { status : false, msg : ""}
+        }
 }
 //number validation
 export const isNumber = (number) => {
-    if(isEmpty(number)){
         if(!(validator.isMobilePhone(number) && 
         validator.isLength(number,{
             min : 10,
             max : 12
         }))){
-            return `Enter your 10-digit number`;
+            return {status: true, msg:`Enter your 10-digit number`}
         }
-    }
-    else{
-        return 'Enter your number';
-    }
+        else{
+            return {status : false, msg : ""}
+        }
 }
 //full name validation
 export const isFullName = (fullname) => {
-    if(isEmpty(fullname)){
-        if(!validator.isAlpha()){
-            return 'Name should be alphabetic'
+       console.log(fullname)
+        if(validator.isInt(fullname)){
+            return {status : true, msg:'Name should be alphabetic'}
         }
-    }
-    else{
-        return 'Enter you name'
-    }
+       else{
+           return {status : false, msg : ""}
+       }
 }
 //password validation
 export const isPassword = (password) => {
-    if(isEmpty(password)){
+   
           if(!(validator.isAlphanumeric(password) &&
           validator.isLength(password, {
               min : 6,
               max : 10
           }))){
-              return 'minimum 6 alphanumeric'
+              return {status: true, msg:'minimum 6 alphanumeric'}
           }
-    }
-    else{
-        return 'Enter password'
-    }   
+          else{
+          return { status : false, msg:"" }   
+   } 
 }
 //empty field validation
 export const isEmpty = (value) => {

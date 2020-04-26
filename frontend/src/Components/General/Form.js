@@ -2,6 +2,7 @@ import React, { useState, Fragment } from 'react';
 import { makeStyles, useMediaQuery, Typography } from '@material-ui/core';
 import { connect } from 'react-redux'
 import { register, removeError, login } from '../../Actions/index'
+import { customerRegister, customerLoginInitiate } from '../../Actions/customer'
 import {Input} from './Input';
 import {KeyStroke} from './Button';
 import { AlertBox } from './Alert';
@@ -97,11 +98,23 @@ const Form = ( props ) => {
             specialisation, area }    
           props.dispatch(register(data));
     }
+    const customerCreateAccount = () => {
+        let { Fullname : name, Email : email,
+                Password : password, Number : mobileNumber,
+                Area : area } = customerProfile;
+        let data = { name, email, 
+                    password, mobileNumber, area };
+        props.dispatch(customerRegister(data))                         
+    }
     const loginAccount = () => {
         let { Email : email, Password : password } = loginFields
-        console.log(email, password);
-        let data = { email, password}
+        let data = { email, password};
         props.dispatch(login(data));
+    }
+    const customerLoginAccount = () => {
+        let { Email : email, Password : password } = customerLogin;
+        let data = { email, password};
+        props.dispatch(customerLoginInitiate(data));
     }
     const handleError = () => {
         props.dispatch(removeError())
@@ -154,7 +167,7 @@ const Form = ( props ) => {
              setCreateProfile={setCustomerProfile}/>
              <Typography  variant="caption" display="block" style={{margin:"1em 1.4em"}} 
              gutterBottom>On click of create account, I agreed to all term & conditions.</Typography>
-             <KeyStroke part = {'signup'}/>
+             <KeyStroke part = {'signup'} customerCreateAccount = {customerCreateAccount}/>
              </form>}             
          {props.part === 'login' && <form className = {classes.career}>
              <Input part={'login'} loginFields={customerLogin}
@@ -166,7 +179,7 @@ const Form = ( props ) => {
              <Typography variant="caption" display="block" 
              className={classes.signup} style={{margin:"1em 0em"}}>SignUp</Typography>
              </Flex>
-             <KeyStroke part = {'login'}/>
+             <KeyStroke part = {'login'} customerLoginAccount = {customerLoginAccount}/>
              </form>}             
         </Fragment>
     )

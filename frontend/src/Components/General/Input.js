@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import { makeStyles, createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import {FormControl, 
         TextField, 
@@ -7,6 +7,8 @@ import {FormControl,
         Select } from '@material-ui/core';
 import grey from '@material-ui/core/colors/grey';
 import { Flex,} from '../Styled/Styled'
+import {isEmpty, isFullName, isEmail,
+        isNumber, isPassword} from '../../Validations/index';
 import {locations, categories} from '../Data/data';        
 const useStyles = makeStyles((theme) => ({
     formControl :{
@@ -27,11 +29,43 @@ export const Input = ( { city, service,
                         loginFields, setLoginFields,
                         handleChange,  part }, ...rest ) => {
     const classes = useStyles();
+    const [validations, setValidations] = useState({
+        Fullname : {status : false, msg : ""},
+        Email : {status : false, msg : ""},
+        Password : {status : false, msg : ""},
+        Number : {status : false, msg : ""},})
     const inputs = (createProfile||loginFields)?Object.entries(createProfile?createProfile:loginFields):"";
     const ChangeHandler = (e, cb, state) => {
         let { name, value } = e.target;
-          cb({...state, [name] : value});
-      }
+        let { Fullname, Email, Password, Number } = validations
+        switch(name){
+            case 'Fullname' :
+                     let dataName = isFullName(value);
+                    setValidations({...validations,...{Fullname : {...Fullname, 
+                        ...{status : dataName.status}, ...{msg : dataName.msg}}}});
+                    break;
+            case 'Email' : 
+                     let dataEmail = isEmail(value)
+                    setValidations({...validations,...{Email:
+                        {...Email, ...{status : dataEmail.status }, ...{msg : dataEmail.msg}}}});
+                    break;
+            case 'Password' :
+                     let dataPassword = isPassword(value)
+                    setValidations({...validations, ...{Password:{...Password, 
+                        ...{status : dataPassword.status}, ...{msg : dataPassword.msg}}}});
+                    break;
+            case 'Number' : 
+                     let dataNumber = isNumber(value)
+                    setValidations({...validations,...{Number:{...Number, 
+                        ...{status : dataNumber.status}, ...{msg : dataNumber.msg}}}});
+                    break;        
+        }  
+        cb({...state, [name] : value});
+      } 
+    //  const checker = (value, fn) => { 
+    //     let data = fn(value);
+    //      return data;
+    //  }   
     return(
         <Fragment>
         
@@ -140,6 +174,8 @@ export const Input = ( { city, service,
         {inputs.slice(0).map((field, index) => 
         field[0]!=='Specialisation'?<TextField
         id={`outlined-secondary-${index}`}
+        error = {field[0]!=='Area'?validations[`${field[0]}`].status:false}
+        helperText = {field[0]!=='Area'?validations[`${field[0]}`].msg:false}
         key = {index}
         label={`${field[0]}`}
         variant="outlined"
@@ -148,7 +184,7 @@ export const Input = ( { city, service,
         name={field[0]}
         value = {field[1]}
         type={(field[0] === 'Password')?field[0].toLowerCase():""}
-        //onChange = {(e) => ChangeHandler(e, setCreateProfile, createProfile)}
+        onChange = {(e) => ChangeHandler(e, setCreateProfile, createProfile)}
         fullWidth/>:"")}</Flex>            
             </Fragment>}
         {part==="login" && <Fragment>
@@ -156,6 +192,8 @@ export const Input = ( { city, service,
         {inputs.slice(0).map((field, index) => 
         <TextField
         id={`outlined-secondary-${index}`}
+        error = {validations[`${field[0]}`].status}
+        helperText = {validations[`${field[0]}`].msg}
         key = {index}
         label={`${field[0]}`}
         variant="outlined"
