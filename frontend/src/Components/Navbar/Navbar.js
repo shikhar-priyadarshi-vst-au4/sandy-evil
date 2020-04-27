@@ -7,10 +7,8 @@ import { Logo } from './logo'
 const Nav = Styled.nav`
 position : ${props=>props.position||'relative'};
 top : ${props=>props.top||'2em'};
-left : ${props=>props.left||'2em'};
+left : ${props=>props.left||'0em'};
 z-index : ${props=>props.index||'2'};
-width : ${props=>props.width||'95%'};
-height : ${props=>props.height||'100%'};
 border : ${props=>props.border||'1px solid #272727'};
 border-radius : ${props=>props.radius||'0.5em'};
 background : ${props=>props.background||'#ffffff'};
@@ -19,12 +17,12 @@ background : ${props=>props.background||'#ffffff'};
     top : ${props=>props.sm_top||'3em'};
     width : ${props=>props.sm_width||'100%'};
     height : ${props=>props.sm_height||'100%'};}`;    
+    
 
 const NavElem = Styled.div`
 position : ${props=>props.navElem||'relative'};
 display : flex;
-padding : 1em;
-width : 100%;
+padding : 1.4em 0em;
 @media screen and (max-width : 1024px){
 flex-direction : column;
 }`;
@@ -39,7 +37,6 @@ justify-content : space-between;
 }`;
 
 const UL = Styled.div`
-width : 100%; 
 display : flex;
 @media screen and (max-width : 1024px){
     flex-direction : column;
@@ -52,10 +49,9 @@ margin : 1.2em 0.5em;
 letter-spacing : 0.1em;
 color : #4a4a48;
 font-size : 0.8em;
-font-weight : 620;
 border : 1px solid #ffffff;
 border-radius : 0.5em;
-padding : 1.6em 3em;
+padding : 1.6em 2.5em;
 cursor : pointer;
 &:hover{
     border-color : #272727;

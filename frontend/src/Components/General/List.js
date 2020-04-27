@@ -55,7 +55,7 @@ const useStyle = makeStyles((theme) => ({
     paper : {
         padding : '1em 1em',
         margin:'1em 0em',
-        fontSize : '1.4em',
+        fontSize : '100%',
         cursor:'pointer',
 
     }

@@ -8,10 +8,10 @@ import { Navbar } from '../Navbar/Navbar'
 import { CustomPosition } from '../Styled/Styled'
 const styles = (theme) => ({
   root : {
-    margin : '1em 1.8em'  
+    margin : '4em 0em',  
   },
   item : {
-     margin : '0em 0em'
+     margin : '0em 1em'
   }
 })
 
@@ -25,11 +25,9 @@ class Booking extends Component {
             <Fragment>
               <Navbar 
               mainBar={[{ navLinkName : "Login", path : '/login'},{ navLinkName : "Create Account", path : '/signup'}]} 
-                      position={'static'} top={'0em'} left={'0em'} index={'0'} width={'100%'}
-                      border={'0px'} sm_top={'0em'} sm_left={'0em'}  
-                      sm_width={'100%'} radius={'0em'} navElem={'static'}/>
+                    top={'0em'} radius={'0em'} />
              <Grid container className={classes.root}>
-                      <Grid item className={classes.item} xs={3}>
+                      <Grid item className={classes.item} xs={2}>
                       <List part={'booking-page-services'} categories={
                         this.props.services
                       }/>
@@ -37,10 +35,10 @@ class Booking extends Component {
                       <Grid item className={classes.item} xs={5}>
                       <List part={'booking-page-services-category'}/>
                       </Grid>
-                      <Grid item className={classes.item} xs={3}>
+                      <Grid item className={classes.item} xs={4}>
                       <List part={'booking-page-payment'}/>
                       </Grid>
-                 </Grid>
+                 </Grid>             
                     
             </Fragment>
         )
@@ -48,3 +46,5 @@ class Booking extends Component {
 }
 
 export default compose(connect(mapStateToProps),withStyles(styles))(Booking);
+
+
