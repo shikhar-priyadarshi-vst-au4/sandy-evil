@@ -16,9 +16,19 @@ const styles = (theme) => ({
 })
 
 class Booking extends Component {
-    componentDidMount(){
-
-    }    
+    constructor(props){
+      super(props)
+      this.state={filtered : []}
+      this.setFilter=this.setFilter.bind(this);
+    }
+    componentDidUpdate(prevProps){
+      if(this.props.services!==prevProps.services){
+        this.setState({filtered : this.props.services[0] })
+      }
+    }
+     setFilter(val){
+       this.setState({filtered : val})
+     }    
     render() {
         const {classes} = this.props;
         return (
@@ -30,10 +40,12 @@ class Booking extends Component {
                       <Grid item className={classes.item} xs={2}>
                       <List part={'booking-page-services'} categories={
                         this.props.services
-                      }/>
+                      }
+                      setFilter={this.setFilter}/>
                       </Grid>
                       <Grid item className={classes.item} xs={5}>
-                      <List part={'booking-page-services-category'}/>
+                      <List part={'booking-page-services-category'}
+                      {...this.state}/>
                       </Grid>
                       <Grid item className={classes.item} xs={4}>
                       <List part={'booking-page-payment'}/>

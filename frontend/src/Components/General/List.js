@@ -58,6 +58,12 @@ const useStyle = makeStyles((theme) => ({
         fontSize : '100%',
         cursor:'pointer',
 
+    },
+    category:{
+        borderColor:'#ffffff',
+    },
+    warn : {
+        margin  : "0em 1em"
     }
 }));         
 
@@ -195,6 +201,7 @@ export const List = ({ search : { city , services} = '',
                         className={classes.paper}
                         elevation={index===size.ind?size.value:2}
                         key={index}
+                        onClick={()=>rest.setFilter(value)}
                         onMouseOver={()=>setSize({...size, ...{value : 8, ind : index}})}
                         onMouseOut={()=>setSize({...size, ...{value : 1, ind : 0}})}>
                             <Grid container>
@@ -210,7 +217,36 @@ export const List = ({ search : { city , services} = '',
                         </Paper>)
                   })}
                   </Grid>}    
-              {part === 'booking-page-services-category' && <Paper variant={'outlined'}>categories</Paper>}    
+              {part === 'booking-page-services-category' && <Paper variant={'outlined'}
+              className={classes.category}>
+              <Typography variant={'body1'}>Services Available</Typography>
+                <hr/>
+                {rest.filtered?.services?.map((val,id)=><Paper 
+                className={classes.item}
+                variant={'outlined'} key={id}>
+                    <Grid container>
+                    <Grid item xs={9}><Typography variant={'h6'}
+                    className={classes.item}>{val.service}</Typography></Grid>
+                    <Grid item xs={3}><Typography variant={'h6'}
+                    className={classes.item}
+                    color={'secondary'}>&#8377;{val.price}</Typography></Grid>
+                    <Grid container>
+                    <Grid item xs={9}>
+                    <Typography variant={"caption"}
+                    color={'textPrimary'}>
+                    <div className={classes.warn}>*Extra charges</div>
+                    <div className={classes.warn}>*Non-Refundable</div>
+                    <div className={classes.warn}>*24 X 7 helpline</div>
+                    <div className={classes.warn}>*100% verified experts</div>
+                    </Typography>
+                    </Grid>
+                    <Grid item xs={3}>
+                      <KeyStroke part={'booking-page-services-category'}/>
+                    </Grid>
+                    </Grid>
+                    </Grid>
+                </Paper>)}
+                  </Paper>}    
               {part === 'booking-page-payment' && <Paper variant={'outlined'}>payment</Paper>}    
         </Fragment>)
 }

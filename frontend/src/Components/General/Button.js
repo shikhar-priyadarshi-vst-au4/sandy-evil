@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {Button} from '@material-ui/core';
+import { Add } from '@material-ui/icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowCircleRight } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
@@ -83,6 +84,16 @@ export const KeyStroke = (props) => {
           className = {classes.form_btn_login}>
             Sign Out
           </Button></Link>
+        }
+        {
+          props.part==='booking-page-services-category' &&  <Button
+          variant="contained"
+          color="secondary"
+          className={classes.button}
+          startIcon={<Add/>}
+        >
+         Add 
+        </Button>
         }
       </Fragment> 
     
