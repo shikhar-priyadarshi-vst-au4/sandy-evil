@@ -1,12 +1,11 @@
-import React, { Fragment } from 'react';
-import { makeStyles,
-         Paper, Grid } from '@material-ui/core';
+import React, { Fragment, useState } from 'react';
+import { makeStyles, Badge,
+         Paper, Grid, Typography } from '@material-ui/core';
 import  Alert from '@material-ui/lab/Alert';         
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
-import { Card, AlertBox} from './index';
+import { Card, AlertBox, Image, KeyStroke} from './index';
 import { chunk } from 'lodash';
-import { Link } from 'react-router-dom';
 import { Text, Position, Flex } from '../Styled/Styled'
 const useStyle = makeStyles((theme) => ({
     list : {
@@ -50,9 +49,15 @@ const useStyle = makeStyles((theme) => ({
         padding : theme.spacing(1),
         margin  : theme.spacing(3)
     },
+    signout :{ 
+        margin  : "5em 0em"
+    },
     paper : {
         padding : '1em 1em',
-        backgroundColor : '#606470',
+        margin:'1em 0em',
+        fontSize : '1.4em',
+        cursor:'pointer',
+
     }
 }));         
 
@@ -60,8 +65,8 @@ const useStyle = makeStyles((theme) => ({
 export const List = ({ search : { city , services} = '', 
                        cancelCard, part, categories, qualities, ...rest}) => {
     const classes = useStyle();
+    let [size, setSize] = useState({value : 1, ind:0 });
     let details = !!rest.data?chunk(Object.entries(rest.data),2):[];
-    console.log(categories);
     return ( <Fragment>
 
         { part === 'homepage-header' && (!!services.length? <div className = {classes.list}>
@@ -97,7 +102,7 @@ export const List = ({ search : { city , services} = '',
         
         { part === 'dashboard-profile' && 
         <Fragment>
-                <Position margin={'6em 0em'}
+                <Position margin={'8em 0em'}
                 sm_margin = {'8em 0em'}>
             <Text>User Details</Text>
             <hr/>
@@ -126,40 +131,87 @@ export const List = ({ search : { city , services} = '',
         { part === 'dashboard-categories' && <Grid container 
          className={classes.container}>
              <Grid item xs={12}>
-             <Text size={'1em'}>Services as per profile</Text>
+             <Text>Services as per profile</Text>
              <hr/>
              </Grid>
              
              {rest?.filtered?.map((value, index) => {
                  return(<Grid item xs={12} sm={3} key={index} className = {classes.item}>
-                     <Paper variant="outlined" className={classes.paper}>
+                     <Paper elevation={4} className={classes.paper}>
                         <Text sm_margin = {'1em'}  
                             sm_size = {'0.2em'}
                             style={{margin : "0.5em 0em"}}
                             fontcolor = {'#ffffff'}
-                            size={'1.2em'}>{`Service ${index+1}`}</Text>
+                            size={'1em'}>{`Service ${index+1}`}</Text>
                         <Text sm_margin = {'1em'}  
                             style={{margin : "0.3em 0em"}}
                             sm_size = {'0.2em'}
+                            weight={'400'}
                             fontcolor = {'#ffffff'}
-                            size={'0.8em'}>{value.service}</Text>
+                            size={'1.2em'}>{value.service}</Text>
                         <Text sm_margin = {'1em'}
                             style={{margin : "0.1em 0em"}}
                             sm_size = {'0.2em'}
+                            weight={'400'}
                             fontcolor = {'#ffffff'}
-                            size={'0.5em'}> &#8377;{value.price}(Base Price)</Text>
-                        <div>
-                                <Text sm_size = {'0.2em'} size={'0.5em'}
-                            fontcolor={'#facf5a'} style={{margin : "1em 0em"}}>*Additional charges as per company norms</Text>
-                                <Text sm_size = {'0.2em'} size={'0.5em'}
-                            fontcolor={'#facf5a'} style={{margin : "1em 0em"}}>*Client statisfication is higher priority</Text>
-                                <Text sm_size = {'0.2em'} size={'0.5em'}
-                            fontcolor={'#facf5a'} style={{margin : "1em 0em"}}>*Incase of emergency, contact area captian</Text>
-                            </div>
+                            size={'1.2em'}> &#8377;{value.price}(Base Price)</Text>
+                        
                      </Paper>
                  </Grid>)
              })}
-            </Grid>}    
+            </Grid>}
+            { part === 'dashboard-ticket' && <Grid container
+            className={classes.container}>
+              <Grid item xs={12}>
+             <Text>Tickets</Text>
+             <hr/>
+             </Grid>  
+                <Grid xs={12} sm={4}>
+                    <Card part={'dashboard-ticket-matrix'} value={0}/>
+                </Grid>
+                <Grid xs={12} sm={7}>
+                    <Card part={'dashboard-ticket-list'}/>
+                </Grid>
+                </Grid>}
+            {part === 'dashboard-signout' && <Grid container 
+            className={classes.signout}>
+                <Grid item xs={6}>
+                    <Image part = 'dashboard-signout'/>
+                </Grid> 
+                <Grid item xs={6}>
+                <Grid item xs={12}>
+                <Typography variant="h1" color="textPrimary">
+                   Do you really want to leave?
+                </Typography>
+                </Grid>
+                <Grid item xs={12}>
+                   <KeyStroke part = 'dashboard-signout' logout={rest.logout}/> 
+                </Grid>
+              </Grid>
+              </Grid>}
+              {part === 'booking-page-services' && <Grid item>
+                  {categories?.map((value, index)=>{
+                      return(<Paper 
+                        className={classes.paper}
+                        elevation={index===size.ind?size.value:2}
+                        key={index}
+                        onMouseOver={()=>setSize({...size, ...{value : 8, ind : index}})}
+                        onMouseOut={()=>setSize({...size, ...{value : 1, ind : 0}})}>
+                            <Grid container>
+                            <Grid item xs={6}>{value.category}</Grid>
+                            <Grid item xs={6} style={{
+                                textAlign : "end"
+                            }}>
+                                <Badge badgeContent={value.services.length} color="secondary"
+                                variant={'standard'}/>
+                                
+                                </Grid>
+                            </Grid>
+                        </Paper>)
+                  })}
+                  </Grid>}    
+              {part === 'booking-page-services-category' && <Paper variant={'outlined'}>categories</Paper>}    
+              {part === 'booking-page-payment' && <Paper variant={'outlined'}>payment</Paper>}    
         </Fragment>)
 }
 

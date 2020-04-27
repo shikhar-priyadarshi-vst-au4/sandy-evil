@@ -8,6 +8,7 @@ import { Image, List } from '../General/index'
 import { profileOptions } from '../Data/data'
 import { imageUpdate, extractUser, 
   retrieveServices, registerServices, categoryId } from '../../Actions/worker'
+import {logout} from '../../Actions/index';
 const useStyles = makeStyles((theme) => ({
     root: {
       flexGrow : 1
@@ -44,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
     }
   }));
 const WorkerDashboard = ( props ) => {
-    const [ option, setOption ] = useState('User Profile');
+    const [ option, setOption ] = useState('Check Your Tickets');
     const classes = useStyles();
     //CDM
     useEffect(()=>{
@@ -128,7 +129,7 @@ const WorkerDashboard = ( props ) => {
                   fontcolor = {"#33313b"}
                   weight={'350'} spacing={'0.1em'} 
                   cursor = {'pointer'}
-                  onClick = {() =>  val==='Sign Out'?{}:setOption(val) }>{val}</Text> 
+                  onClick = {() =>  setOption(val) }>{val}</Text> 
                   </Paper>)}  
            </Position>                       
           </Paper>
@@ -150,9 +151,10 @@ const WorkerDashboard = ( props ) => {
             {...props}
             part = {'dashboard-settings'}/>}
             
-            {option ==='Check Your Tickets' && 'Check Your Tickets'}
+            {option ==='Check Your Tickets' && <List {...props} part = {'dashboard-ticket'}/>}
             {option === 'Service Categories' && <List {...props} part = {'dashboard-categories'}/>} 
-        
+            {option === 'Check Your History' && 'Check Your History'}
+            {option === 'Sign Out' && <List part={'dashboard-signout'} logout={logout}/>} 
         </Paper>
         </Position>
         </Grid>

@@ -47,7 +47,23 @@ export const Card = (props) => {
                     weight={'200'} fontcolor={'#63686e'} padding={'0.4em'} sm_padding={'0.4em'}>{body}</Text>
                 </div>
             </Flex>
-            </Paper>}         
+            </Paper>}
+            { part==='dashboard-ticket-matrix' && <Paper variant={'outlined'}  className={classes.card}>
+                    <Flex alignItems={'center'} wrap={'no-wrap'}
+                    style={{flexDirection:'column'}}>
+                    <Text>No. of Tickets</Text>
+                    <Text size={'4em'}>{props.value}</Text>
+                    <Text>Accepted</Text>
+                    <Text size={'4em'}>{props.value}</Text>
+                    <Text>Declined</Text>
+                    <Text size={'4em'}>{props.value}</Text>
+                    </Flex>
+                </Paper>}
+            { part === 'dashboard-ticket-list' && <Paper
+            className={classes.card}
+            variant={'outlined'}>
+                <Text>Ticket Bucket</Text>
+                </Paper>}             
         </Fragment>
     )
 } 

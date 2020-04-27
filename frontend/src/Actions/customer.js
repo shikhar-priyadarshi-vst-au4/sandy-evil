@@ -1,28 +1,11 @@
-import {client_links, HOST, PORT} from './links'
+import {client_links} from './links'
+import {FetchAPI} from './Fetch'
 const CUSTOMER_REGISTER = 'CUSTOMER_REGISTER';
 const CUSTOMER_LOGIN = 'CUSTOMER_LOGIN';
 const CUSTOMER_LOGOUT = 'CUSTOMER_LOGOUT';
 
 const RESET_ALL = 'RESET_ALL';
 
-const FetchAPI = async (LINK, {METHOD, VALUE} , cb) => {
-    let OPTION = {
-        method : `${METHOD}`,
-        headers : {
-            "Content-Type" : "application/json"
-        },
-        body : JSON.stringify(VALUE)
-    } 
-    try{
-        let data = await (await fetch(`http://${HOST}:${PORT}${LINK}`, OPTION)).json();        
-        if(data){
-            return cb (null, data);
-        }
-      }
-      catch(error){
-          return cb(error, null)
-      }
-}
 
 
 

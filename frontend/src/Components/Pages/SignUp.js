@@ -1,17 +1,11 @@
 import React, { Fragment } from 'react';
-import {Grid, Paper, makeStyles} from '@material-ui/core';
+import {Grid} from '@material-ui/core';
 import {Image} from '../General/index'
 import {connect} from 'react-redux';
 import {Form} from '../General/index';
 
-// const useStyle = makeStyles((theme) => ({
-//     SignUp : {
-      
-//     }
-// }))
 
 const SignUp = (props) => {
-  //  const classes = useStyle();
     return (
         <Fragment>
           <Grid container>
@@ -19,9 +13,7 @@ const SignUp = (props) => {
                  <Image part={'signup'}/>
                  </Grid> 
              <Grid item xs={12} sm={6}>
-                 <Form part={'signup'} 
-                 //className={classes.SignUp}
-                 />
+                 <Form part={'signup'} />
                  </Grid> 
           </Grid>
         </Fragment>

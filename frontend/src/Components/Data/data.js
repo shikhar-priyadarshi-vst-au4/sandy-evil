@@ -49,6 +49,7 @@ export const services = [
         services : [ "Salon", "Carpenter", "Technician"]
     }
 ];
+//static data if server gets down
 export const categories = [
     { name : 'Salon'},
     { name : 'Carpenters'},
@@ -56,6 +57,7 @@ export const categories = [
     { name : 'Electricians'},
     { name : 'Cleaners'}
 ]
+//static data
 export const qualities = [{
     title : `High Quality & Trusted Professionals`,
     body:`We provide Towny trained professionals, 
@@ -72,5 +74,5 @@ export const qualities = [{
     body:`Super convenient, guaranteed service from
           booking to delivery`,
     icon : faCheckCircle}]
-    
+//static data    
 export const profileOptions = ["User Profile", "Account Settings", "Check Your Tickets" , "Service Categories", "Check Your History", "Sign Out"];    

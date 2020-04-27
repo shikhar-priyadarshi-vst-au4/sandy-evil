@@ -5,24 +5,23 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
 import { Logo } from './logo'
 const Nav = Styled.nav`
-position : relative;
-top : 2em;
-left : 2em;
-z-index : 2;
-width : 95%;
-height : 100%;
-border : 1px solid #272727;
-border-radius : 0.5em;
-background : #ffffff;
+position : ${props=>props.position||'relative'};
+top : ${props=>props.top||'2em'};
+left : ${props=>props.left||'2em'};
+z-index : ${props=>props.index||'2'};
+width : ${props=>props.width||'95%'};
+height : ${props=>props.height||'100%'};
+border : ${props=>props.border||'1px solid #272727'};
+border-radius : ${props=>props.radius||'0.5em'};
+background : ${props=>props.background||'#ffffff'};
 @media screen and (max-width : 1024px){
-    left : 0em;
-    top : 3em;
-    width : 100%;
-    height : 100%;
-}`;    
+    left : ${props=>props.sm_left||'0em'};
+    top : ${props=>props.sm_top||'3em'};
+    width : ${props=>props.sm_width||'100%'};
+    height : ${props=>props.sm_height||'100%'};}`;    
 
 const NavElem = Styled.div`
-position : relative;
+position : ${props=>props.navElem||'relative'};
 display : flex;
 padding : 1em;
 width : 100%;
@@ -88,10 +87,10 @@ export const Navbar = ( props ) => {
     const display = { display : "flex"};
     
     return(
-        <Nav>
-         <NavElem>
+        <Nav {...props}>
+         <NavElem {...props}>
          <Brand>
-         <BrandName>
+         <BrandName as={Link} to={'/'} style={{textDecoration : "none", color:'#e40475'}}>
          <Logo/>
          <Name>Towny</Name>
          </BrandName>
@@ -100,8 +99,8 @@ export const Navbar = ( props ) => {
          </Bar>
          
          </Brand> 
-          <UL style = {toggle?display : {}}>
-              {props.mainBar.map(({navLinkName, path},
+          <UL style = {toggle?display : {}} >
+              {props.mainBar?.map(({navLinkName, path},
                index) => <List 
                           as = {Link}
                           to = {path}

@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import {Button} from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowCircleRight } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     btn_homepage : {
@@ -21,12 +22,16 @@ const useStyles = makeStyles((theme) => ({
     form_btn_login : {
       margin : "1em",
       padding : "1em 3em",
-      letterSpacing : "0.1em"
+      letterSpacing : "0.1em",
     }
   }));
 
 export const KeyStroke = (props) => {
     const classes = useStyles();
+    const LogOut = () => {
+      props.logout();
+      console.log(props);
+    }
     return(
       <Fragment>
         {props.part === "homepage-header" && <Button variant="contained"
@@ -69,11 +74,17 @@ export const KeyStroke = (props) => {
           {'Login'}
         </Button>
         }
+        {
+          props.part === 'dashboard-signout' &&<Link to={'/'}
+          style={{textDecoration : "none"}}><Button
+          Button variant="contained"
+          color={"secondary"} 
+          onClick = {() => props.logout()}
+          className = {classes.form_btn_login}>
+            Sign Out
+          </Button></Link>
+        }
       </Fragment> 
     
     )
 }
-
-// {props.error?<FontAwesomeIcon icon={faArrowCircleRight} 
-//           style={{padding : '0em 2em'}} size={'2x'}/>:
-//props.error?props.handleError():props.createAccount()

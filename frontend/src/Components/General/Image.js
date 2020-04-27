@@ -4,7 +4,7 @@ import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import { makeStyles, Card,  Avatar} from '@material-ui/core';
 import  Skeleton  from '@material-ui/lab/Skeleton';
 import Styled from 'styled-components';
-import {Position, CustomPosition,Text} from '../Styled/Styled';
+import {Position, CustomPosition,Text, CardImage} from '../Styled/Styled';
 const useStyles = makeStyles((theme) => ({
     Skeleton : {
         backgroundColor : "ffffff",
@@ -61,6 +61,12 @@ export const Image = ({ image, imageHandler, part,...rest }) => {
             </CustomPosition>
         <AccountImage src="images/SignUp.png"/>
         </Position>
-        </div>}         
+        </div>}
+        {
+            part === 'dashboard-signout' && <div>
+              <CardImage src="images/logout.png"
+              width={'100%'} height={'400px'}/>  
+            </div>
+        }         
     </Fragment>)
 }

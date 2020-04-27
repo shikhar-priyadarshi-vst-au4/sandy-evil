@@ -1,8 +1,7 @@
 import { CUSTOMER_REGISTER,
          CUSTOMER_LOGIN, CUSTOMER_LOGOUT, 
-         CUSTOMER_TOKEN_VALIDATE, CUSTOMER_NOTOKEN,
         RESET_ALL } from '../Actions/customer' 
-
+import {  CUSTOMER_TOKEN_VALIDATE, CUSTOMER_NOTOKEN } from '../Actions/Auth';
 const initState = {
     isCustomerAuthenticated :  false,
     isRegister : false,

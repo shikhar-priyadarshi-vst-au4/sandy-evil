@@ -1,3 +1,4 @@
+import {HOST, PORT} from './links';
 export const FetchAPI = async (LINK, {METHOD, VALUE} , cb) => {
     let OPTION = {
         method : `${METHOD}`,
