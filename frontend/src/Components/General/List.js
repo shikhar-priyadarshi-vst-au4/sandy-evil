@@ -3,7 +3,7 @@ import { makeStyles, Badge,
          Paper, Grid, Typography } from '@material-ui/core';
 import  Alert from '@material-ui/lab/Alert';         
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faTimes, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import { Card, AlertBox, Image, KeyStroke} from './index';
 import { chunk } from 'lodash';
 import { Text, Position, Flex } from '../Styled/Styled'
@@ -64,6 +64,9 @@ const useStyle = makeStyles((theme) => ({
     },
     warn : {
         margin  : "0em 1em"
+    },
+    bill : {
+        margin  : "1em 2em"
     }
 }));         
 
@@ -269,11 +272,44 @@ export const List = ({ search : { city , services} = '',
                            <KeyStroke component={Grid} xs={12} part={'booking-page-payment-generate'}/>
                            </Grid>
                           </Grid>
-                    {/* {rest.addedServices?.map((value, index) => ({
-                           
-                       }))} */}
-                      
                   </Paper>
+                   <Paper variant={'outlined'}>
+                    <Grid container>
+                     <Grid item xs={12} className={classes.item}>
+                         <Typography variant={'body1'}>Generated Receipt</Typography>
+                         </Grid>     
+                    </Grid>  
+                    
+                   {rest.addedServices?.map((value, index) => <Grid container>
+                                        
+                                            <Typography 
+                                            className={classes.bill}
+                                            component={Grid} xs={3}
+                                            variant={'body1'}>{value.service}</Typography>
+                                            
+                                        
+                                            <Typography 
+                                            className={classes.bill}
+                                            component={Grid} xs={3}
+                                            variant={'body1'}>&#8377;{value.price}</Typography>
+                                          
+                                          <FontAwesomeIcon 
+                                          className={classes.bill}
+                                          icon={faCheckCircle}/>
+                   </Grid>)}     
+                      <hr/>
+                      <Grid container>
+                            
+                                <Typography component={Grid} item xs={5} className={classes.bill} 
+                                variant={'body1'}>Amount to be paid</Typography>
+                            
+                                <Typography component={Grid} variant={'body1'} item xs={3} 
+                                className={classes.bill}>
+                                &#8377;{rest.balance}
+                                </Typography>
+                               
+                          </Grid>          
+                   </Paper>
                   </Paper>}    
         </Fragment>)
 }

@@ -18,7 +18,7 @@ const styles = (theme) => ({
 class Booking extends Component {
     constructor(props){
       super(props)
-      this.state={ filtered : [], addedServices:[], serviceId: "" }
+      this.state={ filtered : [], addedServices:[], serviceId: "", balance : 0 }
       this.setFilter=this.setFilter.bind(this);
       this.addService = this.addService.bind(this);
     }
@@ -32,11 +32,17 @@ class Booking extends Component {
      }
      addService(index){
        let filteredState = this.state.filtered;
-       let services = this.state.addedServices;
-       if(!services.includes(filteredState.services[index])){
-        this.setState({
-          addedServices : [...this.state.addedServices,filteredState.services[index]],
-          serviceId : filteredState.id 
+       let addedServices = this.state.addedServices;
+       if(!addedServices.includes(filteredState.services[index])){
+        addedServices = [...addedServices, filteredState.services[index]];
+        let balance =  addedServices.reduce((acc, curr) => {
+                 acc+=curr.price;
+                 return acc;
+        },0)
+         this.setState({
+          ...{ addedServices },
+          serviceId : filteredState.id,
+          ...{balance}, 
         })
        }
      }
