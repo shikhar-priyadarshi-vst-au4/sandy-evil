@@ -67,6 +67,15 @@ export const Image = ({ image, imageHandler, part,...rest }) => {
               <CardImage src="images/logout.png"
               width={'100%'} height={'400px'}/>  
             </div>
+        }
+
+        {
+            part === 'booking-page-payment' && <div>
+            <CardImage src={'../images/09.png'}
+            width={'100%'}
+            height={'20%'}
+            />  
+          </div>
         }         
     </Fragment>)
 }

@@ -18,8 +18,9 @@ const styles = (theme) => ({
 class Booking extends Component {
     constructor(props){
       super(props)
-      this.state={filtered : []}
+      this.state={ filtered : [], addedServices:[], serviceId: "" }
       this.setFilter=this.setFilter.bind(this);
+      this.addService = this.addService.bind(this);
     }
     componentDidUpdate(prevProps){
       if(this.props.services!==prevProps.services){
@@ -28,6 +29,21 @@ class Booking extends Component {
     }
      setFilter(val){
        this.setState({filtered : val})
+     }
+     addService(index){
+       let filteredState = this.state.filtered;
+       let services = this.state.addedServices;
+       if(!services.includes(filteredState.services[index])){
+        this.setState({
+          addedServices : [...this.state.addedServices,filteredState.services[index]],
+          serviceId : filteredState.id 
+        })
+       }
+     }
+     removeService(serviceName){
+          let services = this.state.addedServices;
+          services.filter((val, index) => val.service !== serviceName );
+          console.log(services);
      }    
     render() {
         const {classes} = this.props;
@@ -45,10 +61,11 @@ class Booking extends Component {
                       </Grid>
                       <Grid item className={classes.item} xs={5}>
                       <List part={'booking-page-services-category'}
+                      addService={this.addService}
                       {...this.state}/>
                       </Grid>
                       <Grid item className={classes.item} xs={4}>
-                      <List part={'booking-page-payment'}/>
+                      <List part={'booking-page-payment'} {...this.state}/>
                       </Grid>
                  </Grid>             
                     

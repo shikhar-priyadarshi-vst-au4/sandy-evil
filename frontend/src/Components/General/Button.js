@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {Button} from '@material-ui/core';
-import { Add } from '@material-ui/icons';
+import { Add, ReceiptSharp } from '@material-ui/icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowCircleRight } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
@@ -24,6 +24,9 @@ const useStyles = makeStyles((theme) => ({
       margin : "1em",
       padding : "1em 3em",
       letterSpacing : "0.1em",
+    },
+    receipt :{
+      marginTop : theme.spacing(3),
     }
   }));
 
@@ -89,10 +92,22 @@ export const KeyStroke = (props) => {
           props.part==='booking-page-services-category' &&  <Button
           variant="contained"
           color="secondary"
+          onClick={()=>props.addService(props.index)}
           className={classes.button}
           startIcon={<Add/>}
         >
          Add 
+        </Button>
+        }
+        {
+          props.part==='booking-page-payment-generate' && <Button
+          variant="contained"
+          color="secondary"
+          //onClick={()=>props.addService(props.index)}
+          className={classes.receipt}
+          startIcon={<ReceiptSharp/>}
+        >
+         Generate Bill
         </Button>
         }
       </Fragment> 

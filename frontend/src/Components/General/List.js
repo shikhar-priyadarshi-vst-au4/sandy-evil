@@ -241,13 +241,40 @@ export const List = ({ search : { city , services} = '',
                     </Typography>
                     </Grid>
                     <Grid item xs={3}>
-                      <KeyStroke part={'booking-page-services-category'}/>
+                      <KeyStroke part={'booking-page-services-category'}
+                      index={id}
+                      addService={rest.addService}/>
                     </Grid>
                     </Grid>
                     </Grid>
                 </Paper>)}
                   </Paper>}    
-              {part === 'booking-page-payment' && <Paper variant={'outlined'}>payment</Paper>}    
+              {part === 'booking-page-payment' && <Paper variant={'outlined'}
+              className={classes.category}>
+                 <Typography variant={'body1'}>Payment Summary</Typography> 
+                  <hr/>
+                  <Paper variant={'outlined'} className={classes.item}>
+                     <Grid container>
+                      <Grid item xs={6}>
+                          <Image part={'booking-page-payment'}/>
+                          </Grid>
+                          <Grid item xs={6}>
+                           
+                           <Typography component={Grid} 
+                           xs={12}
+                           variant={'button'}>{'Booking Confirmation'}</Typography>  
+                           <Typography component={Grid} 
+                           xs={12}
+                           variant={'caption'}>After confirmation, towny individual will be assigned</Typography>
+                           <KeyStroke component={Grid} xs={12} part={'booking-page-payment-generate'}/>
+                           </Grid>
+                          </Grid>
+                    {/* {rest.addedServices?.map((value, index) => ({
+                           
+                       }))} */}
+                      
+                  </Paper>
+                  </Paper>}    
         </Fragment>)
 }
 
