@@ -75,6 +75,7 @@ export const List = ({ search : { city , services} = '',
                        cancelCard, part, categories, qualities, ...rest}) => {
     const classes = useStyle();
     let [size, setSize] = useState({value : 1, ind:0 });
+    let [generate, setGenerate] = useState(false);
     let details = !!rest.data?chunk(Object.entries(rest.data),2):[];
     return ( <Fragment>
 
@@ -237,15 +238,16 @@ export const List = ({ search : { city , services} = '',
                     <Grid item xs={9}>
                     <Typography variant={"caption"}
                     color={'textPrimary'}>
-                    <div className={classes.warn}>*Extra charges</div>
+                    <div className={classes.warn}>*5% service charges</div>
                     <div className={classes.warn}>*Non-Refundable</div>
-                    <div className={classes.warn}>*24 X 7 helpline</div>
+                    <div className={classes.warn}>*Towny assured products</div>
                     <div className={classes.warn}>*100% verified experts</div>
                     </Typography>
                     </Grid>
                     <Grid item xs={3}>
                       <KeyStroke part={'booking-page-services-category'}
-                      index={id}
+                      index={id} service={val} addedServices={rest.addedServices}
+                      removeService={rest.removeService}
                       addService={rest.addService}/>
                     </Grid>
                     </Grid>
@@ -269,18 +271,22 @@ export const List = ({ search : { city , services} = '',
                            <Typography component={Grid} 
                            xs={12}
                            variant={'caption'}>After confirmation, towny individual will be assigned</Typography>
-                           <KeyStroke component={Grid} xs={12} part={'booking-page-payment-generate'}/>
+                           <KeyStroke component={Grid} xs={12} 
+                           setGenerate={setGenerate}
+                           part={'booking-page-payment-generate'}/>
                            </Grid>
                           </Grid>
                   </Paper>
+                   
+                  { generate && <Fragment> 
                    <Paper variant={'outlined'}>
                     <Grid container>
                      <Grid item xs={12} className={classes.item}>
                          <Typography variant={'body1'}>Generated Receipt</Typography>
                          </Grid>     
                     </Grid>  
-                    
-                   {rest.addedServices?.map((value, index) => <Grid container>
+                   
+                   { rest.addedServices?.map((value, index) => <Grid container key={index}>
                                         
                                             <Typography 
                                             className={classes.bill}
@@ -301,15 +307,42 @@ export const List = ({ search : { city , services} = '',
                       <Grid container>
                             
                                 <Typography component={Grid} item xs={5} className={classes.bill} 
-                                variant={'body1'}>Amount to be paid</Typography>
+                                variant={'body1'}>Total Balance</Typography>
                             
                                 <Typography component={Grid} variant={'body1'} item xs={3} 
                                 className={classes.bill}>
                                 &#8377;{rest.balance}
                                 </Typography>
                                
-                          </Grid>          
-                   </Paper>
+                          </Grid>
+                        <Grid container>
+
+                                <Typography component={Grid} item xs={5} className={classes.bill} 
+                                variant={'body1'}>Service charge (5%)</Typography>
+                            
+                                <Typography component={Grid} variant={'body1'} item xs={3} 
+                                className={classes.bill}>
+                                &#8377;{rest.charges}
+                                </Typography>
+    
+                        </Grid>  
+                        <Grid container>
+
+                                <Typography component={Grid} item xs={5} className={classes.bill} 
+                                variant={'body1'}>Amount to be paid</Typography>
+                            
+                                <Typography component={Grid} variant={'body1'} item xs={3} 
+                                className={classes.bill}>
+                                &#8377;{rest.finalamount}
+                                </Typography>
+    
+                        </Grid>  
+                       <Grid container>
+                       <Grid item xs={12} className={classes.bill}>
+                       <KeyStroke  part={'booking-page-payment-confirmation'}>Confirm Booking</KeyStroke>
+                       </Grid>    
+                       </Grid>
+                   </Paper></Fragment>}
                   </Paper>}    
         </Fragment>)
 }

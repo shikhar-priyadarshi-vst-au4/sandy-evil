@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {Button} from '@material-ui/core';
-import { Add, ReceiptSharp } from '@material-ui/icons';
+import { Add, ReceiptSharp, Delete } from '@material-ui/icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowCircleRight } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
@@ -89,7 +89,16 @@ export const KeyStroke = (props) => {
           </Button></Link>
         }
         {
-          props.part==='booking-page-services-category' &&  <Button
+          props.part==='booking-page-services-category' && ( 
+          props.addedServices.includes(props.service)?<Button
+          variant="contained"
+          color="secondary"
+          onClick={()=>props.removeService(props.service)}
+          className={classes.button}
+          startIcon={<Delete/>}
+        >
+         Delete
+        </Button> :<Button
           variant="contained"
           color="secondary"
           onClick={()=>props.addService(props.index)}
@@ -97,18 +106,27 @@ export const KeyStroke = (props) => {
           startIcon={<Add/>}
         >
          Add 
-        </Button>
+        </Button>)
         }
         {
           props.part==='booking-page-payment-generate' && <Button
           variant="contained"
           color="secondary"
-          //onClick={()=>props.addService(props.index)}
+          onClick={()=>props.setGenerate(true)}
           className={classes.receipt}
           startIcon={<ReceiptSharp/>}
         >
          Generate Bill
         </Button>
+        }
+        {
+          props.part==='booking-page-payment-confirmation' && <Button
+          variant="contained"
+          color="secondary"
+          //onClick={()=>props.addService(props.index)}
+          className={classes.receipt}>
+         Confirm Booking
+        </Button>          
         }
       </Fragment> 
     
