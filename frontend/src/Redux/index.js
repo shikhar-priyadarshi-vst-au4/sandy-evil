@@ -6,6 +6,7 @@ import { ServiceReducer } from './ServiceReducer';
 import { TicketReducer  } from './TicketReducer';
 import { HistoryReducer } from './HistoryReducer';
 import { CustomerReducer } from './CustomerReducer';
+import { BookingReducer } from './BookingReducer';
 
 export const rootReducer = combineReducers({
             AccountReducer,
@@ -13,7 +14,8 @@ export const rootReducer = combineReducers({
             ServiceReducer,
             TicketReducer,
             HistoryReducer,
-            CustomerReducer
+            CustomerReducer,
+            BookingReducer
 });
 
 //Worker

@@ -47,6 +47,6 @@ export const isPassword = (password) => {
    } 
 }
 //empty field validation
-export const isEmpty = (value) => {
-    return validator.isEmpty(value)
-}
+// export const isEmpty = (value) => {
+//     return validator.isEmpty(value)
+// }

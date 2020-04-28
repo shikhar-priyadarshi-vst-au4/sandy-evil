@@ -23,7 +23,7 @@ import 'typeface-roboto';
        <Route path = {'/careers'} component = {Career} />
        <Route path = {'/login'}  render={(props)=><Account part={'login'} {...props}/>}/> 
        <Route path = {'/signup'}  render={(props)=><Account part={'signup'} {...props}/>}/> 
-       <Route path = {'/booking'} component = {Booking}/>
+       <Route path = {'/booking/:serviceId'} component = {Booking}/>
        <ProtectedRoute path = {'/dashboard'}
                        isAuthenticated = {isAuthenticated} 
                        component = {WorkerDashboard} />   

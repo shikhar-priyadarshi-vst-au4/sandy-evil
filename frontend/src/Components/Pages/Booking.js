@@ -5,7 +5,8 @@ import { compose } from 'redux';
 import { mapStateToProps } from '../StateTransition';
 import { List } from '../General/index'
 import { Navbar } from '../Navbar/Navbar'
-import { CustomPosition } from '../Styled/Styled'
+import { FilterServices, AddServices,
+         RemoveServices, ConfirmBooking } from '../../Actions/booking'
 const styles = (theme) => ({
   root : {
     margin : '4em 0em',  
@@ -18,8 +19,6 @@ const styles = (theme) => ({
 class Booking extends Component {
     constructor(props){
       super(props)
-      this.state={ filtered : [], addedServices:[], serviceId: "", 
-      balance : 0, charges : 0, finalamount : 0 }
       this.setFilter=this.setFilter.bind(this);
       this.addService = this.addService.bind(this);
       this.removeService = this.removeService.bind(this);
@@ -27,61 +26,29 @@ class Booking extends Component {
     }
     componentDidMount(){
       if(this.props.services.length>0){
-        this.setState({filtered : this.props.services[0] })
+        this.props.dispatch(FilterServices(this.props.services[0]))
       }
     }
     componentDidUpdate(prevProps){
       if(this.props.services!==prevProps.services){
-        this.setState({filtered : this.props.services[0] })
+        this.props.dispatch(FilterServices(this.props.services[0]))
       }
     }
      setFilter(val){
-       this.setState({filtered : val, addedServices : [], serviceId : "",
-      balance : 0, charges : 0, finalamount : 0});
-
+       this.props.dispatch(FilterServices(val));
      }
      addService(index){
-       let filteredState = this.state.filtered;
-       let addedServices = this.state.addedServices;
-       if(!addedServices.includes(filteredState.services[index])){
-        addedServices = [...addedServices, filteredState.services[index]];
-        let balance =  addedServices.reduce((acc, curr) => {
-                 acc+=curr.price;
-                 return acc;
-        },0)
-        let charges = 0.05*balance;
-        let finalamount = balance + charges;
-         this.setState({
-          ...{ addedServices },
-          serviceId : filteredState.id,
-          ...{balance}, ...{charges},
-          ...{finalamount}
-        })
-       }
+       this.props.dispatch(AddServices(index));
      }
       removeService(serviceName){
-          let { addedServices, balance, 
-               charges, finalamount } = this.state;
-          
-          if(addedServices.length>0){
-            addedServices.map(({service, price}) => {
-              if(service === serviceName.service){
-                balance = balance - price;
-                charges = balance*0.05;
-                finalamount = balance + charges;
-                this.setState({...{balance},...{charges},...{finalamount}});              
-              }
-              return ;
-            })
-            addedServices = addedServices?.filter(({service}) => service !== serviceName.service );
-            this.setState({...{addedServices}})
-          }
+       this.props.dispatch(RemoveServices(serviceName));   
      }    
      confirmBooking(value){
-         console.log('Confirm Booking');
-     }
+       this.props.dispatch(ConfirmBooking(value));        
+    }
     render() {
         const {classes} = this.props;
+        console.log(this.props.match.params);
         return (
             <Fragment>
               <Navbar 
@@ -98,10 +65,10 @@ class Booking extends Component {
                       <List part={'booking-page-services-category'}
                       addService={this.addService}
                       removeService={this.removeService}
-                      {...this.state}/>
+                      {...this.props}/>
                       </Grid>
                       <Grid item className={classes.item} xs={4}>
-                      <List part={'booking-page-payment'} {...this.state}/>
+                      <List part={'booking-page-payment'} {...this.props} confirmBooking={this.confirmBooking}/>
                       </Grid>
                  </Grid>             
                     
@@ -111,5 +78,36 @@ class Booking extends Component {
 }
 
 export default compose(connect(mapStateToProps),withStyles(styles))(Booking);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

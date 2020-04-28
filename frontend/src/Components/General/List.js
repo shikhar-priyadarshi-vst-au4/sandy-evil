@@ -225,7 +225,7 @@ export const List = ({ search : { city , services} = '',
               className={classes.category}>
               <Typography variant={'body1'}>Services Available</Typography>
                 <hr/>
-                {rest.filtered?.services?.map((val,id)=><Paper 
+                {rest.filteredServices?.services?.map((val,id)=><Paper 
                 className={classes.item}
                 variant={'outlined'} key={id}>
                     <Grid container>
@@ -340,7 +340,8 @@ export const List = ({ search : { city , services} = '',
                         </Grid>  
                        <Grid container>
                        <Grid item xs={12} className={classes.bill}>
-                       <KeyStroke  part={'booking-page-payment-confirmation'}>Confirm Booking</KeyStroke>
+                       <KeyStroke  part={'booking-page-payment-confirmation'}
+                       confirmBooking={rest.confirmBooking}/>
                        </Grid>    
                        </Grid>
                    </Paper></Fragment>}

@@ -36,6 +36,7 @@ export const KeyStroke = (props) => {
       props.logout();
       console.log(props);
     }
+    
     return(
       <Fragment>
         {props.part === "homepage-header" && <Button variant="contained"
@@ -90,7 +91,8 @@ export const KeyStroke = (props) => {
         }
         {
           props.part==='booking-page-services-category' && ( 
-          props.addedServices.includes(props.service)?<Button
+          (!!props.addedServices?.find(({ service
+           }) => service === props.service.service))?<Button
           variant="contained"
           color="secondary"
           onClick={()=>props.removeService(props.service)}
@@ -123,7 +125,7 @@ export const KeyStroke = (props) => {
           props.part==='booking-page-payment-confirmation' && <Button
           variant="contained"
           color="secondary"
-          //onClick={()=>props.addService(props.index)}
+          onClick={()=>props.confirmBooking()}
           className={classes.receipt}>
          Confirm Booking
         </Button>          
