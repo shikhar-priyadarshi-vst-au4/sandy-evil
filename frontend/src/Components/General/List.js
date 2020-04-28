@@ -6,7 +6,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import { Card, AlertBox, Image, KeyStroke} from './index';
 import { chunk } from 'lodash';
-import { Text, Position, Flex } from '../Styled/Styled'
+import { Text, Position, Flex } from '../Styled/Styled';
+import { Link } from 'react-router-dom';
 const useStyle = makeStyles((theme) => ({
     list : {
         display : 'flex',
@@ -201,11 +202,14 @@ export const List = ({ search : { city , services} = '',
               </Grid>}
               {part === 'booking-page-services' && <Grid item>
                   {categories?.map((value, index)=>{
-                      return(<Paper 
+                      return(
+                      <Link to={`/booking/${value.id}`} style={{textDecoration : 'none'}}>
+                      <Paper 
+                        
                         className={classes.paper}
                         elevation={index===size.ind?size.value:2}
                         key={index}
-                        onClick={()=>rest.setFilter(value)}
+                        onClick={()=>rest.setFilter()}
                         onMouseOver={()=>setSize({...size, ...{value : 8, ind : index}})}
                         onMouseOut={()=>setSize({...size, ...{value : 1, ind : 0}})}>
                             <Grid container>
@@ -218,7 +222,8 @@ export const List = ({ search : { city , services} = '',
                                 
                                 </Grid>
                             </Grid>
-                        </Paper>)
+                        </Paper>
+                        </Link>)
                   })}
                   </Grid>}    
               {part === 'booking-page-services-category' && <Paper variant={'outlined'}

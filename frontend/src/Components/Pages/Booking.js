@@ -19,6 +19,7 @@ const styles = (theme) => ({
 class Booking extends Component {
     constructor(props){
       super(props)
+      this.revertFilter=this.revertFilter.bind(this);
       this.setFilter=this.setFilter.bind(this);
       this.addService = this.addService.bind(this);
       this.removeService = this.removeService.bind(this);
@@ -26,16 +27,25 @@ class Booking extends Component {
     }
     componentDidMount(){
       if(this.props.services.length>0){
-        this.props.dispatch(FilterServices(this.props.services[0]))
+         this.revertFilter();
       }
     }
     componentDidUpdate(prevProps){
       if(this.props.services!==prevProps.services){
-        this.props.dispatch(FilterServices(this.props.services[0]))
+        this.revertFilter();
       }
     }
-     setFilter(val){
-       this.props.dispatch(FilterServices(val));
+     revertFilter(){
+      let { match : {
+        params : { serviceId : id }
+      }, services} = this.props;
+      let value = services.find(val => val.id === id);
+      console.log(value);
+      this.props.dispatch(FilterServices(value)) 
+    }
+     setFilter(){
+       this.revertFilter();
+       //this.props.dispatch(FilterServices(val));
      }
      addService(index){
        this.props.dispatch(AddServices(index));
@@ -59,7 +69,7 @@ class Booking extends Component {
                       <List part={'booking-page-services'} categories={
                         this.props.services
                       }
-                      setFilter={this.setFilter}/>
+                      setFilter={this.setFilter} {...this.props}/>
                       </Grid>
                       <Grid item className={classes.item} xs={5}>
                       <List part={'booking-page-services-category'}

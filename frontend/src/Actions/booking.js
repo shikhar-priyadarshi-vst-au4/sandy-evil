@@ -6,6 +6,7 @@ const CONFIRM_BOOKING = 'CONFIRM_BOOKING';
 
 
             export const FilterServices = (value) => {
+               console.log(value);
                 return ({
                     type : SET_FILTER,
                     payload : value
