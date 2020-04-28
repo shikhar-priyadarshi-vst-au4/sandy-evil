@@ -238,10 +238,11 @@ export const List = ({ search : { city , services} = '',
                     <Grid item xs={9}>
                     <Typography variant={"caption"}
                     color={'textPrimary'}>
-                    <div className={classes.warn}>*5% service charges</div>
-                    <div className={classes.warn}>*Non-Refundable</div>
-                    <div className={classes.warn}>*Towny assured products</div>
-                    <div className={classes.warn}>*100% verified experts</div>
+                     {['*5% service charges',
+                     '*Non-Refundable',
+                     '*Towny assured products',
+                    '*100% verified experts'].map((val, index) => <div
+                     className={classes.warn} key={index}>{val}</div> )}   
                     </Typography>
                     </Grid>
                     <Grid item xs={3}>
