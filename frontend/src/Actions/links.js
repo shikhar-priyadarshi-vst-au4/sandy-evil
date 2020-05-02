@@ -17,10 +17,10 @@ export const client_links = [
     { Login : "/user/login"},
     { Upload : "/user/upload?jwt="},
     { tokenAuth : "/user/auth?jwt="},
-    { createBooking : "/create/:customer_id"},
-    { getBookings : "/retrieve/:customer_id"},
-    { cancelBooking : "/cancel/:bookingId" },
-    { workerAssigned : "/assign/:bookingId/:worker_id" },
-    { submitFeedback : "/submit/feedback/:profile_id" },
+    { createBooking : "/user/create/"},
+    { getBookings : "/user/retrieve/:customer_id"},
+    { cancelBooking : "/user/cancel/:bookingId" },
+    { workerAssigned : "/user/assign/:bookingId/:worker_id" },
+    { submitFeedback : "/user/submit/feedback/:profile_id" },
 
 ]

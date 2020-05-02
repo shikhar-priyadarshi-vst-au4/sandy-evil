@@ -6,9 +6,10 @@ function controller(){
     let { customer_id } = req.params;  
     let { service_id, services,
         status = 'Pending', balance = 0.0 } = req.body;
+        console.log(customer_id, service_id, services, balance);
       if(!!customer_id && !!services.length ){
           try{
-           let data = await Booking.create(
+           let data = await Booking.findOrCreate(
                {where : {customer_id, service_id, services, 
                 status, balance}});
              if(data){

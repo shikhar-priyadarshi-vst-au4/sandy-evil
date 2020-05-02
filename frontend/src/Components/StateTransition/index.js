@@ -14,7 +14,7 @@ export const mapStateToProps = (state) => {
          status, filteredServices,
          addedServices, serviceId,
          balance, charges,
-         finalamount }                                            
+         finalamount, bookingdata }                                            
          } = state;
     return({
             profileCreated, isAuthenticated, isLoggedIn,
@@ -25,7 +25,7 @@ export const mapStateToProps = (state) => {
             status, filteredServices,
             addedServices, serviceId,
             balance, charges,
-            finalamount
+            finalamount, bookingdata
     })
 }
 

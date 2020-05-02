@@ -16,6 +16,9 @@ const styles = (theme) => ({
   }
 })
 
+
+
+
 class Booking extends Component {
     constructor(props){
       super(props)
@@ -53,9 +56,12 @@ class Booking extends Component {
       removeService(serviceName){
        this.props.dispatch(RemoveServices(serviceName));   
      }    
-     confirmBooking(value){
-       this.props.dispatch(ConfirmBooking(value));        
-    }
+     confirmBooking(){
+      let { customerData : { id : customer_id }, serviceId : service_id,
+        addedServices: services, finalamount : balance } = this.props;
+        let value = {customer_id, service_id, services, balance }
+        this.props.dispatch(ConfirmBooking(value));          
+      }
     render() {
         const {classes} = this.props;
         console.log(this.props.match.params);

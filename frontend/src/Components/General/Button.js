@@ -1,9 +1,9 @@
 import React, { Fragment } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {Button} from '@material-ui/core';
-import { Add, ReceiptSharp, Delete, EditOutlined, Edit } from '@material-ui/icons';
+import { Add, ReceiptSharp, Delete, Edit, ExitToApp } from '@material-ui/icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowCircleRight, faPen, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
+import { faArrowCircleRight  } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
@@ -148,6 +148,15 @@ export const KeyStroke = (props) => {
           }}
           color="default" >
           {props.category}
+        </Button>          
+          
+        }
+        {
+          props.part==='userpage-signout-button' && <Button
+          variant="outlined" size={'medium'} style={{margin : '0em 1em'}}
+          startIcon={<ExitToApp></ExitToApp>}
+          color="default" >
+          Sign out
         </Button>          
           
         }

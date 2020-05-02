@@ -45,14 +45,16 @@ const styles = (theme) => ({
     }
     
     render() {
+        
         let {classes, customerData : {
           name : Fullname, image, mobileNumber : Contact, email : Email, 
           area : Area  
         }} = this.props;
+        
         let details = { Fullname, Contact, Email, Area };
-        console.log(details);
+        
         details = Object.entries(details);
-        console.log(details);
+        
         return (
               
             <div className={classes.topContainer}>    
@@ -73,6 +75,7 @@ const styles = (theme) => ({
                       className={classes.image}
                       variant={'outlined'}>
                           <Flex justifyContent={'flex-end'}>
+                          <KeyStroke part={'userpage-signout-button'}/>    
                           <KeyStroke part={'userpage-button'}/>
                           </Flex>
                           <Grid container>
@@ -102,7 +105,8 @@ const styles = (theme) => ({
                       <Grid container>
                       
                       <Paper component={Grid} item xs={5} className={classes.paper} variant={'outlined'}>
-                      <Typography variant={'button'} color={'secondary'} className={classes.heading}
+                      <Typography variant={'button'} component={Grid} item
+                      color={'secondary'} className={classes.heading}
                      xs={5}>Profile Details</Typography><hr/>
                      
                       {details?.map((val, index) => 
@@ -122,10 +126,11 @@ const styles = (theme) => ({
 
                       </Paper>
                       <Paper component={Grid} item xs={6} className={classes.paper} variant={'outlined'}>
-                          <Typography  variant={'button'} className={classes.heading} color={'secondary'}>
+                          <Typography  variant={'button'} className={classes.heading} 
+                          component={Grid} xs={6} item color={'secondary'}>
                               Booking Information 
                           </Typography><hr/>
-                      </Paper>
+                         </Paper>
                       </Grid>
                       
                     </Paper>

@@ -1,19 +1,18 @@
 import {    SET_FILTER,
             ADD_SERVICES,
             REMOVE_SERVICES,
-            CONFIRM_BOOKING     } from '../Actions/booking';
+            CONFIRM_BOOKING,
+            BOOKING_FAILED     } from '../Actions/booking';
 
 
 const initState = {
-    customer_id : "",
-    worker_id : "",
-    status : 'Pending',
     filteredServices : [],
     addedServices : [],
     serviceId : "",
     balance : 0.0,
     charges : 0.0,
-    finalamount : 0.0
+    finalamount : 0.0,
+    bookingdata : ""
 }
 
 export const BookingReducer = (state = initState, {type, payload}) => {
@@ -62,7 +61,12 @@ export const BookingReducer = (state = initState, {type, payload}) => {
                     }
                     return stateCopy;
                 case CONFIRM_BOOKING :
+                    let { data } = payload;
+                    stateCopy = { ...stateCopy, ...{ bookingdata : data }}
                     return stateCopy;
+                case BOOKING_FAILED:
+                    stateCopy = {...stateCopy, ...{ bookingdata : ""}};
+                    return stateCopy;     
                 default :
                     return stateCopy;                                                 
         }           
