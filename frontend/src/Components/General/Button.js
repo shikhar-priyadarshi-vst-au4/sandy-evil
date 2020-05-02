@@ -1,9 +1,9 @@
 import React, { Fragment } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {Button} from '@material-ui/core';
-import { Add, ReceiptSharp, Delete } from '@material-ui/icons';
+import { Add, ReceiptSharp, Delete, EditOutlined, Edit } from '@material-ui/icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowCircleRight } from '@fortawesome/free-solid-svg-icons';
+import { faArrowCircleRight, faPen, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
@@ -26,16 +26,15 @@ const useStyles = makeStyles((theme) => ({
       letterSpacing : "0.1em",
     },
     receipt :{
-      marginTop : theme.spacing(3),
+      marginTop : theme.spacing(2),
+    },
+    edit : {
+      padding : theme.spacing(1),
     }
   }));
 
 export const KeyStroke = (props) => {
     const classes = useStyles();
-    const LogOut = () => {
-      props.logout();
-      console.log(props);
-    }
     
     return(
       <Fragment>
@@ -80,14 +79,14 @@ export const KeyStroke = (props) => {
         </Button>
         }
         {
-          props.part === 'dashboard-signout' &&<Link to={'/'}
-          style={{textDecoration : "none"}}><Button
-          Button variant="contained"
+          props.part === 'dashboard-signout' && <Button
+          style={{textDecoration : "none"}} 
+          variant={"contained"}
           color={"secondary"} 
-          onClick = {() => props.logout()}
+          onClick = {() => props.Logout()}
           className = {classes.form_btn_login}>
             Sign Out
-          </Button></Link>
+          </Button>
         }
         {
           props.part==='booking-page-services-category' && ( 
@@ -129,6 +128,28 @@ export const KeyStroke = (props) => {
           className={classes.receipt}>
          Confirm Booking
         </Button>          
+        }
+        {
+          props.part==='userpage-button' && <Button
+          variant="outlined" size={'small'}
+          // onClick = { () => props.editHandler()}
+          color="secondary" className={classes.edit}
+          startIcon={<Edit></Edit>}>
+          Edit profile
+        </Button>          
+          
+        }
+        {
+          props.part==='userpage-service-button' && <Button
+          component={Link} to={`/booking/${props.id}`}
+          variant="outlined" size={'medium'} style={{
+            margin : "0.5em 0em",
+            textDecoration : 'none'
+          }}
+          color="default" >
+          {props.category}
+        </Button>          
+          
         }
       </Fragment> 
     

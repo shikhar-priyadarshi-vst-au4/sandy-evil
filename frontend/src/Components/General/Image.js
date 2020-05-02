@@ -1,14 +1,18 @@
 import React, { createRef, Fragment } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
-import { makeStyles, Card,  Avatar} from '@material-ui/core';
+import { faUserCircle, faCamera } from '@fortawesome/free-solid-svg-icons';
+import { makeStyles,   Avatar} from '@material-ui/core';
 import  Skeleton  from '@material-ui/lab/Skeleton';
 import Styled from 'styled-components';
 import {Position, CustomPosition,Text, CardImage} from '../Styled/Styled';
 const useStyles = makeStyles((theme) => ({
     Skeleton : {
         backgroundColor : "ffffff",
-        margin : "1em 8em"
+        margin : "1em 1em"
+    },
+    CustomerSkeleton : {
+        backgroundColor : "ffffff",
+        margin : "0em 8em"
     },
     image : {
         margin : "0.8em 0.5em",
@@ -39,10 +43,10 @@ export const Image = ({ image, imageHandler, part,...rest }) => {
                      style = {{display : "none"}}
                      onChange = {( e ) => imageHandler( e )}
                      ref={(inputFile) => inputRef.current = inputFile}/>
-               <Skeleton variant="rect" width={80} height={80}>
+               <Skeleton variant="circle" width={48} height={48}>
                <FontAwesomeIcon icon={faUserCircle} 
               style = {{cursor : "pointer", color:"#272727"}}
-              size={'5x'} onClick = {( ) => inputRef.current.click( )}/>    
+              size={'3x'} onClick = {( ) => inputRef.current.click( )}/>    
                  </Skeleton> </div>)}
         { (['signup','login'].includes(part)) && 
         <div>
@@ -76,6 +80,21 @@ export const Image = ({ image, imageHandler, part,...rest }) => {
             height={'20%'}
             />  
           </div>
-        }         
+        }
+        {part ==='userpage' && (image && !!image.length ? 
+               <Avatar alt="Remy Sharp" src={image} className={classes.image} />:
+              <div className={classes.CustomerSkeleton}>
+              <input type="file" 
+                     style = {{display : "none"}}
+                    // onChange = {( e ) => imageHandler( e )}
+                     ref={(inputFile) => inputRef.current = inputFile}/>
+               <Skeleton variant="circle" width={120} height={120} style={{
+                   textAlign : 'center'
+               }}>
+               <FontAwesomeIcon icon={faCamera} 
+              style = {{cursor : "pointer", color:"#272727",
+              margin : "1.3em"}}
+              size={'2x'} onClick = {( ) => inputRef.current.click( )}/>    
+                 </Skeleton> </div>)}         
     </Fragment>)
 }

@@ -74,7 +74,9 @@ const WorkerDashboard = ( props ) => {
         props.dispatch(imageUpdate(file));
       }
     } 
-    console.log(props);
+    const Logout = () => {
+      props.dispatch(logout())
+    }
     return(
         <div className = {classes.root}>
        <Chip position={'absolute'}
@@ -154,7 +156,7 @@ const WorkerDashboard = ( props ) => {
             {option ==='Check Your Tickets' && <List {...props} part = {'dashboard-ticket'}/>}
             {option === 'Service Categories' && <List {...props} part = {'dashboard-categories'}/>} 
             {option === 'Check Your History' && 'Check Your History'}
-            {option === 'Sign Out' && <List part={'dashboard-signout'} logout={logout}/>} 
+            {option === 'Sign Out' && <List part={'dashboard-signout'} {...props} Logout={Logout}/>} 
         </Paper>
         </Position>
         </Grid>

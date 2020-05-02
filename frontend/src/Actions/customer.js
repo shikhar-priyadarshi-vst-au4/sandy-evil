@@ -35,7 +35,8 @@ export const customerLoginInitiate = (value) => {
                     type : CUSTOMER_LOGIN,
                     payload : data  
                 })
-               } 
+               }
+               
                return dispatch({
                    type : RESET_ALL
                }) 

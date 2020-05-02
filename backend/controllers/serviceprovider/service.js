@@ -1,4 +1,3 @@
-const async = require('async');
 const Category = require('../../models/Category');
 const Service = require('../../models/Service');
 

@@ -55,13 +55,14 @@ export const BookingReducer = (state = initState, {type, payload}) => {
                          finalamount = balance + charges;
                          stateCopy ={...stateCopy,...{balance},...{charges},...{finalamount}};              
                        }
-                       return ;
+                       return {service, price};
                      })
                      addedServices = addedServices?.filter(({service}) => service !== payload.service );
                      stateCopy = { ...stateCopy, ...{addedServices}};
                     }
                     return stateCopy;
                 case CONFIRM_BOOKING :
+                    return stateCopy;
                 default :
                     return stateCopy;                                                 
         }           

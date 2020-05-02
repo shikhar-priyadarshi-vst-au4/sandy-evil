@@ -146,25 +146,25 @@ export const List = ({ search : { city , services} = '',
              <hr/>
              </Grid>
              
-             {rest?.filtered?.map((value, index) => {
+             {rest.filtered.map((value, index) => {
                  return(<Grid item xs={12} sm={3} key={index} className = {classes.item}>
-                     <Paper elevation={4} className={classes.paper}>
+                     <Paper variant={'outlined'} className={classes.paper}>
                         <Text sm_margin = {'1em'}  
                             sm_size = {'0.2em'}
                             style={{margin : "0.5em 0em"}}
-                            fontcolor = {'#ffffff'}
+                            fontcolor = {'#272727'}
                             size={'1em'}>{`Service ${index+1}`}</Text>
                         <Text sm_margin = {'1em'}  
                             style={{margin : "0.3em 0em"}}
                             sm_size = {'0.2em'}
                             weight={'400'}
-                            fontcolor = {'#ffffff'}
+                            fontcolor = {'#272727'}
                             size={'1.2em'}>{value.service}</Text>
                         <Text sm_margin = {'1em'}
                             style={{margin : "0.1em 0em"}}
                             sm_size = {'0.2em'}
                             weight={'400'}
-                            fontcolor = {'#ffffff'}
+                            fontcolor = {'#272727'}
                             size={'1.2em'}> &#8377;{value.price}(Base Price)</Text>
                         
                      </Paper>
@@ -177,10 +177,10 @@ export const List = ({ search : { city , services} = '',
              <Text>Tickets</Text>
              <hr/>
              </Grid>  
-                <Grid xs={12} sm={4}>
+                <Grid item xs={12} sm={4}>
                     <Card part={'dashboard-ticket-matrix'} value={0}/>
                 </Grid>
-                <Grid xs={12} sm={7}>
+                <Grid item xs={12} sm={7}>
                     <Card part={'dashboard-ticket-list'}/>
                 </Grid>
                 </Grid>}
@@ -196,19 +196,18 @@ export const List = ({ search : { city , services} = '',
                 </Typography>
                 </Grid>
                 <Grid item xs={12}>
-                   <KeyStroke part = 'dashboard-signout' logout={rest.logout}/> 
+                   <KeyStroke part = 'dashboard-signout' Logout={rest.Logout}/> 
                 </Grid>
               </Grid>
               </Grid>}
               {part === 'booking-page-services' && <Grid item>
                   {categories?.map((value, index)=>{
                       return(
-                      <Link to={`/booking/${value.id}`} style={{textDecoration : 'none'}}>
+                      <Link to={`/booking/${value.id}`} key={value.id} style={{textDecoration : 'none'}}>
                       <Paper 
                         
                         className={classes.paper}
                         elevation={index===size.ind?size.value:2}
-                        key={index}
                         onClick={()=>rest.setFilter()}
                         onMouseOver={()=>setSize({...size, ...{value : 8, ind : index}})}
                         onMouseOut={()=>setSize({...size, ...{value : 1, ind : 0}})}>
@@ -271,13 +270,13 @@ export const List = ({ search : { city , services} = '',
                           </Grid>
                           <Grid item xs={6}>
                            
-                           <Typography component={Grid} 
+                           <Typography component={Grid} item
                            xs={12}
                            variant={'button'}>{'Booking Confirmation'}</Typography>  
-                           <Typography component={Grid} 
+                           <Typography component={Grid} item
                            xs={12}
                            variant={'caption'}>After confirmation, towny individual will be assigned</Typography>
-                           <KeyStroke component={Grid} xs={12} 
+                           <KeyStroke component={Grid} xs={12} item
                            setGenerate={setGenerate}
                            part={'booking-page-payment-generate'}/>
                            </Grid>
@@ -296,13 +295,13 @@ export const List = ({ search : { city , services} = '',
                                         
                                             <Typography 
                                             className={classes.bill}
-                                            component={Grid} xs={3}
+                                            component={Grid} xs={3} item
                                             variant={'body1'}>{value.service}</Typography>
                                             
                                         
                                             <Typography 
                                             className={classes.bill}
-                                            component={Grid} xs={3}
+                                            component={Grid} xs={3} item
                                             variant={'body1'}>&#8377;{value.price}</Typography>
                                           
                                           <FontAwesomeIcon 

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { mapStateToProps } from '../StateTransition';
 import { List } from '../General/index'
-import { Navbar } from '../Navbar/Navbar'
+import  Navbar  from '../Navbar/Navbar'
 import { FilterServices, AddServices,
          RemoveServices, ConfirmBooking } from '../../Actions/booking'
 const styles = (theme) => ({

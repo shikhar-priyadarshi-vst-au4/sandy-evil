@@ -7,14 +7,18 @@ const CUSTOMER_NOTOKEN = 'CUSTOMER_NOTOKEN';
 
 export const tokenValidate = () =>{
     let getToken = localStorage.getItem('customer-token');
-    if(!!getToken.length){
+    if(!!getToken){
         return dispatch => {
-          FetchAPI(client_links[3].tokenAuth,{METHOD: 'POST', VALUE : ""},(error, data)=>{
+          FetchAPI(client_links[3].tokenAuth.concat(getToken),{METHOD: 'POST', VALUE : {} },(error, data)=>{
               if(!error){
-                  return dispatch({
-                      type : CUSTOMER_TOKEN_VALIDATE,
-                      payload : data
-                  })
+                  let {status} = data;
+                  if(status){
+                    return dispatch({
+                        type : CUSTOMER_TOKEN_VALIDATE,
+                        payload : data
+                    })
+                  }
+                  localStorage.removeItem('customer-token');
               }
           })
         }

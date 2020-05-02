@@ -1,8 +1,8 @@
 import React from 'react';
-import {Navbar} from '../Navbar/Navbar';
+import Navbar from '../Navbar/Navbar';
 import {Footer} from '../Footer/Footer';
 import { Form, List } from '../General/index.js';
-import {mainBar, categories, qualities} from '../Data/data';
+import { qualities } from '../Data/data';
 import { Container, Header,
             Block, Image,
             Section, Text,
@@ -11,11 +11,37 @@ import {connect} from 'react-redux';
 import { mapStateToProps } from '../StateTransition';
 
  const Main = ( props ) => {
-    return(
+      
+  let mainBar = [
+      {
+          navLinkName : "Services",
+          path : '/services'
+      },
+      {
+          navLinkName : "Become A Professional",
+          path : '/careers'
+      },
+      {
+          navLinkName : "Contact Us",
+          path : '/contact-us'
+      },
+      {
+         navLinkName : "Login",
+         path : '/login'
+     },
+     {
+         navLinkName : "Create Account",
+         path : '/signup'
+     }
+   ];
+   
+   return(
             <Container>
                  <Header>
                     <Block/>
-                    <Navbar mainBar = {mainBar} />
+                    <Navbar  
+                    mainBar = {mainBar}
+                    />
                     <div style={{display:"flex"}}>
                     <Image src = {'images/worker.jpg'} alt="failed"/>
                     <Form part = "homepage-header" />

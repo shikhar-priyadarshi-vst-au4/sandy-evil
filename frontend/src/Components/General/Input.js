@@ -7,7 +7,7 @@ import {FormControl,
         Select } from '@material-ui/core';
 import grey from '@material-ui/core/colors/grey';
 import { Flex,} from '../Styled/Styled'
-import {isEmpty, isFullName, isEmail,
+import { isFullName, isEmail,
         isNumber, isPassword} from '../../Validations/index';
 import {locations, categories} from '../Data/data';        
 const useStyles = makeStyles((theme) => ({

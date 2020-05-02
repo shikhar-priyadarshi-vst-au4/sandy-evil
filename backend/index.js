@@ -26,7 +26,7 @@ db.authenticate( ).then(( ) => {
                 })
         })
         
-    }).catch(( ) => {
-        console.log("database connection failed");
+    }).catch((error) => {
+        console.log("database connection failed",error);
     })
 
