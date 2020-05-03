@@ -20,7 +20,7 @@ export const Card = (props) => {
     const classes = useStyle();
     let [elevation, setElevation] = useState(1);
     const { name, service_id, part, title, body, icon } = props;
-    console.log(props);
+    
     return(
         <Fragment>
         { part === 'homepage-section' && name && <Link to = {`/booking/${service_id}`} style={{textDecoration : "none"}}><Paper 

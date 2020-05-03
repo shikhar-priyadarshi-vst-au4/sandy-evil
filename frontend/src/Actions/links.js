@@ -18,7 +18,7 @@ export const client_links = [
     { Upload : "/user/upload?jwt="},
     { tokenAuth : "/user/auth?jwt="},
     { createBooking : "/user/create/"},
-    { getBookings : "/user/retrieve/:customer_id"},
+    { getBookings : "/user/retrieve/"},
     { cancelBooking : "/user/cancel/:bookingId" },
     { workerAssigned : "/user/assign/:bookingId/:worker_id" },
     { submitFeedback : "/user/submit/feedback/:profile_id" },

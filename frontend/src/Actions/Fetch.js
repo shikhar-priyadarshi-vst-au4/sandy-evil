@@ -1,12 +1,6 @@
 import {HOST, PORT} from './links';
 export const FetchAPI = async (LINK, {METHOD, VALUE} , cb) => {
-    let OPTION = {
-        method : `${METHOD}`,
-        headers : {
-            "Content-Type" : "application/json"
-        },
-        body : JSON.stringify(VALUE)
-    } 
+    let OPTION = OPTIONS(METHOD, VALUE); 
     try{
         let data = await (await fetch(`http://${HOST}:${PORT}${LINK}`, OPTION)).json();        
         if(data){
@@ -16,4 +10,17 @@ export const FetchAPI = async (LINK, {METHOD, VALUE} , cb) => {
       catch(error){
           return cb(error, null)
       }
+}
+
+const OPTIONS = (METHOD, VALUE) => {
+    if(METHOD === 'GET'){
+        return ({ method : `${METHOD}`})
+    }
+    return ({
+        method : `${METHOD}`,
+        headers : {
+            "Content-Type" : "application/json"
+        },
+        body : JSON.stringify(VALUE)
+    })
 }

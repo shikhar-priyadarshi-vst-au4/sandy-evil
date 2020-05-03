@@ -1,5 +1,6 @@
-import React, { Component, Fragment } from 'react';
-import { withStyles, Grid, Typography, Paper } from '@material-ui/core';
+import React, { Component } from 'react';
+import { withStyles, Grid, Typography, Paper,
+        Chip } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { compose } from 'redux'
 //import UserSvg from './UserSvg';
@@ -10,6 +11,7 @@ import { Name, BrandName } from '../Navbar/Styled';
 import { Link } from 'react-router-dom';
 import { Image } from '../General/index'
 import { Flex } from '../Styled/Styled';
+import { customerBookings } from '../../Actions/customer';
 const styles = (theme) => ({
    BrandName : {
        padding : '1em'
@@ -28,7 +30,10 @@ const styles = (theme) => ({
        padding : theme.spacing(1)
    }, 
    heading :{
-    margin : '2em'
+    margin : '0.5em'
+   },
+   body : {
+       margin : '0em 1.6em',
    }
 })
  class User extends Component {
@@ -39,7 +44,16 @@ const styles = (theme) => ({
       }
       this.editHandler = this.editHandler.bind(this);
     }
-    
+    componentDidMount(){
+        if(!!this.props.customerData){
+            this.props.dispatch(customerBookings(this.props.customerData.id));
+         }   
+    }
+    componentDidUpdate(){
+     if(!this.props.bookings.length && !!this.props.customerData){
+        this.props.dispatch(customerBookings(this.props.customerData.id));
+     }
+    }
     editHandler(){
        this.setState({...this.state, edit : true})
     }
@@ -130,6 +144,27 @@ const styles = (theme) => ({
                           component={Grid} xs={6} item color={'secondary'}>
                               Booking Information 
                           </Typography><hr/>
+                          {this.props.bookings.map(val => <Paper key={val.id} component={Grid} 
+                          className={classes.paper} xs={6} item variant={'outlined'}>
+                            <Grid container>
+                                <Typography component={Grid} item xs={4} 
+                                className={classes.heading}
+                                variant="button">Booking Id</Typography>
+                                <Typography component={Grid} item xs={2} 
+                                className={classes.heading}
+                                variant="button">{val.id.slice(0,val.id.indexOf('-'))}</Typography>
+                            </Grid>
+                            <Grid container>
+                                <Chip label={`${val.status}`}
+                                className={classes.body} size={'small'}
+                                variant="outlined" color={`${val.status==='Pending'?'secondary':
+                                'primary'}`} />
+                                <Typography variant="body2" className={classes.body}
+                                component={Grid} item xs={2}>{val.Category.category}</Typography>
+                                <Typography variant="body2" className={classes.body}
+                                component={Grid} item xs={2}>&#8377;{val.balance}</Typography>
+                          </Grid>
+                          </Paper>)}
                          </Paper>
                       </Grid>
                       
@@ -146,3 +181,4 @@ const styles = (theme) => ({
 export default compose(connect(mapStateToProps),withStyles(styles))(User);
 
 
+                            

@@ -9,9 +9,8 @@ export const mapStateToProps = (state) => {
                             password, area },
          ServiceReducer : { services, filtered, category_id },
          CustomerReducer : { isCustomerAuthenticated,
-             loggedIn, isRegister, customerData, },
-         BookingReducer : { customer_id , worker_id ,
-         status, filteredServices,
+             loggedIn, isRegister, customerData, bookings },
+         BookingReducer : { filteredServices,
          addedServices, serviceId,
          balance, charges,
          finalamount, bookingdata }                                            
@@ -21,8 +20,7 @@ export const mapStateToProps = (state) => {
             response, loginError, error, data, id, image, 
             name, email, number, specialisation, password, 
             area, services, filtered, category_id, isCustomerAuthenticated, 
-            loggedIn, isRegister, customerData, customer_id , worker_id ,
-            status, filteredServices,
+            loggedIn, isRegister, customerData, bookings, filteredServices,
             addedServices, serviceId,
             balance, charges,
             finalamount, bookingdata
@@ -30,8 +28,3 @@ export const mapStateToProps = (state) => {
 }
 
 
-// AccountReducer,
-//             ProfileReducer,
-//             ServiceReducer,
-//             TicketReducer,
-//             HistoryReducer
