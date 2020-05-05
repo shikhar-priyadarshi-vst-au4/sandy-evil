@@ -20,7 +20,7 @@ export const client_links = [
     { createBooking : "/user/create/"},
     { getBookings : "/user/retrieve/"},
     { cancelBooking : "/user/cancel/:bookingId" },
-    { workerAssigned : "/user/assign/:bookingId/:worker_id" },
+    { workerAssigned : "/user/assign/" },
     { submitFeedback : "/user/submit/feedback/:profile_id" },
 
 ]

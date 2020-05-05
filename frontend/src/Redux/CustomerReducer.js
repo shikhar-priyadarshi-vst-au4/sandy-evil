@@ -1,5 +1,5 @@
 import { CUSTOMER_REGISTER,
-         CUSTOMER_LOGIN, CUSTOMER_LOGOUT, 
+         CUSTOMER_LOGIN, CUSTOMER_LOGOUT, CLOSE_CUSTOMER_MODAL,
          CUSTOMER_BOOKINGS, NOBOOKINGS, RESET_ALL } from '../Actions/customer' 
 import {  CUSTOMER_TOKEN_VALIDATE, CUSTOMER_NOTOKEN } from '../Actions/Auth';
 const initState = {
@@ -32,6 +32,9 @@ export const CustomerReducer = ( state = initState,
           case CUSTOMER_BOOKINGS:
               stateCopy={...stateCopy, bookings : payload.data};
               return stateCopy;
+          case CLOSE_CUSTOMER_MODAL :
+               stateCopy[payload] = false;
+               return stateCopy;
           case CUSTOMER_NOTOKEN:         
           case CUSTOMER_LOGOUT:
           case RESET_ALL:

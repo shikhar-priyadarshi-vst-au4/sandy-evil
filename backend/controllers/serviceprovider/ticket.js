@@ -38,6 +38,19 @@ function controller( ){
                  })
              }
         }         
+  
+  }
+  this.create = async(req,res) => {
+      let {worker_id} = req.params;
+      try{
+        let bookings = await Booking.findAll({
+            where : { worker_id, status : 'Accept'}
+        })
+        //still have to do
+      }
+      catch(error){
+
+      }
   }
 } 
 

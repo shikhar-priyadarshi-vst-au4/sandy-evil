@@ -23,7 +23,6 @@ class Booking extends Component {
     constructor(props){
       super(props)
       this.revertFilter=this.revertFilter.bind(this);
-      this.setFilter=this.setFilter.bind(this);
       this.addService = this.addService.bind(this);
       this.removeService = this.removeService.bind(this);
       this.confirmBooking = this.confirmBooking.bind(this);
@@ -37,6 +36,15 @@ class Booking extends Component {
       if(this.props.services!==prevProps.services){
         this.revertFilter();
       }
+      if(this.props.match.params.serviceId!==prevProps.match.params.serviceId){
+        this.revertFilter();
+      }
+      if(this.props.bookingdata!==prevProps.bookingdata){
+        let { serviceId } = this.props;
+        let domain = this.props.services.find(val => val.id === serviceId);
+        let {id : bookingId} = this.props.bookingdata; 
+        this.props.history.push(`/assign/${bookingId}/${domain.category}`) 
+      }
     }
      revertFilter(){
       let { match : {
@@ -45,11 +53,7 @@ class Booking extends Component {
       let value = services.find(val => val.id === id);
       console.log(value);
       this.props.dispatch(FilterServices(value)) 
-    }
-     setFilter(){
-       this.revertFilter();
-       //this.props.dispatch(FilterServices(val));
-     }
+    }  
      addService(index){
        this.props.dispatch(AddServices(index));
      }
@@ -57,10 +61,16 @@ class Booking extends Component {
        this.props.dispatch(RemoveServices(serviceName));   
      }    
      confirmBooking(){
+      localStorage.removeItem('booking-id');
       let { customerData : { id : customer_id }, serviceId : service_id,
         addedServices: services, finalamount : balance } = this.props;
-        let value = {customer_id, service_id, services, balance }
-        this.props.dispatch(ConfirmBooking(value));          
+        let domain = this.props.services.find(val => val.id === service_id);
+        console.log(domain.category);
+        if(domain){
+          let value = {customer_id, service_id, domain : domain.category, services, balance }
+          this.props.dispatch(ConfirmBooking(value));
+          // this.props.history.push(`/assign/${domain.category}`);
+        }
       }
     render() {
         const {classes} = this.props;
@@ -74,8 +84,8 @@ class Booking extends Component {
                       <Grid item className={classes.item} xs={2}>
                       <List part={'booking-page-services'} categories={
                         this.props.services
-                      }
-                      setFilter={this.setFilter} {...this.props}/>
+                      } 
+                      {...this.props}/>
                       </Grid>
                       <Grid item className={classes.item} xs={5}>
                       <List part={'booking-page-services-category'}

@@ -208,7 +208,6 @@ export const List = ({ search : { city , services} = '',
                         
                         className={classes.paper}
                         elevation={index===size.ind?size.value:2}
-                        onClick={()=>rest.setFilter()}
                         onMouseOver={()=>setSize({...size, ...{value : 8, ind : index}})}
                         onMouseOut={()=>setSize({...size, ...{value : 1, ind : 0}})}>
                             <Grid container>

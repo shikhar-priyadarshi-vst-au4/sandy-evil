@@ -4,4 +4,5 @@ import  WorkerDashboard from './Dashboard';
 import  Account from './Account';
 import  Booking from "./Booking";
 import  User from './User';
-export { Main, Career, WorkerDashboard, Account, Booking, User };
+import  Assign from './Assign';
+export { Main, Career, WorkerDashboard, Account, Booking, User, Assign };

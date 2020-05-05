@@ -4,6 +4,7 @@ const CUSTOMER_REGISTER = 'CUSTOMER_REGISTER';
 const CUSTOMER_LOGIN = 'CUSTOMER_LOGIN';
 const CUSTOMER_LOGOUT = 'CUSTOMER_LOGOUT';
 const CUSTOMER_BOOKINGS = 'CUSTOMER_BOOKINGS';
+const CLOSE_CUSTOMER_MODAL = 'CLOSE_CUSTOMER_MODAL';
 const NOBOOKINGS = 'NOBOOKINGS';
 const RESET_ALL = 'RESET_ALL';
 
@@ -52,7 +53,12 @@ export const customerLoginInitiate = (value) => {
              type : CUSTOMER_LOGOUT
          })   
     }
-    
+    export const closeCustomerModal = (property) => {
+        return ({
+            type : CLOSE_CUSTOMER_MODAL,
+            payload : property
+        })
+    }
     export const customerBookings = (customer_id) => {
         let token = localStorage.getItem('customer-token');
         if(!!token){
@@ -82,6 +88,7 @@ export {
     CUSTOMER_LOGIN,
     CUSTOMER_LOGOUT,
     CUSTOMER_BOOKINGS,
+    CLOSE_CUSTOMER_MODAL,
     NOBOOKINGS,
     RESET_ALL
 } 

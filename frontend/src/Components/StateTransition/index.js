@@ -13,7 +13,7 @@ export const mapStateToProps = (state) => {
          BookingReducer : { filteredServices,
          addedServices, serviceId,
          balance, charges,
-         finalamount, bookingdata }                                            
+         finalamount, bookingdata, afterassigned, bookingError }                                            
          } = state;
     return({
             profileCreated, isAuthenticated, isLoggedIn,
@@ -23,7 +23,7 @@ export const mapStateToProps = (state) => {
             loggedIn, isRegister, customerData, bookings, filteredServices,
             addedServices, serviceId,
             balance, charges,
-            finalamount, bookingdata
+            finalamount, bookingdata, afterassigned, bookingError
     })
 }
 

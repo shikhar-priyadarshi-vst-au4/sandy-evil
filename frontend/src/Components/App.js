@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {  Switch, Route } from 'react-router-dom';
-import { Main, Career, WorkerDashboard, Account, Booking, User } from './Pages/index';
+import { Main, Career, WorkerDashboard, Account, Booking, User, Assign } from './Pages/index';
 import { connect } from 'react-redux'
 import { ProtectedRoute }  from './ProtectedRoute';
 import { mapStateToProps } from './StateTransition';
@@ -35,6 +35,7 @@ import 'typeface-roboto';
        <Route path = {'/signup'}  render={(props)=><Account part={'signup'} {...props}/>}/> 
        <Route path = {'/booking/:serviceId'} component = {Booking}/>
        <Route path = {'/user'} component={User}/>
+       <Route path = {'/assign/:bookingId/:domain'} component={Assign}/>
        {/* <ProtectedRoute path = {'/user'} {...this.props} component={User}
         part = {'User'}/> */}
        

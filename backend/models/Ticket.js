@@ -25,8 +25,7 @@ const Ticket = sequelize.define('Ticket',{
         },
     action : {
         type : Sequelize.ENUM,
-        values: ['Accept', 'Decline', 'Pending', 'Completed'],
-        defaultValue : 'Active'
+        values: ['Pending', 'Accept', 'Completed']
     }
 });
 

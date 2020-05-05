@@ -2,7 +2,9 @@ import {    SET_FILTER,
             ADD_SERVICES,
             REMOVE_SERVICES,
             CONFIRM_BOOKING,
-            BOOKING_FAILED     } from '../Actions/booking';
+            BOOKING_FAILED,
+            BOOKING_ERROR,     
+            WORKER_ASSIGNED} from '../Actions/booking';
 
 
 const initState = {
@@ -12,7 +14,9 @@ const initState = {
     balance : 0.0,
     charges : 0.0,
     finalamount : 0.0,
-    bookingdata : ""
+    bookingdata : "",
+    afterassigned : "",
+    bookingError : ""
 }
 
 export const BookingReducer = (state = initState, {type, payload}) => {
@@ -64,8 +68,14 @@ export const BookingReducer = (state = initState, {type, payload}) => {
                     let { data } = payload;
                     stateCopy = { ...stateCopy, ...{ bookingdata : data }}
                     return stateCopy;
+                case WORKER_ASSIGNED :
+                    let value = payload;
+                    stateCopy.afterassigned = value.data;
+                    return stateCopy;    
                 case BOOKING_FAILED:
-                    stateCopy = {...stateCopy, ...{ bookingdata : ""}};
+                case BOOKING_ERROR :    
+                    stateCopy = {...stateCopy, 
+                        ...{ bookingdata : ""},...{bookingError : payload.message}};
                     return stateCopy;     
                 default :
                     return stateCopy;                                                 

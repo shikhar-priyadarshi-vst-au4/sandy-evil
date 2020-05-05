@@ -10,7 +10,6 @@ function controller(){
     let { customer_id } = req.params;  
     let { service_id, services,
         status = 'Pending', balance = 0.0 } = req.body;
-        console.log(customer_id, service_id, services, balance);
       if(!!customer_id && !!services.length ){
           try{
            let data = await Booking.create(
@@ -49,7 +48,7 @@ function controller(){
              }    
           }
           catch(error){
-              res.json({error, status : false});
+              res.json({message : error.message, status : false});
           }
       }
       else{
@@ -69,12 +68,14 @@ function controller(){
         })
       }
   }
+  //to assign a worker to booking
   this.assign = async( req, res ) => {
       let { bookingId : id  } = req.params;
-      let { worker_id } = req.locals;
+      let { worker_id } = res.locals;
+      console.log('bookingId', id);
       if( !!id && !!worker_id){
             try{
-            let data = Booking.update({worker_id,
+            let data = await Booking.update({worker_id,
             status : 'Accept' },{where : {id}, 
             returning: true});
             if(!!data){
@@ -83,9 +84,15 @@ function controller(){
                     data
                 })
             }
+            else{
+                res.json({
+                    status : false,
+                    message : 'Worker not available'
+                })
+            }
         }
         catch(error){
-            res.json({status : false, error})
+            res.json({status : false, message : error.message})
         }
       } 
   }
@@ -109,36 +116,58 @@ function controller(){
         })
     }
   }
+  //gather available worker for assigning
   this.gather = async( req, res, next ) => {
-    let { bookingId : id } = req.params;
+    let { bookingId : id, domain } = req.params;
+    console.log('bookingId',id);
     try{
-      let booking = await Booking.findByPk(id,{include : Category});
-        if(booking){
-            let requiredWorkers = await Available.findAll({where : { domain : booking.Category.category}});
+    //   let data = await Booking.findByPk(id);
+    //   res.json({data});
+       if(domain){
+        let requiredWorkers = await Available.findAll({
+            where : { domain, 
+                      status : 'FREE'}});
+            if(requiredWorkers.length>0){
             requiredWorkers.map( async({id, worker_id, status, ...value}) => {
                 if(status!=='BUSY'){
                     res.locals.worker_id = worker_id;
-                    let update = await Available.update({ status : 'BUSY'}, {
-                        where : {
-                            id
-                        }
-                    })
-                    next()
+                    try{
+                        let update = await Available.update({ status : 'BUSY'}, {
+                            where : {
+                                id
+                            },
+                            returning : true
+                        })
+                     next()
+                    }
+                    catch(error){
+                       res.json({
+                           status : false,
+                           message : error.message
+                       })
+                    }
                 }
             })
+        } 
+        else{
             res.json({
                 status : false,
                 message : 'Worker not available'
             })
         }
-    }   
-    catch(error){
-      res.json({
-          error,
-          status : false
-      })
-    }     
+       }
+      
+        }
+        catch(error){
+            res.json({
+                status : false,
+                message : error.message
+            })
+        }
+    //}   
+    //      
   }
+  //gather all bookings irrespective of customer id
   this.gatherAll = async(req,res)=>{
       let data = await Booking.findAndCountAll();
       if(data){
@@ -147,7 +176,56 @@ function controller(){
           })
       }
   }
-
+  //checker the availability of worker
+  this.check = async(req,res,next) => {
+      let domain = req.body.domain;
+      console.log('domain',domain);
+      try{
+        let check = await Available.findAll({
+            where : {
+                domain, 
+                status : 'FREE'
+            }
+        })
+        
+        if(check.length>0){
+         next();
+        }
+        else{
+            res.json({
+                status : false,
+                message : 'Worker not available'
+            })
+        }
+      }
+      catch(error){
+        res.json({
+            status : false,
+            message : error.message
+        })
+      }
+  }
+  this.isAssigned = async( req, res, next ) => {
+      let {bookingId : id} = req.params;
+      try{
+          let data = await Booking.findByPk(id);
+          if(data.worker_id){
+              res.json({
+                  status : false,
+                  message : 'Worker already assigned'
+              })
+          }
+          else{
+            next();
+          }
+      }
+      catch(error){
+          res.json({
+              status : false,
+              message : error.message
+          })
+      }
+  }
 }
   
 module.exports = new controller();

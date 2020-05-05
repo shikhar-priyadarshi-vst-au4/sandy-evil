@@ -114,6 +114,7 @@ const Form = ( props ) => {
     const customerLoginAccount = () => {
         let { Email : email, Password : password } = customerLogin;
         let data = { email, password};
+        props.setProgress(true);
         props.dispatch(customerLoginInitiate(data));
     }
     const handleError = () => {
