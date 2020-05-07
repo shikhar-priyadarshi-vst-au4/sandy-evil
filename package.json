@@ -1,0 +1,22 @@
+{
+  "name": "shikhar-aayush-towny-au4",
+  "version": "1.0.0",
+  "description": "Shikhar Branch",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./backend/index.js",
+    "heroku-postbuild": "cd frontend && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
+
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/attainu/Shikhar-Aayush-Towny-au4.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/attainu/Shikhar-Aayush-Towny-au4/issues"
+  },
+  "homepage": "https://github.com/attainu/Shikhar-Aayush-Towny-au4#readme"
+}
