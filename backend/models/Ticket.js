@@ -7,25 +7,13 @@ const Ticket = sequelize.define('Ticket',{
         defaultValue : Sequelize.UUIDV1,
         primaryKey : true
     },
-    profile_id: {
-        type : Sequelize.UUID,
-        allowNull : false
-    },
-    customer_id :{
-        type : Sequelize.UUID,
-        allowNull : false
-    },
     booking_id :{
         type : Sequelize.UUID,
         allowNull : false
     },
-    services: {
-        type : Sequelize.ARRAY(Sequelize.STRING),
+    worker_id : {
+        type : Sequelize.UUID,
         allowNull : false
-        },
-    action : {
-        type : Sequelize.ENUM,
-        values: ['Pending', 'Accept', 'Completed']
     }
 });
 
