@@ -9,6 +9,10 @@
     "heroku-postbuild": "cd frontend && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
 
   },
+  "engines": {
+    "node": "10.16.x",
+    "npm": "6.14.x"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/attainu/Shikhar-Aayush-Towny-au4.git"
