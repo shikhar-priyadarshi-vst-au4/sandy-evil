@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Form = ( props ) => {
     const classes = useStyles();
-    const matches = useMediaQuery('(max-width:1024px)');
+     useMediaQuery('(max-width:1024px)');
     const [ city, setCity ] = useState('');
     const [ service, setService ] = useState('');
     const [ search, setSearch ] = useState('');

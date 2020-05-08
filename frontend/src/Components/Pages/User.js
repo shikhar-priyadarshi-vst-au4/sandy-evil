@@ -61,7 +61,9 @@ const styles = (theme) => ({
     render() {
         
         let {classes, customerData : {
-          name : Fullname, image, mobileNumber : Contact, email : Email, 
+          name : Fullname, 
+          //image,
+           mobileNumber : Contact, email : Email, 
           area : Area  
         }} = this.props;
         

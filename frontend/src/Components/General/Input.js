@@ -58,7 +58,9 @@ export const Input = ( { city, service,
                      let dataNumber = isNumber(value)
                     setValidations({...validations,...{Number:{...Number, 
                         ...{status : dataNumber.status}, ...{msg : dataNumber.msg}}}});
-                    break;        
+                    break;   
+            default :
+                    break;             
         }  
         cb({...state, [name] : value});
       } 

@@ -1,6 +1,6 @@
 import { CUSTOMER_REGISTER,
          CUSTOMER_LOGIN, CUSTOMER_LOGOUT, CLOSE_CUSTOMER_MODAL,
-         CUSTOMER_BOOKINGS, NOBOOKINGS, RESET_ALL } from '../Actions/customer' 
+         CUSTOMER_BOOKINGS,  RESET_ALL } from '../Actions/customer' 
 import {  CUSTOMER_TOKEN_VALIDATE, CUSTOMER_NOTOKEN } from '../Actions/Auth';
 const initState = {
     isCustomerAuthenticated :  false,

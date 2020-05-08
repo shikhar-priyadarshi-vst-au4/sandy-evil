@@ -1,5 +1,6 @@
-import {HOST, PORT, worker_links} from './links';
+import {worker_links} from './links';
 import {noToken, logout} from './index'
+import { FetchAPI } from './Fetch';
 const IMAGE_UPDATE = 'IMAGE_UPDATE';
 const IMAGE_ERROR = 'IMAGE_ERROR';
 const FETCH_USER = 'FETCH_USER';
@@ -20,7 +21,7 @@ export const imageUpdate = ( file ) => {
                         body : formData
                     };
                 try{
-                    let data = await (await fetch(`http://${HOST}:${PORT}${worker_links[2].upload}${getToken}`, 
+                    let data = await (await fetch(`${worker_links[2].upload}${getToken}`, 
                     option)).json();
                     console.log(data);
                     return ({
@@ -51,26 +52,42 @@ export const extractUser = ( user ) => {
 export const retrieveServices = (  ) => {
    return async dispatch => {
       
-      try{
-         let services = await (await fetch(`http://${HOST}:${PORT}${worker_links[4].render}all`,{
-             method : 'GET',
-             headers : {
-                 "Content-Type" : "application/json"
-             }
-         })).json();
-         if(services){
-            return dispatch({
-                type : ALLSERVICES,
-                payload : services.data
-            })
+      //try{
+          FetchAPI(`${worker_links[4].render}all`,{METHOD : 'GET', VALUE : {}},(error, services) => {
+               if(!error){
+                if(services){
+                    return dispatch({
+                        type : ALLSERVICES,
+                        payload : services.data
+                    })
+                   
+                 }
+               }
+               else{
+                return dispatch({
+                    type : 'ERROR'
+                })
+               }
+          })
+        //  let services = await (await fetch(`http://${HOST}:${PORT}${worker_links[4].render}all`,{
+        //      method : 'GET',
+        //      headers : {
+        //          "Content-Type" : "application/json"
+        //      }
+        //  })).json();
+        //  if(services){
+        //     return dispatch({
+        //         type : ALLSERVICES,
+        //         payload : services.data
+        //     })
            
-         }
-       }
-       catch(error){
-              return dispatch({
-                  type : 'ERROR'
-              })
-       }
+        //  }
+    //    }
+    //    catch(error){
+    //           return dispatch({
+    //               type : 'ERROR'
+    //           })
+       //}
    }
 }
 export const categoryId = (work) => {
@@ -85,32 +102,41 @@ export const registerServices = ( data ) => {
        if(!!profile_id && !!category_id){
            
         return async dispatch => {
-            try{
+            
                 let getToken = localStorage.getItem('access-token');
                 if(getToken){
-                    let result = await (await 
-                        fetch(`http://${HOST}:${PORT}${worker_links[5].register}${getToken}`,{
-                            method : "POST",
-                            headers : {
-                                'Content-Type' : 'application/json'
-                            },
-                            body : JSON.stringify(data)
-                        })).json();
+                //     let result = await (await 
+                //         fetch(`http://${HOST}:${PORT}${worker_links[5].register}${getToken}`,{
+                //             method : "POST",
+                //             headers : {
+                //                 'Content-Type' : 'application/json'
+                //             },
+                //             body : JSON.stringify(data)
+                //         })).json();
                         
-                   return dispatch({
-                       type : FILTERSERVICE,
-                       payload : result.data[0]
-                   });        
+                //    return dispatch({
+                //        type : FILTERSERVICE,
+                //        payload : result.data[0]
+                //    });
+                        FetchAPI(`${worker_links[5].register}${getToken}`,{ METHOD : 'POST',
+                         VALUE : data},(error, result) => {
+                             if(!error){
+                                return dispatch({
+                                    type : FILTERSERVICE,
+                                    payload : result.data[0]
+                                });
+                             }
+                             else{
+                                return dispatch({
+                                    type : 'ERROR'
+                                })
+                             }
+                         })
                 }
                 return dispatch(noToken());
-            }catch(error){
-                return dispatch({
-                    type : 'ERROR'
-                })
             }
         }
     }    
-}
 export const updateUser = ( data, property ) => {
     //update user creditenials
     console.log('Update');

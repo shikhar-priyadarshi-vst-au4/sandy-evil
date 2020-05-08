@@ -1,4 +1,4 @@
-import {HOST, PORT, worker_links} from './links';
+import { worker_links} from './links';
 
 //Account Action constants
 const CREATE_ACCOUNT = 'CREATE_ACCOUNT';
@@ -32,7 +32,7 @@ export const register = ({ name, email,
          return async dispatch => {
              
              try{
-                let { message, status, error } = await (await fetch(`http://${HOST}:${PORT}${worker_links[0].register}`,{
+                let { message, status, error } = await (await fetch(`${worker_links[0].register}`,{
                     method : 'POST',
                     headers : {
                         'Content-Type' : 'application/json'
@@ -82,7 +82,7 @@ export const login = ({ email, password }) => {
       else{
           return async dispatch => {
              try{
-                 let { error, user, token, message } = await (await fetch(`http://${HOST}:${PORT}${worker_links[1].login}`,{
+                 let { error, user, token, message } = await (await fetch(`${worker_links[1].login}`,{
                     method : 'POST',
                     headers : {
                         'Content-Type' : 'application/json'
@@ -150,7 +150,7 @@ export const validateToken = ( ) => {
             }
             else{   
             try {
-                let { token, message, data } = await (await fetch(`http://${HOST}:${PORT}${worker_links[3].tokenAuth}${gettoken}`,{
+                let { token, message, data } = await (await fetch(`${worker_links[3].tokenAuth}${gettoken}`,{
                     method : 'POST',
                     headers : {
                      'Content-Type' : 'application/json'

@@ -60,7 +60,7 @@ export const AccountReducer = (state = initState, action) => {
             }
             return stateCopy;    
         case VALIDTOKEN :
-             let {message, data} = action.payload;
+             let {data} = action.payload;
              stateCopy.isAuthenticated = true;
              stateCopy.data = data;
              return stateCopy; 

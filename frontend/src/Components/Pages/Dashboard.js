@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
         }
     }
   }));
-const WorkerDashboard = ( props ) => {
+const WorkerDashboard = ( {image,services, category_id,...props} ) => {
     const [ option, setOption ] = useState('Check Your Tickets');
     const classes = useStyles();
     //CDM
@@ -55,18 +55,17 @@ const WorkerDashboard = ( props ) => {
     //CDU
     useEffect(( ) => {
       props.dispatch(extractUser(props.data));
-     },[props.image]);
+     },[image]);
      useEffect(()=>{
-       if(props.services.length>0){
-         console.log(props.services);
+       if(services.length>0){
         props.dispatch(categoryId(props.data.specialisation));
        }
-       if(!!props.category_id){
-         console.log(props.category_id); 
+       if(!!category_id){
+          
         props.dispatch(registerServices({profile_id : props.id,
-        category_id : props.category_id}));
+        category_id : category_id}));
        }
-     },[props.services, props.category_id])
+     },[services, category_id])
      const imageHandler = ( event ) => {
       let file = event.target.files[0];
       console.log(file);
@@ -85,7 +84,7 @@ const WorkerDashboard = ( props ) => {
           top = {'0.5em'}  sm_top = {'1em'}>
               <Paper variant="outlined"
               className={classes.chip}>              
-                <Image part={'dashboard'} image = {props.image}
+                <Image part={'dashboard'} image = {image}
                 imageHandler={imageHandler}/>     
                  
                  <Text padding={'1em 1em'} size={'0.5em'} 

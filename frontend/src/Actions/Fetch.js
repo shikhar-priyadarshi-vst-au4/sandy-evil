@@ -1,8 +1,8 @@
-import {HOST, PORT} from './links';
+// import {HOST, PORT} from './links';
 export const FetchAPI = async (LINK, {METHOD, VALUE} , cb) => {
     let OPTION = OPTIONS(METHOD, VALUE); 
     try{
-        let data = await (await fetch(`http://${HOST}:${PORT}${LINK}`, OPTION)).json();        
+        let data = await (await fetch(`${LINK}`, OPTION)).json();        
         if(data){
             return cb (null, data);
         }

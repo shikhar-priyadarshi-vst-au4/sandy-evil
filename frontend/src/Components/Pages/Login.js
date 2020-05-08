@@ -25,7 +25,7 @@ const Login = ({ isCustomerAuthenticated, loggedIn,...props}) => {
                 });
               }, 1000)
         }
-      },[isCustomerAuthenticated]);
+      },[isCustomerAuthenticated, progress]);
       const handleClose = (property) => {
         props.dispatch(closeCustomerModal(property))
       } 
