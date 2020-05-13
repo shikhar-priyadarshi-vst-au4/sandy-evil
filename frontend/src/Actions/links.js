@@ -7,9 +7,10 @@ export const worker_links = [
     { upload:`${host}/worker/upload?jwt=` },
     { tokenAuth : `${host}/worker/auth?jwt=`},
     { render : `${host}/services/render?category=`},
-    { register : `${host}/services/register?jwt=`},
-    { acceptTicket : `${host}/ticket/action/:profile_id/
-    :customer_id/:booking_id/:action`}
+    { getServices : `${host}/services/register?jwt=`},
+    { create : `${host}/worker/ticket/`},
+    { retrieve : `${host}/worker/retrieve/`},
+    { update : `${host}/worker/update/`}
 ]
 
 export const client_links = [

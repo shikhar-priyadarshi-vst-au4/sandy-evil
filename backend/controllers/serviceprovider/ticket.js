@@ -1,5 +1,6 @@
 const Ticket = require('../../models/Ticket');
 const Booking = require('../../models/Booking');
+const Available = require('../../models/Available');
 Ticket.belongsTo(Booking, {foreignKey : 'booking_id'});
 // Booking.hasOne()
 function controller( ){
@@ -10,20 +11,33 @@ function controller( ){
         let bookings = await Booking.findAll({
             where : { worker_id, status : 'Accept'}
         })
-        if(bookings.length>0){
+        if(!!bookings.length){
             let ticket = await Ticket.findOrCreate({where : {
                 booking_id : bookings[0].id,
                 worker_id
             }})
-            res.json(ticket);
+            res.json({
+                status : true,
+                ticket,
+                message : `${ticket[1]?`Ticket 
+                created successfully`:`Ticket already exist`}`
+            });
         }
-          
-                  
+        else{
+            res.json({
+                status : true,
+                message : 'No booking found with such details'
+            })
+        }          
       }
       catch(error){
-
+            res.json({
+                status : false,
+                message : error.message
+            })
       }
   }
+  //to retrieve all tickets of a worker
   this.getTickets = async(req,res) => {
       let {worker_id} = req.params;
       try{
@@ -32,20 +46,50 @@ function controller( ){
                  model : Booking
              }
          ]})
-         res.json(tickets);
+         res.json({tickets});
       }
       catch(error){
-
+            res.json({
+                status : false,
+                message : error.message
+            })
       }
   }
   //to mark the ticket complete
-  this.update = async(req,res) => {
-      let {worker_id} = req.params;
+  this.updateTicket = async(req,res, next) => {
+      let {booking_id} = req.params;
       try{
+        let updateTicket = await Booking.update({status : 'Completed'},{where : {
+            id : booking_id, status : 'Accept'}, returning : true});
+        if(updateTicket){
+            next();
+        }
 
       }catch(error){
-
+        res.json({
+            status : false,
+            message : error.message
+        })
       }
+  }
+  this.reset = async(req,res) => {
+     let {worker_id} = req.params;
+     try{
+        let reset = await Available.update({status : 'FREE'},{where : {worker_id,
+                                             status : 'BUSY'}, returning : true});
+            if(reset){
+                res.json({
+                    status : true,
+                    data : reset
+                })
+            }                                 
+     }
+     catch(error){
+         res.json({
+             status : false,
+             message : error.message
+         })
+     }
   }
 } 
 

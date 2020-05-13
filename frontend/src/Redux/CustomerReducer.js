@@ -1,6 +1,6 @@
 import { CUSTOMER_REGISTER,
          CUSTOMER_LOGIN, CUSTOMER_LOGOUT, CLOSE_CUSTOMER_MODAL,
-         CUSTOMER_BOOKINGS,  RESET_ALL } from '../Actions/customer' 
+         CUSTOMER_BOOKINGS,  RESET_CUSTOMER_DATA } from '../Actions/customer' 
 import {  CUSTOMER_TOKEN_VALIDATE, CUSTOMER_NOTOKEN } from '../Actions/Auth';
 const initState = {
     isCustomerAuthenticated :  false,
@@ -37,7 +37,7 @@ export const CustomerReducer = ( state = initState,
                return stateCopy;
           case CUSTOMER_NOTOKEN:         
           case CUSTOMER_LOGOUT:
-          case RESET_ALL:
+          case RESET_CUSTOMER_DATA:
                return initState;
           default:
               return stateCopy;            

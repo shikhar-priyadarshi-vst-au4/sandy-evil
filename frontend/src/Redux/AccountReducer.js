@@ -8,8 +8,8 @@ import { INPUT_ERROR,
          LOGOUT,
          LOGIN_ERROR,
          REMOVE_ERROR_ALERT } from '../Actions/index';
-
-
+import {IMAGE_UPDATE} from '../Actions/worker';
+ 
 //initial state for workerReducer
 let initState = {
     profileCreated : false,
@@ -18,7 +18,8 @@ let initState = {
     error : false,
     loginError : false,
     response : "",
-    data : ""
+    data : "",
+    imagemessage : ""
 }
 
 export const AccountReducer = (state = initState, action) => {
@@ -58,7 +59,10 @@ export const AccountReducer = (state = initState, action) => {
             if(stateCopy.loginError){
                 stateCopy.loginError = false;
             }
-            return stateCopy;    
+            return stateCopy;   
+        case IMAGE_UPDATE :
+            stateCopy.imagemessage = 'Image Uploaded Successfully';
+            return stateCopy;
         case VALIDTOKEN :
              let {data} = action.payload;
              stateCopy.isAuthenticated = true;

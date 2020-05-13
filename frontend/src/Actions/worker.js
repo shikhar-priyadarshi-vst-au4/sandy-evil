@@ -1,5 +1,5 @@
 import {worker_links} from './links';
-import {noToken, logout} from './index'
+import {noToken} from './index'
 import { FetchAPI } from './Fetch';
 const IMAGE_UPDATE = 'IMAGE_UPDATE';
 const IMAGE_ERROR = 'IMAGE_ERROR';
@@ -40,21 +40,22 @@ export const imageUpdate = ( file ) => {
             }
         }     
    }
-export const extractUser = ( user ) => {
-    if(user){
-        return ({ 
-            type : FETCH_USER,
-            payload : user
-        })
-    }
-    return (logout());
-}
+// export const extractUser = ( user ) => {
+//     if(user){
+//         return ({ 
+//             type : FETCH_USER,
+//             payload : user
+//         })
+//     }
+//     return (logout());
+// }
 export const retrieveServices = (  ) => {
    return async dispatch => {
       
       //try{
           FetchAPI(`${worker_links[4].render}all`,{METHOD : 'GET', VALUE : {}},(error, services) => {
-               if(!error){
+             
+            if(!error){
                 if(services){
                     return dispatch({
                         type : ALLSERVICES,
@@ -91,6 +92,7 @@ export const retrieveServices = (  ) => {
    }
 }
 export const categoryId = (work) => {
+    console.log(work);
     return ({
         type : SERVICEID,
         payload : work.slice(0,1).toUpperCase().concat(work.slice(1))
@@ -100,25 +102,12 @@ export const registerServices = ( data ) => {
        let {profile_id, category_id} = data;
        console.log(profile_id, category_id);
        if(!!profile_id && !!category_id){
-           
         return async dispatch => {
             
                 let getToken = localStorage.getItem('access-token');
                 if(getToken){
-                //     let result = await (await 
-                //         fetch(`http://${HOST}:${PORT}${worker_links[5].register}${getToken}`,{
-                //             method : "POST",
-                //             headers : {
-                //                 'Content-Type' : 'application/json'
-                //             },
-                //             body : JSON.stringify(data)
-                //         })).json();
-                        
-                //    return dispatch({
-                //        type : FILTERSERVICE,
-                //        payload : result.data[0]
-                //    });
-                        FetchAPI(`${worker_links[5].register}${getToken}`,{ METHOD : 'POST',
+               
+                        FetchAPI(`${worker_links[5].getServices}${getToken}`,{ METHOD : 'POST',
                          VALUE : data},(error, result) => {
                              if(!error){
                                 return dispatch({

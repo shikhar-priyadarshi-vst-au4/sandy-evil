@@ -52,10 +52,10 @@ export const services = [
 //static data if server gets down
 export const categories = [
     { name : 'Salon'},
-    { name : 'Carpenters'},
-    { name : 'Plumbers'},
-    { name : 'Electricians'},
-    { name : 'Cleaners'}
+    { name : 'Carpenter'},
+    { name : 'Plumber'},
+    { name : 'Electrician'},
+    { name : 'Cleaner'}
 ]
 //static data
 export const qualities = [{

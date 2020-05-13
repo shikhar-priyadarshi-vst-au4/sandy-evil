@@ -15,7 +15,7 @@ import { mapStateToProps } from '../StateTransition';
   let mainBar = [
       {
           navLinkName : "Services",
-          path : '/services'
+          path : '/'
       },
       {
           navLinkName : "Become A Professional",

@@ -94,10 +94,10 @@ const Navbar = ( { isAuthenticated, data ,
               onClose={handleClose}
             >
               <MenuItem onClick={handleClose}
-              to={'/user'} 
+              to={`${isAuthenticated?'/dashboard':'/user'}`} 
               component={Link}>Profile</MenuItem>
               <MenuItem onClick={handleClose}
-              to={'/user'}
+              to={`${isAuthenticated?'/dashboard':'/user'}`} 
               component={Link}>My account</MenuItem>
               <MenuItem onClick={Logout}>Logout</MenuItem>
             </Menu>

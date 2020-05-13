@@ -6,7 +6,7 @@ const CUSTOMER_LOGOUT = 'CUSTOMER_LOGOUT';
 const CUSTOMER_BOOKINGS = 'CUSTOMER_BOOKINGS';
 const CLOSE_CUSTOMER_MODAL = 'CLOSE_CUSTOMER_MODAL';
 const NOBOOKINGS = 'NOBOOKINGS';
-const RESET_ALL = 'RESET_ALL';
+const RESET_CUSTOMER_DATA = 'RESET_CUSTOMER_DATA';
 
 
 
@@ -40,7 +40,7 @@ export const customerLoginInitiate = (value) => {
                }
                
                return dispatch({
-                   type : RESET_ALL
+                   type : RESET_CUSTOMER_DATA
                }) 
             }
          })
@@ -90,6 +90,6 @@ export {
     CUSTOMER_BOOKINGS,
     CLOSE_CUSTOMER_MODAL,
     NOBOOKINGS,
-    RESET_ALL
+    RESET_CUSTOMER_DATA
 } 
 

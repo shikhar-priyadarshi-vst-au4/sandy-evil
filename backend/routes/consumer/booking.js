@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const {isAuthorised} = require('../../controllers/consumer/profile')
-const { create, getInfo, assign, 
+const { create, getInfo, after, assign, 
         cancel, gather, gatherAll,
         check, isAssigned } = require('../../controllers/consumer/booking');
 
@@ -11,7 +11,7 @@ router.post('/create/:customer_id', isAuthorised, check, create);
 router.get('/retrieve/:customer_id', isAuthorised, getInfo);
 
 //end-point to assign booking to worker
-router.put('/assign/:bookingId/:domain', gather, assign);
+router.put('/assign/:bookingId/:domain', gather, assign, after);
 
 //end-point to cancel the booking
 router.delete('/cancel/:bookingId', isAuthorised, cancel);

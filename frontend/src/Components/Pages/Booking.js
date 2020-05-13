@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { Grid, withStyles } from "@material-ui/core";
+import { Grid, Paper, withStyles, makeStyles, Typography, Button } from "@material-ui/core";
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { mapStateToProps } from '../StateTransition';
@@ -7,6 +7,7 @@ import { List } from '../General/index'
 import  Navbar  from '../Navbar/Navbar'
 import { FilterServices, AddServices,
          RemoveServices, ConfirmBooking } from '../../Actions/booking'
+// import { Redirect } from 'react-router-dom';
 const styles = (theme) => ({
   root : {
     margin : '4em 0em',  
@@ -16,7 +17,49 @@ const styles = (theme) => ({
   }
 })
 
+const useStyles = makeStyles(theme => ({
+  root : {
+    margin : theme.spacing(3),
+    padding : theme.spacing(1),
+  },
+  text : {
+    margin : theme.spacing(2),
+  },
+  info:{
+    margin : theme.spacing(5),
+  },
+  button : {
+    margin : theme.spacing(2)
+  },
+}))
+ 
+const Clickable = ({...rest}) => {
+  let classes = useStyles();
+  return(
+    <Button className={classes.button}
+    variant={`${rest.children==='Homepage'?'text':'contained'}`} 
+    color = {`${rest.children==='Homepage'?'':'secondary'}`}
+    onClick={()=>{
+      rest.history.push(`${rest.children==='Homepage'?'/':'/user'}`)
+    }}>
+      {rest.children}
+    </Button>
+  )
+}
 
+const ErrorAlert = ({bookingError, ...rest}) => {
+  let classes = useStyles();
+    
+  return (<Paper variant={'outlined'} className={classes.root}>
+     <Grid container>
+     <Typography className={classes.text} variant={'h4'}>Towny</Typography>
+     <Clickable {...rest}>Homepage</Clickable>
+     <Clickable {...rest}>Profile</Clickable>
+     </Grid>
+      <Typography variant={'body1'} className={classes.info}>{`Sorry for inconvenience, 
+      ${bookingError}. Please try again later.`}</Typography>
+  </Paper>)
+}
 
 
 class Booking extends Component {
@@ -69,12 +112,14 @@ class Booking extends Component {
         if(domain){
           let value = {customer_id, service_id, domain : domain.category, services, balance }
           this.props.dispatch(ConfirmBooking(value));
-          // this.props.history.push(`/assign/${domain.category}`);
         }
       }
     render() {
         const {classes} = this.props;
-        console.log(this.props.match.params);
+        if(!!this.props.bookingError){
+        return (<ErrorAlert bookingError={this.props.bookingError}
+          {...this.props}/>)
+        }
         return (
             <Fragment>
               <Navbar 

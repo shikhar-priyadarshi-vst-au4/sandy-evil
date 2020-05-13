@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {Button} from '@material-ui/core';
-import { Add, ReceiptSharp, Delete, Edit, ExitToApp } from '@material-ui/icons';
+import { Add, ReceiptSharp, Delete, Edit, ExitToApp, Check } from '@material-ui/icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowCircleRight  } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
@@ -159,6 +159,16 @@ export const KeyStroke = (props) => {
           Sign out
         </Button>          
           
+        }
+
+        {
+          props.part === 'dashboard-ticket-list' && <Button  variant="outlined"
+            size={'medium'} style={{margin : '0em 1em'}}
+            startIcon={<Check></Check>} 
+            onClick={()=>props.updateTicket(props.workerId, props.bookingId)}
+            color="secondary" >
+            Mark Completed
+        </Button>          
         }
       </Fragment> 
     

@@ -4,6 +4,8 @@ const Worker = require('../../models/Worker');
 const Available = require('../../models/Available');
 Booking.belongsTo(Category,{foreignKey : 'service_id'});
 Category.hasMany(Booking,{foreignKey : 'service_id'});
+Booking.belongsTo(Worker, {foreignKey : 'worker_id'});
+Worker.hasMany(Booking,{foreignKey : 'worker_id'});
 function controller(){
   //create a booking
   this.create = async ( req, res) => {
@@ -68,8 +70,27 @@ function controller(){
         })
       }
   }
+  //revert after assign
+  this.after =  async (req, res) => {
+    let { bookingId : id  } = req.params;
+    try{
+       let data = await Booking.findAll({where : {id}, include : [Category, Worker]})
+       if(data){
+           res.json({
+               status : true,
+               data
+           })
+       }
+    }
+    catch(error){
+        res.json({
+            status : false,
+            message : error.message
+        })
+    }
+  }
   //to assign a worker to booking
-  this.assign = async( req, res ) => {
+  this.assign = async( req, res, next ) => {
       let { bookingId : id  } = req.params;
       let { worker_id } = res.locals;
       console.log('bookingId', id);
@@ -79,10 +100,7 @@ function controller(){
             status : 'Accept' },{where : {id}, 
             returning: true});
             if(!!data){
-                res.json({
-                    status : true,
-                    data
-                })
+                next();
             }
             else{
                 res.json({

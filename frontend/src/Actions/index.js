@@ -1,5 +1,5 @@
 import { worker_links} from './links';
-
+import { resetTickets } from './ticket';
 //Account Action constants
 const CREATE_ACCOUNT = 'CREATE_ACCOUNT';
 const LOGIN_ACCOUNT = 'LOGIN_ACCOUNT';
@@ -115,11 +115,13 @@ export const login = ({ email, password }) => {
       }
 }
 export const logout = () => { 
-    localStorage.removeItem('access-token');
-    
-    return({
-        type : LOGOUT
-    })
+    return dispatch => {
+        dispatch(resetTickets());
+        localStorage.removeItem('access-token');
+        return dispatch({
+            type : LOGOUT
+        })
+    }
 }
 export const closeModal = (property) => {
      return ({

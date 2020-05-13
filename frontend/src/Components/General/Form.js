@@ -19,6 +19,7 @@ const useStyles = makeStyles((theme) => ({
     position : "relative",
     top : "3em",
     left : "14em",
+    // eslint-disable-next-line 
     ['@media (max-width:1024px)'] : {
         top : "5em",
         left : "0.1em"
@@ -34,7 +35,8 @@ const useStyles = makeStyles((theme) => ({
         margin: "2em 1em", 
     },
     signup : {
-      cursor : "pointer",   
+      cursor : "pointer",
+      // eslint-disable-next-line    
      ['&:hover']:{
        color : '#ffffff',
        borderRadius : '1em',

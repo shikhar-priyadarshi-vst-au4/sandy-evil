@@ -1,15 +1,21 @@
 import React, { Fragment, useState } from 'react';
-import { makeStyles,
+import { makeStyles, Grid,
          Paper} from '@material-ui/core';
 import { Text, CardImage, Flex } from '../Styled/Styled'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
+import { KeyStroke } from './Button';
 const useStyle = makeStyles((theme) => ({
     card : {
         margin : theme.spacing(2),
         padding : theme.spacing(0),
         borderRadius : '0.5em',
         cursor : 'pointer',
+    },
+    cardItems : {
+        margin : theme.spacing(2),
+        padding : theme.spacing(2),
+        border : '1px solid #272727',
     }
 }))
 
@@ -52,17 +58,48 @@ export const Card = (props) => {
                     <Flex alignItems={'center'} wrap={'no-wrap'}
                     style={{flexDirection:'column'}}>
                     <Text>No. of Tickets</Text>
-                    <Text size={'4em'}>{props.value}</Text>
+                    <Text size={'4em'}>{props.Total}</Text>
                     <Text>Accepted</Text>
-                    <Text size={'4em'}>{props.value}</Text>
-                    <Text>Declined</Text>
-                    <Text size={'4em'}>{props.value}</Text>
+                    <Text size={'4em'}>{props.Accepted}</Text>
+                    <Text>Completed</Text>
+                    <Text size={'4em'}>{props.Completed}</Text>
                     </Flex>
                 </Paper>}
             { part === 'dashboard-ticket-list' && <Paper
             className={classes.card}
             variant={'outlined'}>
                 <Text>Ticket Bucket</Text>
+                {props.tickets.map(val => <Paper key={val.id} className={classes.cardItems}
+                variant={'outlined'}>
+                <Grid container>
+                    <Grid item xs={6}><Text size={'1em'}>Booking Id</Text></Grid>
+                    <Grid item xs={6}>{val.Booking.id.slice(0,5)}</Grid>
+                </Grid>
+                <Grid container>
+                    <Grid item xs={6}><Text size={'1em'}>Status</Text></Grid>
+                    <Grid item xs={6}>{val.Booking.status}</Grid>
+                </Grid>
+                <Grid container>
+                    <Grid item xs={12}><Text size={'1.2em'}>Services</Text></Grid>
+                    <Grid item>{val.Booking.services.map((value, index) =><Text 
+                    key={index}
+                    size={'1em'} style={
+                       {
+                        display : 'inline',
+                        margin : '1em 1em 1em 0em'
+                       }
+                    }> 
+                    {value.service}</Text>)}</Grid>
+                    <Grid item xs={12}><Text size={'1em'}>Total(Inclusive of all charges)</Text></Grid>
+                <Grid item xs={6}><Text size={'1em'}> &#8377; {val.Booking.balance}</Text></Grid>
+                <Grid item xs={6}>
+                    <KeyStroke part={'dashboard-ticket-list'} 
+                    bookingId = {val.booking_id}
+                    workerId = {val.worker_id}
+                    updateTicket ={props.updateTicket}/>
+                </Grid>
+                </Grid>
+                </Paper>)}
                 </Paper>}             
         </Fragment>
     )

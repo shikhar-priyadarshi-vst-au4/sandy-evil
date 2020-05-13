@@ -78,6 +78,7 @@ export const List = ({ search : { city , services} = '',
     let [size, setSize] = useState({value : 1, ind:0 });
     let [generate, setGenerate] = useState(false);
     let details = !!rest.data?chunk(Object.entries(rest.data),2):[];
+    let {tickets, Accepted, Completed} = rest;
     return ( <Fragment>
 
         { part === 'homepage-header' && (!!services.length? <div className = {classes.list}>
@@ -178,10 +179,15 @@ export const List = ({ search : { city , services} = '',
              <hr/>
              </Grid>  
                 <Grid item xs={12} sm={4}>
-                    <Card part={'dashboard-ticket-matrix'} value={0}/>
+                    <Card part={'dashboard-ticket-matrix'} 
+                    Total = {tickets.length}
+                    Accepted={Accepted.length}
+                    Completed = {Completed.length}
+                    />
                 </Grid>
                 <Grid item xs={12} sm={7}>
-                    <Card part={'dashboard-ticket-list'}/>
+                    <Card part={'dashboard-ticket-list'}
+                    tickets = {tickets} updateTicket ={rest.updateTicket}/>
                 </Grid>
                 </Grid>}
             {part === 'dashboard-signout' && <Grid container 

@@ -1,21 +1,21 @@
 const sequelize = require('../db/index');
 const { Sequelize } = require('sequelize');
 
-const Transaction = sequelize.define('Transaction',{
+const History = sequelize.define('History',{
     id : {
         type : Sequelize.UUID,
         defaultValue : Sequelize.UUIDV1,
         primaryKey : true
     },
-    ticket_id : {
+    worker_id : {
         type : Sequelize.UUID,
         allowNull : false
     },
-    total_amt : {
-        type : Sequelize.DOUBLE,
+    data : {
+        type : Sequelize.Array(Sequelize.JSON),
         allowNull : false
     }
 }, { timestamps: false });
 
 
-module.exports = Transaction;
+module.exports = History;

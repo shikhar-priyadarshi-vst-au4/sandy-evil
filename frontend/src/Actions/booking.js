@@ -67,7 +67,7 @@ const WORKER_ASSIGNED = 'WORKER_ASSIGNED';
                 return dispatch => {
                     FetchAPI(`${client_links[7].workerAssigned}${bookingId}/${domain}`,
                     {METHOD : 'PUT', VALUE : {}},(error, data) => {
-                        console.log(data);
+                        console.log(error,data);
                         if(!error){
                             if(data.status){
                                 return dispatch({
